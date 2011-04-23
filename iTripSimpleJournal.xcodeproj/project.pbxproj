@@ -1,0 +1,462 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* testAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* testAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
+		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
+		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		73259D5D1241AC8700B6D853 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73259D5C1241AC8700B6D853 /* CoreLocation.framework */; };
+		7369081D122807BC00AAA201 /* UIImageInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7369081C122807BC00AAA201 /* UIImageInfoView.m */; };
+		73CA1370132C4B0100BF493C /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = 73CA136F132C4B0100BF493C /* upload.png */; };
+		A3011CEF12DA081000050CF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3011CEE12DA081000050CF4 /* MainViewController.m */; };
+		A3011CF112DA096400050CF4 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3011CF012DA096400050CF4 /* MainViewController.xib */; };
+		A3192FFF1323C83B00770B60 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = A3192FFE1323C83B00770B60 /* gear.png */; };
+		A31930271323D0E400770B60 /* gears.png in Resources */ = {isa = PBXBuildFile; fileRef = A31930261323D0E400770B60 /* gears.png */; };
+		A33ED76612075E7A00DA7773 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A33ED76512075E7A00DA7773 /* CFNetwork.framework */; };
+		A33ED76912075EAD00DA7773 /* libObjectiveFlickr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A33ED74E12075E2100DA7773 /* libObjectiveFlickr.a */; };
+		A3459C00125AAB68004B76FD /* TDBadgedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3459BFF125AAB68004B76FD /* TDBadgedCell.m */; };
+		A35821BA1245107400EF63F8 /* StopInfoPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = A35821B91245107400EF63F8 /* StopInfoPrompt.m */; };
+		A35821DB1245190400EF63F8 /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = A35821DA1245190400EF63F8 /* ModalAlert.m */; };
+		A3651BCA12728BBA008539BD /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3651BC912728BBA008539BD /* icon.png */; };
+		A3806AEC120060FD008E4C02 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3806AEB120060FD008E4C02 /* MapKit.framework */; };
+		A3806AF41200616C008E4C02 /* simpletripjournal512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = A3806AF31200616C008E4C02 /* simpletripjournal512x512.png */; };
+		A3958863122178C200754402 /* ImageInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3958860122178C200754402 /* ImageInfoController.xib */; };
+		A3958864122178C200754402 /* UIImageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3958862122178C200754402 /* UIImageInfoViewController.m */; };
+		A39962D011FDBD59009B4324 /* StopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39962CE11FDBD59009B4324 /* StopViewController.m */; };
+		A39962D111FDBD59009B4324 /* StopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39962CF11FDBD59009B4324 /* StopViewController.xib */; };
+		A39FB59011FC70490039A701 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39FB58E11FC70490039A701 /* DetailViewController.m */; };
+		A39FB59111FC70490039A701 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39FB58F11FC70490039A701 /* DetailViewController.xib */; };
+		A39FB59B11FC717A0039A701 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = A39FB59A11FC717A0039A701 /* Trip.m */; };
+		A3A2A8401227F61E00E7F297 /* TripJournalSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2A83F1227F61E00E7F297 /* TripJournalSession.m */; };
+		A3BA5E9E1208EE81004DD918 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BA5E9D1208EE81004DD918 /* Default.png */; };
+		A3D8FCDD120308BE004FE32C /* backsplash.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D8FCDC120308BE004FE32C /* backsplash.png */; };
+		A3F0F2DB12577D2F00A9B5A8 /* UserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F0F2D912577D2F00A9B5A8 /* UserInfoController.m */; };
+		A3F0F2DC12577D2F00A9B5A8 /* UserInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F0F2DA12577D2F00A9B5A8 /* UserInfoController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A33ED74D12075E2100DA7773 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A33ED74212075E2100DA7773 /* ObjectiveFlickr.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6ABF72E60F939BE600B9179E;
+			remoteInfo = "ObjectiveFlickr (library)";
+		};
+		A33ED76212075E6800DA7773 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A33ED74212075E2100DA7773 /* ObjectiveFlickr.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6ABF72E50F939BE600B9179E;
+			remoteInfo = "ObjectiveFlickr (library)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* testAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* testAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* iTripSimpleJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTripSimpleJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AAE50D9B0CCF005BE974 /* iTripSimpleJournal_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTripSimpleJournal_Prefix.pch; sourceTree = "<group>"; };
+		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		73259D5C1241AC8700B6D853 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		7369081B122807BC00AAA201 /* UIImageInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageInfoView.h; path = ../UIImageInfoView.h; sourceTree = "<group>"; };
+		7369081C122807BC00AAA201 /* UIImageInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageInfoView.m; path = ../UIImageInfoView.m; sourceTree = "<group>"; };
+		73CA136F132C4B0100BF493C /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* iTripSimpleJournal-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iTripSimpleJournal-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A3011CE912DA075100050CF4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = SOURCE_ROOT; };
+		A3011CEE12DA081000050CF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = SOURCE_ROOT; };
+		A3011CF012DA096400050CF4 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		A3192FFE1323C83B00770B60 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		A31930261323D0E400770B60 /* gears.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gears.png; sourceTree = "<group>"; };
+		A33ED74212075E2100DA7773 /* ObjectiveFlickr.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveFlickr.xcodeproj; path = ../objectiveflickr/ObjectiveFlickr.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A33ED76512075E7A00DA7773 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A34064C0127A5BB100D565F5 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		A3459BFE125AAB68004B76FD /* TDBadgedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDBadgedCell.h; sourceTree = "<group>"; };
+		A3459BFF125AAB68004B76FD /* TDBadgedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDBadgedCell.m; sourceTree = "<group>"; };
+		A35821B81245107400EF63F8 /* StopInfoPrompt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StopInfoPrompt.h; path = ../StopInfoPrompt.h; sourceTree = "<group>"; };
+		A35821B91245107400EF63F8 /* StopInfoPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StopInfoPrompt.m; path = ../StopInfoPrompt.m; sourceTree = "<group>"; };
+		A35821D91245190400EF63F8 /* ModalAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalAlert.h; sourceTree = "<group>"; };
+		A35821DA1245190400EF63F8 /* ModalAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalAlert.m; sourceTree = "<group>"; };
+		A3651BC912728BBA008539BD /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		A3806AEB120060FD008E4C02 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		A3806AF31200616C008E4C02 /* simpletripjournal512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = simpletripjournal512x512.png; sourceTree = "<group>"; };
+		A3958860122178C200754402 /* ImageInfoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ImageInfoController.xib; path = Classes/ImageInfoController.xib; sourceTree = "<group>"; };
+		A3958861122178C200754402 /* UIImageInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageInfoViewController.h; sourceTree = "<group>"; };
+		A3958862122178C200754402 /* UIImageInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageInfoViewController.m; sourceTree = "<group>"; };
+		A39962CD11FDBD59009B4324 /* StopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopViewController.h; sourceTree = "<group>"; };
+		A39962CE11FDBD59009B4324 /* StopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopViewController.m; sourceTree = "<group>"; };
+		A39962CF11FDBD59009B4324 /* StopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StopViewController.xib; path = Classes/StopViewController.xib; sourceTree = "<group>"; };
+		A39FB58D11FC70490039A701 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailViewController.h; path = ../DetailViewController.h; sourceTree = "<group>"; };
+		A39FB58E11FC70490039A701 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailViewController.m; path = ../DetailViewController.m; sourceTree = "<group>"; };
+		A39FB58F11FC70490039A701 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		A39FB59911FC717A0039A701 /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
+		A39FB59A11FC717A0039A701 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
+		A3A2A83E1227F61E00E7F297 /* TripJournalSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripJournalSession.h; sourceTree = "<group>"; };
+		A3A2A83F1227F61E00E7F297 /* TripJournalSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripJournalSession.m; sourceTree = "<group>"; };
+		A3BA5E9D1208EE81004DD918 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A3D8FCDC120308BE004FE32C /* backsplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backsplash.png; sourceTree = "<group>"; };
+		A3F0F2D812577D2F00A9B5A8 /* UserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoController.h; sourceTree = "<group>"; };
+		A3F0F2D912577D2F00A9B5A8 /* UserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoController.m; sourceTree = "<group>"; };
+		A3F0F2DA12577D2F00A9B5A8 /* UserInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserInfoController.xib; path = Classes/UserInfoController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73259D5D1241AC8700B6D853 /* CoreLocation.framework in Frameworks */,
+				A33ED76912075EAD00DA7773 /* libObjectiveFlickr.a in Frameworks */,
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				A3806AEC120060FD008E4C02 /* MapKit.framework in Frameworks */,
+				A33ED76612075E7A00DA7773 /* CFNetwork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A3011CE912DA075100050CF4 /* MainViewController.h */,
+				A3011CEE12DA081000050CF4 /* MainViewController.m */,
+				A3459BFE125AAB68004B76FD /* TDBadgedCell.h */,
+				A3459BFF125AAB68004B76FD /* TDBadgedCell.m */,
+				A35821D91245190400EF63F8 /* ModalAlert.h */,
+				A35821DA1245190400EF63F8 /* ModalAlert.m */,
+				A35821B81245107400EF63F8 /* StopInfoPrompt.h */,
+				A35821B91245107400EF63F8 /* StopInfoPrompt.m */,
+				7369081B122807BC00AAA201 /* UIImageInfoView.h */,
+				7369081C122807BC00AAA201 /* UIImageInfoView.m */,
+				A3A2A83E1227F61E00E7F297 /* TripJournalSession.h */,
+				A3A2A83F1227F61E00E7F297 /* TripJournalSession.m */,
+				A3958861122178C200754402 /* UIImageInfoViewController.h */,
+				A3958862122178C200754402 /* UIImageInfoViewController.m */,
+				A39FB58D11FC70490039A701 /* DetailViewController.h */,
+				A39FB58E11FC70490039A701 /* DetailViewController.m */,
+				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
+				28C286E00D94DF7D0034E888 /* RootViewController.m */,
+				A3F0F2D812577D2F00A9B5A8 /* UserInfoController.h */,
+				A3F0F2D912577D2F00A9B5A8 /* UserInfoController.m */,
+				1D3623240D0F684500981E51 /* testAppDelegate.h */,
+				1D3623250D0F684500981E51 /* testAppDelegate.m */,
+				A39FB59911FC717A0039A701 /* Trip.h */,
+				A39FB59A11FC717A0039A701 /* Trip.m */,
+				A39962CD11FDBD59009B4324 /* StopViewController.h */,
+				A39962CE11FDBD59009B4324 /* StopViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* iTripSimpleJournal.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				73259D5C1241AC8700B6D853 /* CoreLocation.framework */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				A3806AEB120060FD008E4C02 /* MapKit.framework */,
+				A33ED76512075E7A00DA7773 /* CFNetwork.framework */,
+				A34064C0127A5BB100D565F5 /* Entitlements.plist */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A33ED74212075E2100DA7773 /* ObjectiveFlickr.xcodeproj */,
+				28A0AAE50D9B0CCF005BE974 /* iTripSimpleJournal_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				73CA136F132C4B0100BF493C /* upload.png */,
+				A31930261323D0E400770B60 /* gears.png */,
+				A3192FFE1323C83B00770B60 /* gear.png */,
+				A3011CF012DA096400050CF4 /* MainViewController.xib */,
+				A39FB58F11FC70490039A701 /* DetailViewController.xib */,
+				A3958860122178C200754402 /* ImageInfoController.xib */,
+				A3F0F2DA12577D2F00A9B5A8 /* UserInfoController.xib */,
+				A39962CF11FDBD59009B4324 /* StopViewController.xib */,
+				A3651BC912728BBA008539BD /* icon.png */,
+				A3BA5E9D1208EE81004DD918 /* Default.png */,
+				A3D8FCDC120308BE004FE32C /* backsplash.png */,
+				A3806AF31200616C008E4C02 /* simpletripjournal512x512.png */,
+				28F335F01007B36200424DE2 /* RootViewController.xib */,
+				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* iTripSimpleJournal-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A33ED74312075E2100DA7773 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A33ED74E12075E2100DA7773 /* libObjectiveFlickr.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* iTripSimpleJournal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iTripSimpleJournal" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A33ED76312075E6800DA7773 /* PBXTargetDependency */,
+			);
+			name = iTripSimpleJournal;
+			productName = test;
+			productReference = 1D6058910D05DD3D006BFB54 /* iTripSimpleJournal.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iTripSimpleJournal" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = A33ED74312075E2100DA7773 /* Products */;
+					ProjectRef = A33ED74212075E2100DA7773 /* ObjectiveFlickr.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* iTripSimpleJournal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		A33ED74E12075E2100DA7773 /* libObjectiveFlickr.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libObjectiveFlickr.a;
+			remoteRef = A33ED74D12075E2100DA7773 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
+				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
+				A39FB59111FC70490039A701 /* DetailViewController.xib in Resources */,
+				A39962D111FDBD59009B4324 /* StopViewController.xib in Resources */,
+				A3806AF41200616C008E4C02 /* simpletripjournal512x512.png in Resources */,
+				A3D8FCDD120308BE004FE32C /* backsplash.png in Resources */,
+				A3BA5E9E1208EE81004DD918 /* Default.png in Resources */,
+				A3958863122178C200754402 /* ImageInfoController.xib in Resources */,
+				A3F0F2DC12577D2F00A9B5A8 /* UserInfoController.xib in Resources */,
+				A3651BCA12728BBA008539BD /* icon.png in Resources */,
+				A3011CF112DA096400050CF4 /* MainViewController.xib in Resources */,
+				A3192FFF1323C83B00770B60 /* gear.png in Resources */,
+				A31930271323D0E400770B60 /* gears.png in Resources */,
+				73CA1370132C4B0100BF493C /* upload.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* testAppDelegate.m in Sources */,
+				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
+				A39FB59011FC70490039A701 /* DetailViewController.m in Sources */,
+				A39FB59B11FC717A0039A701 /* Trip.m in Sources */,
+				A39962D011FDBD59009B4324 /* StopViewController.m in Sources */,
+				A3958864122178C200754402 /* UIImageInfoViewController.m in Sources */,
+				A3A2A8401227F61E00E7F297 /* TripJournalSession.m in Sources */,
+				7369081D122807BC00AAA201 /* UIImageInfoView.m in Sources */,
+				A35821BA1245107400EF63F8 /* StopInfoPrompt.m in Sources */,
+				A35821DB1245190400EF63F8 /* ModalAlert.m in Sources */,
+				A3F0F2DB12577D2F00A9B5A8 /* UserInfoController.m in Sources */,
+				A3459C00125AAB68004B76FD /* TDBadgedCell.m in Sources */,
+				A3011CEF12DA081000050CF4 /* MainViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A33ED76312075E6800DA7773 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ObjectiveFlickr (library)";
+			targetProxy = A33ED76212075E6800DA7773 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iTripSimpleJournal_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					../objectiveflickr/source,
+					../objectiveflickr/LFWebAPIKit,
+				);
+				INFOPLIST_FILE = "iTripSimpleJournal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				PRODUCT_NAME = iTripSimpleJournal;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/Dropbox/dev/iSimpleTripJournal/Entitlements.plist";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iTripSimpleJournal_Prefix.pch;
+				HEADER_SEARCH_PATHS = (
+					../objectiveflickr/source,
+					../objectiveflickr/LFWebAPIKit,
+				);
+				INFOPLIST_FILE = "iTripSimpleJournal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				PRODUCT_NAME = iSimpleTripJournal;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				PREBINDING = NO;
+				SDKROOT = iphoneos4.3;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphonesimulator4.3]" = "iPhone Developer: stephen eshelman (ZXV77CSSEA)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphonesimulator4.3]" = "999177F7-70CF-4682-B140-BA10FCD4221E";
+				SDKROOT = iphoneos4.3;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iTripSimpleJournal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iTripSimpleJournal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
