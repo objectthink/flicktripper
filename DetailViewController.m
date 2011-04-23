@@ -244,6 +244,9 @@
          break;
       case LOCATION:
          break;
+      default:
+         NSLog(@"SWITCH SKIPPED");
+         break;
    }
 }
 

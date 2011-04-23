@@ -12,6 +12,8 @@
 #import "UIImageInfoViewController.h"
 #import "ModalAlert.h"
 
+#define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
+
 ///////////////////////////////////////////////////////////////////////////////
 //MyUIViewController - implementation
 @implementation MyUIViewController
@@ -147,6 +149,45 @@
    
    //SET THE APP PROPERTY
    app = (testAppDelegate*)[[UIApplication sharedApplication] delegate];
+   
+   if(self.navigationItem.rightBarButtonItem == nil)
+   {
+      self.navigationItem.rightBarButtonItem = SYSBARBUTTON(UIBarButtonSystemItemAdd, @selector(toolbarHandler:));  
+      self.navigationItem.rightBarButtonItem.enabled = NO;
+   }
+   
+   /////////////////////////////////////////////////////////////////
+   //CREATE A MULTI-LINE LABEL FOR THE MAVIGATION ITEM TITLEVIEW
+   Trip* trip = self.stop.trip;
+   
+   UILabel* aLabel1 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 20, 200, 20)] autorelease];
+   
+   [aLabel1 setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
+   [aLabel1 setText:stop.name];
+   
+   aLabel1.backgroundColor = [UIColor clearColor];
+   aLabel1.shadowColor = [UIColor whiteColor];
+   aLabel1.shadowOffset = CGSizeMake(1.0, 1.0);
+   aLabel1.textAlignment = UITextAlignmentCenter;
+   
+   
+   UILabel* aLabel2 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)] autorelease];
+   
+   [aLabel2 setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
+   [aLabel2 setText:trip.name];
+   
+   aLabel2.backgroundColor = [UIColor clearColor];
+   aLabel2.shadowColor = [UIColor whiteColor];
+   aLabel2.shadowOffset = CGSizeMake(1.0, 1.0);
+   aLabel2.textAlignment = UITextAlignmentCenter;
+   
+   UIView* myTitleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+   [myTitleView addSubview:aLabel1];
+   [myTitleView addSubview:aLabel2];
+   
+   self.navigationItem.titleView = myTitleView;
+   /////////////////////////////////////////////////////////////////
+
 
    //////////////////////////////////////////////////////////////////////////////
    //SETUP PHOTO ON BUTTON
@@ -225,7 +266,8 @@
    NSLog(@"%s", __PRETTY_FUNCTION__);
 
    UIBarButtonItem* button = sender;   
-   switch ((int)button.tag) {
+   switch ((int)button.tag) 
+   {
       case 77:
          //SHOW THE FLICKR PAGE
          [self OnShowInfo];

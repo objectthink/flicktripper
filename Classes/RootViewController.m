@@ -621,19 +621,36 @@ void ShowActivity(UIViewController* controller, BOOL show)
 
    
    /////////////////////////////////////////////////////////////////
-   //CREATE A LABEL FOR THE MAVIGATION ITEM TITLEVIEW
-   UILabel* aLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
+   //CREATE A MULTI-LINE LABEL FOR THE MAVIGATION ITEM TITLEVIEW
+   NSString* username = 		
+   [[NSUserDefaults standardUserDefaults] objectForKey:@"flickrAuthUsername"];
+
+   UILabel* aLabel1 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 20, 100, 20)] autorelease];
    
-   [aLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
-   [aLabel setText:@"My Trips"];
+   [aLabel1 setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
+   [aLabel1 setText:@"My Trips"];
    
-   aLabel.backgroundColor = [UIColor clearColor];
-   aLabel.shadowColor = [UIColor whiteColor];
-   aLabel.shadowOffset = CGSizeMake(1.0, 1.0);
-   aLabel.textAlignment = UITextAlignmentCenter;
+   aLabel1.backgroundColor = [UIColor clearColor];
+   aLabel1.shadowColor = [UIColor whiteColor];
+   aLabel1.shadowOffset = CGSizeMake(1.0, 1.0);
+   aLabel1.textAlignment = UITextAlignmentCenter;
 
     
-   self.navigationItem.titleView = aLabel;
+   UILabel* aLabel2 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)] autorelease];
+   
+   [aLabel2 setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
+   [aLabel2 setText:username];
+   
+   aLabel2.backgroundColor = [UIColor clearColor];
+   aLabel2.shadowColor = [UIColor whiteColor];
+   aLabel2.shadowOffset = CGSizeMake(1.0, 1.0);
+   aLabel2.textAlignment = UITextAlignmentCenter;
+
+   UIView* myTitleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
+   [myTitleView addSubview:aLabel1];
+   [myTitleView addSubview:aLabel2];
+   
+   self.navigationItem.titleView = myTitleView;
    /////////////////////////////////////////////////////////////////
    
    //UIBarButtonItem* test = 
@@ -715,8 +732,8 @@ void ShowActivity(UIViewController* controller, BOOL show)
 {
    self.trips = [NSMutableArray array];
 
-   NSString* username = 		
-   [[NSUserDefaults standardUserDefaults] objectForKey:@"flickrAuthUsername"];
+   //NSString* username = 		
+   //[[NSUserDefaults standardUserDefaults] objectForKey:@"flickrAuthUsername"];
    
    //self.title = [NSString stringWithFormat:@"%@ Trips", username];
       
@@ -740,6 +757,9 @@ void ShowActivity(UIViewController* controller, BOOL show)
           callAPIMethodWithGET:@"flickr.tags.getListUser" 
           arguments:[NSDictionary dictionaryWithObjectsAndKeys:nsid,@"user_id",nil]
           ];            
+         break;
+      default:
+         NSLog(@"SWITCH SKIPPED");
          break;
    }
 
