@@ -150,17 +150,41 @@
    //SET THE APP PROPERTY
    app = (testAppDelegate*)[[UIApplication sharedApplication] delegate];
    
-   if(self.navigationItem.rightBarButtonItem == nil)
-   {
-      self.navigationItem.rightBarButtonItem = SYSBARBUTTON(UIBarButtonSystemItemAdd, @selector(toolbarHandler:));  
-      self.navigationItem.rightBarButtonItem.enabled = NO;
-   }
+   //if(self.navigationItem.rightBarButtonItem == nil)
+   //{
+   //   self.navigationItem.rightBarButtonItem = SYSBARBUTTON(UIBarButtonSystemItemAdd, @selector(toolbarHandler:));  
+   //   self.navigationItem.rightBarButtonItem.enabled = NO;
+   //}
+   
+   //////////////////////////////////////////////////////////////////////
+   //ADD 
+	UISegmentedControl *segmentedControl = 
+   [[UISegmentedControl alloc] initWithItems:
+    [NSArray arrayWithObjects:
+     [UIImage imageNamed:@"up.png"],
+     [UIImage imageNamed:@"down.png"],
+     nil]];
+   
+	[segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
+   
+	segmentedControl.frame = CGRectMake(0, 0, 90, 30);
+	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+	segmentedControl.momentary = YES;
+	
+	//defaultTintColor = [segmentedControl.tintColor retain];	// keep track of this for later
+   
+	UIBarButtonItem *segmentBarItem = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+   [segmentedControl release];
+   
+	self.navigationItem.rightBarButtonItem = segmentBarItem;
+   [segmentBarItem release];
+   /////////////////////////////////////////////////////////////////
    
    /////////////////////////////////////////////////////////////////
    //CREATE A MULTI-LINE LABEL FOR THE MAVIGATION ITEM TITLEVIEW
    Trip* trip = self.stop.trip;
    
-   UILabel* aLabel1 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 20, 200, 20)] autorelease];
+   UILabel* aLabel1 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 20, 150, 20)] autorelease];
    
    [aLabel1 setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
    [aLabel1 setText:stop.name];
@@ -171,7 +195,7 @@
    aLabel1.textAlignment = UITextAlignmentCenter;
    
    
-   UILabel* aLabel2 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 20)] autorelease];
+   UILabel* aLabel2 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 20)] autorelease];
    
    [aLabel2 setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
    [aLabel2 setText:trip.name];
@@ -181,7 +205,7 @@
    aLabel2.shadowOffset = CGSizeMake(1.0, 1.0);
    aLabel2.textAlignment = UITextAlignmentCenter;
    
-   UIView* myTitleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+   UIView* myTitleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 150, 40)];
    [myTitleView addSubview:aLabel1];
    [myTitleView addSubview:aLabel2];
    
@@ -258,6 +282,13 @@
    [mapView addAnnotation:stop.mapPoint];
    
    showingAll = NO;
+}
+/////////////////////////////////////////////////////////////////////////////
+- (IBAction)segmentAction:(id)sender
+{
+	// The segmented control was clicked, handle it here 
+	//UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+	//NSLog(@"Segment clicked: %d", segmentedControl.selectedSegmentIndex);
 }
 //////////////////////////////////////////////////////////////////////////////
 //TOOLBAR HANDLER

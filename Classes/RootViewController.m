@@ -770,8 +770,8 @@ void ShowActivity(UIViewController* controller, BOOL show)
 {
    self.trips = [NSMutableArray array];
    
-   NSString* username = 		
-   [[NSUserDefaults standardUserDefaults] objectForKey:@"flickrAuthUsername"];
+   //NSString* username = 		
+   //[[NSUserDefaults standardUserDefaults] objectForKey:@"flickrAuthUsername"];
    
    //self.title = [NSString stringWithFormat:@"%@ Trips", username];
    
