@@ -514,6 +514,7 @@
       picker.sourceType = UIImagePickerControllerSourceTypeCamera;
    
    picker.delegate = self;
+   picker.allowsEditing = YES;
    
    [self presentModalViewController:picker animated:YES];
    
