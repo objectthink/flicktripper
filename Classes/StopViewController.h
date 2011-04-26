@@ -26,13 +26,15 @@
    UIBarButtonItem* gotoFlickrPageButton;
    
    BOOL showingAll;
+   
+   UILabel* stopNameLabel;
 }
 @property (retain) Stop*     stop;
 @property (assign) UIButton* imageButton;
 @property (assign) UILabel*  stopDetails;
 @property (assign) UILabel*  stopName;
 @property (assign) testAppDelegate* app;
-
+@property (retain) UILabel* stopNameLabel;
 
 -(IBAction) imageTouched;
 

@@ -31,6 +31,49 @@
 @synthesize stopDetails;
 @synthesize stopName;
 @synthesize app;
+@synthesize stopNameLabel;
+
+/////////////////////////////////////////////////////////////////////////////////
+//UPDATE WITH STOP
+//Update the stop view with the passed stop
+-(void)UpdateWithStop:(Stop*)aStop
+{
+   //////////////////////////////////////////////////////////////////////////////
+   //IS THE IMAGE AVAILABLE? EVENTUALLY THIS WILL HAPPEN IN ANOTHER THREAD
+   //FETCH THE STOP IMAGE - MAY NEED TO STORE THIS FOR THE DETAILS VIEW
+   UIImage* image;
+   if(aStop.image == nil)
+   {
+      NSData *imageData = [NSData dataWithContentsOfURL:aStop.photoURL];
+      image = [UIImage imageWithData:imageData];
+      
+      aStop.image = image;
+   }
+   else
+   {
+      image = aStop.image;
+   }
+
+   //////////////////////////////////////////////////////////////////////////////
+   //SETUP PHOTO ON BUTTON
+   self.title = aStop.name;
+   self.stopDetails.text = aStop.details;
+   self.stopName.text = aStop.name;
+   
+   self.imageButton.imageView.contentMode = UIViewContentModeScaleAspectFit;   
+   [self.imageButton setBackgroundImage:aStop.image forState:UIControlStateNormal];
+   
+   //TELL THE MAPVIEW TO SHOW THE CURRENT LOCATION
+   //[mapView setShowsUserLocation:YES];
+   
+   [mapView addAnnotation:aStop.mapPoint];
+   [mapView setCenterCoordinate:aStop.mapPoint.coordinate];
+   
+   gotoFlickrPageButton.enabled = stop.photoSourceURL != nil;
+   
+   //UPDATE THE VIEW CONTROLLER TITLE
+   [stopNameLabel setText:aStop.name];
+}
 
 #pragma mark -
 #pragma mark MKMapViewDelegate
@@ -194,6 +237,7 @@
    aLabel1.shadowOffset = CGSizeMake(1.0, 1.0);
    aLabel1.textAlignment = UITextAlignmentCenter;
    
+   self.stopNameLabel = aLabel1;
    
    UILabel* aLabel2 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, 20)] autorelease];
    
@@ -284,11 +328,44 @@
    showingAll = NO;
 }
 /////////////////////////////////////////////////////////////////////////////
+//SEGMENT ACTION
+//Handle requests to show next/previous stop
 - (IBAction)segmentAction:(id)sender
 {
-	// The segmented control was clicked, handle it here 
-	//UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-	//NSLog(@"Segment clicked: %d", segmentedControl.selectedSegmentIndex);
+	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+   Trip* currentTrip = self.stop.trip;
+   
+   NSUInteger currentStopIndex = [currentTrip.stops indexOfObject:stop];
+   NSInteger  nextStopIndex = 0;
+   
+	NSLog(@"Segment clicked: %d, %d", 
+         segmentedControl.selectedSegmentIndex, currentStopIndex);
+
+   switch (segmentedControl.selectedSegmentIndex) 
+   {
+      case 0:            //PREVIOUS
+         nextStopIndex = currentStopIndex - 1;
+         
+         if(nextStopIndex > -1)
+         {
+            self.stop = [currentTrip.stops objectAtIndex:nextStopIndex];
+            [self UpdateWithStop:self.stop];
+         }
+         break;
+         
+      case 1:            //NEXT
+         nextStopIndex = currentStopIndex + 1;
+         
+         if(nextStopIndex < [currentTrip.stops count])
+         {
+            self.stop = [currentTrip.stops objectAtIndex:nextStopIndex];
+            [self UpdateWithStop:self.stop];
+         }
+         break;
+
+      default:
+         break;
+   }
 }
 //////////////////////////////////////////////////////////////////////////////
 //TOOLBAR HANDLER
