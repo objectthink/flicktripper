@@ -231,9 +231,10 @@
    
    [aLabel1 setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
    [aLabel1 setText:stop.name];
+   [aLabel1 setTextColor:[UIColor whiteColor]];
    
    aLabel1.backgroundColor = [UIColor clearColor];
-   aLabel1.shadowColor = [UIColor whiteColor];
+   aLabel1.shadowColor = [UIColor blackColor];
    aLabel1.shadowOffset = CGSizeMake(1.0, 1.0);
    aLabel1.textAlignment = UITextAlignmentCenter;
    

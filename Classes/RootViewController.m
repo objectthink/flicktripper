@@ -629,9 +629,10 @@ void ShowActivity(UIViewController* controller, BOOL show)
    
    [aLabel1 setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
    [aLabel1 setText:@"My Trips"];
+   [aLabel1 setTextColor:[UIColor whiteColor]];
    
    aLabel1.backgroundColor = [UIColor clearColor];
-   aLabel1.shadowColor = [UIColor whiteColor];
+   aLabel1.shadowColor = [UIColor blackColor];
    aLabel1.shadowOffset = CGSizeMake(1.0, 1.0);
    aLabel1.textAlignment = UITextAlignmentCenter;
 
@@ -656,21 +657,23 @@ void ShowActivity(UIViewController* controller, BOOL show)
    //UIBarButtonItem* test = 
    //[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(doit)];
    
-   //UIButton* infoButon = [UIButton buttonWithType:UIButtonTypeInfoLight];
+   //UIButton* infoButon = [[UIButton buttonWithType:UIButtonTypeInfoLight] autorelease];
+   UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   infoButton.frame = CGRectMake(20, 20, 20, 20);
+   [infoButton setBackgroundImage:[UIImage imageNamed:@"gear.png"] forState:UIControlStateNormal];
+
+   [infoButton addTarget:self action:@selector(doit:) forControlEvents:UIControlEventTouchUpInside];
+   infoButton.tag = 7;
    
-   //[infoButon addTarget:self action:@selector(doit:) forControlEvents:UIControlEventTouchUpInside];
-   //infoButon.tag = 7;
-   
-   //UIBarButtonItem* toolbarItem1 =    
-   //[[[UIBarButtonItem alloc]
-   //  initWithCustomView:infoButon]autorelease];
+   UIBarButtonItem* infoToolbarItem =    
+   [[[UIBarButtonItem alloc]initWithCustomView:infoButton]autorelease];
    
    //UIBarButtonItem* toolbarItem2 = 
    //[[UIBarButtonItem alloc]
    //initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(doit:)];
    //toolbarItem2.tag = 77;
 
-   //[self setToolbarItems:[NSArray arrayWithObjects:toolbarItem1,nil]];
+   [self setToolbarItems:[NSArray arrayWithObjects:infoToolbarItem,nil]];
 
    //[test release];
    

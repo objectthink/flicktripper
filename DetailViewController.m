@@ -322,9 +322,10 @@
    
    [aLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
    [aLabel setText:trip.name];
+   [aLabel setTextColor:[UIColor whiteColor]];
    
    aLabel.backgroundColor = [UIColor clearColor];
-   aLabel.shadowColor = [UIColor whiteColor];
+   aLabel.shadowColor = [UIColor blackColor];
    aLabel.shadowOffset = CGSizeMake(1.0, 1.0);
    aLabel.textAlignment = UITextAlignmentCenter;
    
