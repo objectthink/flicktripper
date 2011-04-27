@@ -10,6 +10,7 @@
 #import "StopViewController.h"
 #import "RootViewController.h"
 #import "ModalAlert.h"
+#import <dispatch/dispatch.h>
 
 #define BARBUTTON(TITLE, SELECTOR) 	[[[UIBarButtonItem alloc] initWithTitle:TITLE style:UIBarButtonItemStylePlain target:self action:SELECTOR] autorelease]
 #define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
@@ -780,21 +781,45 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    cell.editingAccessoryType = UITableViewCellAccessoryNone;
    
    //FETCH THE STOP IMAGE - MAY NEED TO STORE THIS FOR THE DETAILS VIEW
-   UIImage* image;
+//   UIImage* image;
+//   if(stop.image == nil)
+//   {
+//      NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+//      image = [UIImage imageWithData:imageData];
+//      
+//      stop.image = image;
+//   }
+//   else
+//   {
+//      image = stop.image;
+//   }
+//   
+//   //STOP IMAGE
+//   cell.imageView.image = image;
+   
+   
    if(stop.image == nil)
    {
-      NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
-      image = [UIImage imageWithData:imageData];
-      
-      stop.image = image;
+      dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+      dispatch_async(queue, 
+                     ^{
+                        UIImage* image;
+                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+                        image = [UIImage imageWithData:imageData];
+                              
+                        stop.image = image;
+                        
+                        dispatch_sync(dispatch_get_main_queue(), 
+                                      ^{
+                                         cell.imageView.image = image;
+                                         [cell setNeedsLayout];
+                                      });
+                     });  
    }
    else
    {
-      image = stop.image;
+      cell.imageView.image = stop.image;
    }
-   
-   //STOP IMAGE
-   cell.imageView.image = image;
    
    return cell;
 }
