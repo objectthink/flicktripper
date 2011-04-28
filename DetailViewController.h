@@ -19,7 +19,8 @@ OFFlickrAPIRequestDelegate,
 UIImagePickerControllerDelegate,
 UINavigationControllerDelegate,
 UIActionSheetDelegate,
-CLLocationManagerDelegate>
+CLLocationManagerDelegate,
+UITableViewDataSource>
 {
    Trip* trip;
    
