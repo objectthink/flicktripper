@@ -133,7 +133,7 @@
          [self.tableView reloadData];
          
          //UPDATE THE TOOLBAR
-         uploadWaiting.enabled = trip.needsUploading;
+         uploadWaiting.enabled = self.trip.needsUploading;
       }
    }
 }
@@ -195,7 +195,7 @@
          aStop.uploaded = YES;
          
          //CHECK FOR MORE DELAYED UPLOADS
-         for (Stop* aStop in trip.stops) 
+         for (Stop* aStop in self.trip.stops) 
          {
             if(!aStop.uploaded)
             {
@@ -206,7 +206,7 @@
          MessageBox(nil, @"Photo uploaded to flickr successfully!");
 
          //UPDATE THE TOOLBAR
-         uploadWaiting.enabled = trip.needsUploading;
+         uploadWaiting.enabled = self.trip.needsUploading;
 
          break;
       }
@@ -230,7 +230,7 @@
       case UPLOAD:
          ////////////////////////////////////////
          //REMOVE THE STOP THAT FAILED UPLOAD
-         [trip.stops removeLastObject];
+         [self.trip.stops removeLastObject];
          
          ///////////////////////////////////////
          //STOP THE LOCATION MANAGER
@@ -321,7 +321,7 @@
    UILabel* aLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
    
    [aLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
-   [aLabel setText:trip.name];
+   [aLabel setText:self.trip.name];
    [aLabel setTextColor:[UIColor whiteColor]];
    
    aLabel.backgroundColor = [UIColor clearColor];
@@ -380,7 +380,7 @@
    [[UIBarButtonItem alloc]
      initWithCustomView:uploadWaitingButton];
    
-   uploadWaiting.enabled = trip.needsUploading;
+   uploadWaiting.enabled = self.trip.needsUploading;
    
    //uploadWaiting.tag = 77;
    
@@ -424,7 +424,7 @@
       case 77:
          //MessageBox(@"upload waiting", @"upload waiting");
          
-         for (Stop* aStop in trip.stops) 
+         for (Stop* aStop in self.trip.stops) 
          {
             if(!aStop.uploaded)
             {
@@ -720,13 +720,13 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    {
       if([ModalAlert ask:@"Deleting this stop will remove the photo from flickr..."])
       { 
-         Stop* stop = [trip.stops objectAtIndex:indexPath.row];
+         Stop* stop = [self.trip.stops objectAtIndex:indexPath.row];
          NSString* photoId = [[stop.photoID copy]autorelease];
          
          BOOL uploaded = stop.uploaded;
          
          //DELETE THE ROW FROM THE DATA SOURCE
-         [trip.stops removeObjectAtIndex:indexPath.row];
+         [self.trip.stops removeObjectAtIndex:indexPath.row];
 
          // Delete the row from the data source
          [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
@@ -755,7 +755,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-   return [trip.stops count];
+   return [self.trip.stops count];
 }
 
 
@@ -770,7 +770,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     }
     
     // Configure the cell...
-   Stop* stop = [trip.stops objectAtIndex:indexPath.row];
+   Stop* stop = [self.trip.stops objectAtIndex:indexPath.row];
 
    cell.textLabel.text = stop.name;
    
@@ -860,7 +860,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    StopViewController* stopViewController = 
    [[[StopViewController alloc] initWithNibName:@"StopViewController" bundle:nil] autorelease];
    
-   stopViewController.stop = [trip.stops objectAtIndex:indexPath.row];
+   stopViewController.stop = [self.trip.stops objectAtIndex:indexPath.row];
    
    // ...
    // Pass the selected object to the new view controller.
@@ -885,6 +885,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)viewDidUnload 
 {
+   [super viewDidUnload];
+   
    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
    // For example: self.myOutlet = nil;
    
@@ -901,8 +903,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)dealloc 
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
-   //[trip release];
-   trip = nil;
+   
+//   NSLog(@"trip retainCount=%d", [self.trip retainCount]);
+//   [self.trip release];
+//   NSLog(@"trip retainCount=%d", [self.trip retainCount]);
+   
+   //trip = nil;
    
    [super dealloc];   
 }

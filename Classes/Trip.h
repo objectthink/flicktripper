@@ -68,6 +68,7 @@
 }
 
 -(void)dealloc;
+-(NSInteger)index;
 
 +(Stop*)initWithName:(NSString*)name details:(NSString*)details;
 

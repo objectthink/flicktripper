@@ -44,24 +44,24 @@
     return NO;
 }
 
-+(Trip*)initWithName:(NSString *)name details:(NSString *)details stops:(int)stops
++(Trip*)initWithName:(NSString *)name details:(NSString *)details stops:(int)stopsCount
 {
    Trip* aTrip = [[Trip alloc] init];
    
    aTrip.name = name;
    aTrip.details = details;
-   aTrip.stops = [[NSMutableArray alloc] initWithCapacity:stops];
+   aTrip.stops = [[NSMutableArray alloc] initWithCapacity:stopsCount];
    
    return [aTrip autorelease];
 }
 
-+(Trip*)initWithName:(NSString *)name details:(NSString *)details stops:(int)stops number:(int)number
++(Trip*)initWithName:(NSString *)name details:(NSString *)details stops:(int)stopsCount number:(int)number
 {
    Trip* aTrip = [[Trip alloc] init];
    
    aTrip.name = name;
    aTrip.details = details;
-   aTrip.stops = [[NSMutableArray alloc] initWithCapacity:stops];
+   aTrip.stops = [[NSMutableArray alloc] initWithCapacity:stopsCount];
    aTrip.number = number;
    
    return [aTrip autorelease];
@@ -89,6 +89,7 @@
    [details release];
    
    [stops removeAllObjects];
+   [stops release];
    stops = nil;
 
    [super dealloc];
@@ -107,6 +108,11 @@
 @synthesize location;
 @synthesize mapPoint;
 @synthesize uploaded;
+
+-(NSInteger)index
+{
+   return [self.trip.stops indexOfObject:self];
+}
 
 - (void)dealloc
 {

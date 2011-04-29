@@ -37,7 +37,7 @@ UITableViewDataSource>
    
    id tag;
 }
-@property (retain) Trip* trip;
+@property (assign) Trip* trip;
 @property (assign) testAppDelegate* app;
 @property (assign) id tag;
 @property (assign) BOOL isUploadingWaiting;

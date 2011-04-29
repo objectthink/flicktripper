@@ -48,5 +48,5 @@ typedef enum {
 @property (assign) int index;
 @property (assign) int photoIndex;
 @property (retain) NSArray* photos;
-@property (retain) Trip* trip;
+@property (assign) Trip* trip;
 @end

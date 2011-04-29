@@ -28,6 +28,8 @@
    BOOL showingAll;
    
    UILabel* stopNameLabel;
+   
+   UISegmentedControl* segmentedControl;
 }
 @property (retain) Stop*     stop;
 @property (assign) UIButton* imageButton;
@@ -35,6 +37,7 @@
 @property (assign) UILabel*  stopName;
 @property (assign) testAppDelegate* app;
 @property (retain) UILabel* stopNameLabel;
+@property (retain) UISegmentedControl* segmentedControl;
 
 -(IBAction) imageTouched;
 

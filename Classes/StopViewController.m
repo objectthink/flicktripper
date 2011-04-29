@@ -32,6 +32,7 @@
 @synthesize stopName;
 @synthesize app;
 @synthesize stopNameLabel;
+@synthesize segmentedControl;
 
 /////////////////////////////////////////////////////////////////////////////////
 //UPDATE WITH STOP
@@ -41,17 +42,14 @@
    //////////////////////////////////////////////////////////////////////////////
    //IS THE IMAGE AVAILABLE? EVENTUALLY THIS WILL HAPPEN IN ANOTHER THREAD
    //FETCH THE STOP IMAGE - MAY NEED TO STORE THIS FOR THE DETAILS VIEW
-   UIImage* image;
    if(aStop.image == nil)
    {
+      //CONSIDER DOING THIS IN ANOTHER THREAD
+      UIImage* image;
       NSData *imageData = [NSData dataWithContentsOfURL:aStop.photoURL];
       image = [UIImage imageWithData:imageData];
       
       aStop.image = image;
-   }
-   else
-   {
-      image = aStop.image;
    }
 
    //////////////////////////////////////////////////////////////////////////////
@@ -73,6 +71,13 @@
    
    //UPDATE THE VIEW CONTROLLER TITLE
    [stopNameLabel setText:aStop.name];
+   
+   ///////////////////////////////////////////////////////////////////////////
+   //DISABLE THE SEGMENT CONTROLS AS APPROPRIATE
+   //NSInteger currentStopIndex = [stop.trip.stops indexOfObject:aStop];
+   NSInteger currentStopIndex = [aStop index];
+   [self.segmentedControl setEnabled:(currentStopIndex > 0) forSegmentAtIndex:0];
+   [self.segmentedControl setEnabled:(currentStopIndex < [stop.trip.stops count] -1) forSegmentAtIndex:1];   
 }
 
 #pragma mark -
@@ -190,6 +195,7 @@
 
    [super viewDidLoad];
    
+   /////////////////////////////////////////////////////////////////////
    //SET THE APP PROPERTY
    app = (testAppDelegate*)[[UIApplication sharedApplication] delegate];
    
@@ -200,8 +206,8 @@
    //}
    
    //////////////////////////////////////////////////////////////////////
-   //ADD 
-	UISegmentedControl *segmentedControl = 
+   //CREATE SEGMENTED CONTROL 
+	segmentedControl = 
    [[UISegmentedControl alloc] initWithItems:
     [NSArray arrayWithObjects:
      [UIImage imageNamed:@"up.png"],
@@ -256,17 +262,6 @@
    
    self.navigationItem.titleView = myTitleView;
    /////////////////////////////////////////////////////////////////
-
-
-   //////////////////////////////////////////////////////////////////////////////
-   //SETUP PHOTO ON BUTTON
-   self.title = stop.name;
-   self.stopDetails.text = stop.details;
-   self.stopName.text = stop.name;
-   
-   self.imageButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-   
-   [self.imageButton setBackgroundImage:stop.image forState:UIControlStateNormal];
    
    //////////////////////////////////////////////////////////////////////////////
    //SETUP TOOLBAR
@@ -277,26 +272,25 @@
     action:@selector(toolbarHandler:)] autorelease];
    
    gotoFlickrPageButton.enabled = stop.photoSourceURL != nil;
-   
+   gotoFlickrPageButton.tag = 77;
+
    NSArray* items = [NSArray arrayWithObjects:@"Map", @"Satellite", @"Hybrid",nil];
    UISegmentedControl* sc = [[[UISegmentedControl alloc] initWithItems:items] autorelease];
    sc.segmentedControlStyle = UISegmentedControlStyleBar;
    sc.selectedSegmentIndex = 0;
    [sc addTarget:self action:@selector(mapType:) forControlEvents:UIControlEventValueChanged];
-   
-   gotoFlickrPageButton.tag = 77;
-   
-   UIBarButtonItem* toolbarItem2 =    
+      
+   UIBarButtonItem* mapToolbarItem =    
    [[[UIBarButtonItem alloc]
      initWithCustomView:sc]autorelease];
    
-   UIBarButtonItem* toolbarItem3 =    
+   UIBarButtonItem* allToolbarItem =    
    [[[UIBarButtonItem alloc]
      initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
      target:self 
      action:@selector(toolbarHandler:)] autorelease];
 
-   toolbarItem3.tag = 777;
+   allToolbarItem.tag = 777;
    
    UIBarButtonItem* spaceItem =    
    [[[UIBarButtonItem alloc]
@@ -306,7 +300,7 @@
    
    spaceItem.width = 30;
 
-   [self setToolbarItems:[NSArray arrayWithObjects:gotoFlickrPageButton,spaceItem,toolbarItem2,spaceItem,toolbarItem3,nil]];
+   [self setToolbarItems:[NSArray arrayWithObjects:gotoFlickrPageButton,spaceItem,mapToolbarItem,nil]];
    
    //SET THE MAPVIEW AND LOCATIONMANAGER DELEGATES TO SELF
    mapView.delegate = self;
@@ -321,26 +315,28 @@
    stopName.layer.cornerRadius = 10.0;
    stopName.backgroundColor = [UIColor lightGrayColor];
    
-   //TELL THE MAPVIEW TO SHOW THE CURRENT LOCATION
-   //[mapView setShowsUserLocation:YES];
-   
-   [mapView addAnnotation:stop.mapPoint];
-   
    showingAll = NO;
+   
+   [self UpdateWithStop:stop];
 }
 /////////////////////////////////////////////////////////////////////////////
 //SEGMENT ACTION
 //Handle requests to show next/previous stop
 - (IBAction)segmentAction:(id)sender
 {
-	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+	UISegmentedControl *segmentedControlSender = (UISegmentedControl *)sender;
    Trip* currentTrip = self.stop.trip;
    
    NSUInteger currentStopIndex = [currentTrip.stops indexOfObject:stop];
    NSInteger  nextStopIndex = 0;
    
 	NSLog(@"Segment clicked: %d, %d", 
-         segmentedControl.selectedSegmentIndex, currentStopIndex);
+         segmentedControlSender.selectedSegmentIndex, currentStopIndex);
+
+   
+   //////////////////////////////////////////////////////////////////////////
+   //REMOVE THE CURRENT STOP PIN FROM THE MAP
+   [mapView removeAnnotation:self.stop.mapPoint];
 
    switch (segmentedControl.selectedSegmentIndex) 
    {

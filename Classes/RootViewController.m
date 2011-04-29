@@ -110,6 +110,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
       {
          [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
          [busyAlert dismissWithClickedButtonIndex:0 animated:NO];
+         //[busyAlert release];
          busyAlert = nil;
       }
    }
@@ -734,12 +735,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
 -(void)getTripsFromFlickr
 {
    self.trips = [NSMutableArray array];
-
-   //NSString* username = 		
-   //[[NSUserDefaults standardUserDefaults] objectForKey:@"flickrAuthUsername"];
    
-   //self.title = [NSString stringWithFormat:@"%@ Trips", username];
-      
    app.flickrRequest.sessionInfo = [TripJournalSession sessionWithRequestType:TAGS];
    
    TripJournalSession* session = app.flickrRequest.sessionInfo;
@@ -1137,15 +1133,24 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
    //[ModalAlert say:@"RootViewController viewDidUnload"];
    
+   NSLog(@"%d",[self.trips retainCount]);
+   
    [self.trips removeAllObjects];
+   
    self.trips = nil;
 }
 
 - (void)dealloc 
 {
-   [super dealloc];
-   
    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+   NSLog(@"%d",[self.trips retainCount]);
+
+   [self.trips removeAllObjects];
+   
+   self.trips = nil;
+
+   [super dealloc];
 }
 @end
 

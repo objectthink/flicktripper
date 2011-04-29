@@ -38,6 +38,22 @@
 {
    [super viewDidLoad];
    
+   /////////////////////////////////////////////////////////////////
+   //CREATE A LABEL FOR THE MAVIGATION ITEM TITLEVIEW
+   UILabel* aLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
+   
+   [aLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
+   [aLabel setText:@"iSimple Trip Journal"];
+   [aLabel setTextColor:[UIColor whiteColor]];
+   
+   aLabel.backgroundColor = [UIColor clearColor];
+   aLabel.shadowColor = [UIColor blackColor];
+   aLabel.shadowOffset = CGSizeMake(1.0, 1.0);
+   aLabel.textAlignment = UITextAlignmentCenter;
+   
+   self.navigationItem.titleView = aLabel;
+   /////////////////////////////////////////////////////////////////
+
    self.title = @"Main";
    
    [self.navigationController setToolbarHidden:NO animated:YES];   
@@ -45,7 +61,9 @@
    //UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
    UIButton* infoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
    infoButton.frame = CGRectMake(20, 20, 20, 20);
-   [infoButton setBackgroundImage:[UIImage imageNamed:@"gear.png"] forState:UIControlStateNormal];
+   [infoButton setBackgroundImage:
+    [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"gear" ofType:@"png"]] 
+                            forState:UIControlStateNormal];
    
    [infoButton addTarget:self action:@selector(doit:) forControlEvents:UIControlEventTouchUpInside];
    infoButton.tag = 7;

@@ -49,11 +49,11 @@
    [NSThread sleepForTimeInterval:1];
    
     // Load in the backsplash image into a view
-   UIImageView *iv = 
-   [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"backsplash.png"]] autorelease];
+   //UIImageView *iv = 
+   //[[[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:@"backsplash.png"]] autorelease];
       
    // Add the navigation controller's view to the window and display.
-   [window addSubview:iv];
+   //[window addSubview:iv];
    [window addSubview:navigationController.view];   
    [window makeKeyAndVisible];
 
