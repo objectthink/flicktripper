@@ -12,7 +12,7 @@
 #import "Trip.h"
 
 
-@interface StopViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate>
+@interface StopViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate,OFFlickrAPIRequestDelegate>
 {
    testAppDelegate* app;
 
@@ -38,6 +38,11 @@
 @property (assign) testAppDelegate* app;
 @property (retain) UILabel* stopNameLabel;
 @property (retain) UISegmentedControl* segmentedControl;
+
+//OFFlickrAPIRequestDelegate
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request didCompleteWithResponse:(NSDictionary *)response;
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request didFailWithError:(NSError *)error;
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request imageUploadSentBytes:(NSUInteger)sent totalBytes:(NSUInteger)total;
 
 -(IBAction) imageTouched;
 

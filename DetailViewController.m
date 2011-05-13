@@ -24,7 +24,9 @@
 @synthesize isUploadingWaiting;
 
 #pragma mark -
-#pragma mark CLLocationManager
+#pragma mark CLLocationManage
+
+NSInteger useLocation = 0;
 ///////////////////////////////////////////////////////////////////////
 //locationManager:didUpdateToLocation:fromLocation
 //store the current location to be used in the new stop
@@ -32,15 +34,27 @@
    didUpdateToLocation:(CLLocation *)newLocation 
           fromLocation:(CLLocation *)oldLocation
 {
-   NSLog(@"%@",newLocation);
+   NSLog(@"%@ time:%f",newLocation,[[newLocation timestamp]timeIntervalSinceNow]);
    
    //HOW OLD IS THIS READING?
    NSTimeInterval t =
    [[newLocation timestamp]timeIntervalSinceNow];
    
-   if(t < -180) return;
+   if(t < -30) 
+   {
+      NSLog(@"SKIPPING LOCATION READING");
+      return;
+   }
    
-   currentLocation = [newLocation coordinate];
+   useLocation++;
+   
+   if((useLocation%3)==1)
+   {
+      currentLocation = [newLocation coordinate];
+   
+      //WEVE GOT A LOCATION SO STOP UPDATES
+      [app.locationManager stopUpdatingLocation];
+   }
 }
 ////////////////////////////////////////////////////////////////////////
 //locationManager:didFailWithError
@@ -212,7 +226,8 @@
       }
       case DELETE:
          MessageBox(nil, @"Stop deleted from flickr successfully!");
-         break;
+         //UPDATE THE TOOLBAR
+         uploadWaiting.enabled = self.trip.needsUploading;
          break;
       default:
          break;
@@ -277,15 +292,21 @@
 #pragma mark -
 #pragma mark View lifecycle
 
-//- (void)viewWillAppear:(BOOL)animated 
-//{
-//   [super viewWillAppear:animated];
-//}
+- (void)viewWillAppear:(BOOL)animated 
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
 
-//-(void)viewDidAppear:(BOOL)animated 
-//{
-//   [super viewDidAppear:animated];
-//}
+   [super viewWillAppear:animated];
+   
+   [self.tableView reloadData];
+}
+
+-(void)viewDidAppear:(BOOL)animated 
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+
+   [super viewDidAppear:animated];
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 //getPhotoInfo of the last uploaded image
@@ -662,9 +683,9 @@ editingInfo:(NSDictionary *)editingInfo
 }
 
 - (void)viewWillDisappear:(BOOL)animated 
-{
+{   
    NSLog(@"%s", __PRETTY_FUNCTION__);
-   
+
    [super viewWillDisappear:animated];
 
 //   TripJournalSession* session = app.flickrRequest.sessionInfo;
@@ -688,11 +709,15 @@ editingInfo:(NSDictionary *)editingInfo
 //   }
 }
    
-/*
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
+////////////////////////////////////////////////////////////////
+//VIEW DID DISAPPEAR
+- (void)viewDidDisappear:(BOOL)animated 
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+
+   [super viewDidDisappear:animated];
 }
-*/
+
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -743,6 +768,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
              arguments:[NSDictionary dictionaryWithObjectsAndKeys:photoId,@"photo_id",nil]
              ];
          }
+         else
+            //UPDATE THE TOOLBAR
+            uploadWaiting.enabled = self.trip.needsUploading;
       }
    }   
    else if (editingStyle == UITableViewCellEditingStyleInsert) 

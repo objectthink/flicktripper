@@ -37,6 +37,7 @@
 +(Trip*)initWithName:(NSString*)name details:(NSString*)details stops:(int)stops number:(int)number;
 
 -(Stop*)findStopWithMapPoint:(MapPoint*)mapPoint;
+-(void) removeStop:(Stop*)stop;
 
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* details;

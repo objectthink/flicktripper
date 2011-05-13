@@ -34,6 +34,40 @@
 @synthesize stopNameLabel;
 @synthesize segmentedControl;
 
+#pragma mark -
+#pragma mark OFFlickrAPIRequestDelegate
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request didCompleteWithResponse:(NSDictionary *)response
+{
+   NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);   
+   
+   TripJournalSession* session = app.flickrRequest.sessionInfo;
+   
+   switch (session.requestType) 
+   {
+      case UPLOAD:
+         break;
+      case IMAGEINFO:
+         break;
+      case LOCATION:
+         break;
+      case DELETE:
+         MessageBox(nil, @"Stop deleted from flickr successfully!");
+         break;
+      default:
+         break;
+   }   
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request didFailWithError:(NSError *)error
+{
+   MessageBox(@"didFailWithError", [error localizedDescription]);
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request imageUploadSentBytes:(NSUInteger)sent totalBytes:(NSUInteger)total
+{
+   
+}
+
 /////////////////////////////////////////////////////////////////////////////////
 //UPDATE WITH STOP
 //Update the stop view with the passed stop
@@ -206,7 +240,7 @@
    //}
    
    //////////////////////////////////////////////////////////////////////
-   //CREATE SEGMENTED CONTROL 
+   //CREATE SEGMENTED UP DOWN CONTROL 
 	segmentedControl = 
    [[UISegmentedControl alloc] initWithItems:
     [NSArray arrayWithObjects:
@@ -286,11 +320,11 @@
    
    UIBarButtonItem* allToolbarItem =    
    [[[UIBarButtonItem alloc]
-     initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+     initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
      target:self 
      action:@selector(toolbarHandler:)] autorelease];
 
-   allToolbarItem.tag = 777;
+   allToolbarItem.tag = 778;
    
    UIBarButtonItem* spaceItem =    
    [[[UIBarButtonItem alloc]
@@ -300,12 +334,11 @@
    
    spaceItem.width = 30;
 
-   [self setToolbarItems:[NSArray arrayWithObjects:gotoFlickrPageButton,spaceItem,mapToolbarItem,nil]];
+   [self setToolbarItems:[NSArray arrayWithObjects:gotoFlickrPageButton,spaceItem,mapToolbarItem,spaceItem, allToolbarItem, nil]];
    
    //SET THE MAPVIEW AND LOCATIONMANAGER DELEGATES TO SELF
    mapView.delegate = self;
    mapView.layer.cornerRadius = 10.0;
-   //app.locationManager.delegate = self;
    
    imageButton.layer.cornerRadius = 10.0;
    
@@ -327,7 +360,7 @@
 	UISegmentedControl *segmentedControlSender = (UISegmentedControl *)sender;
    Trip* currentTrip = self.stop.trip;
    
-   NSUInteger currentStopIndex = [currentTrip.stops indexOfObject:stop];
+   NSUInteger currentStopIndex = [currentTrip.stops indexOfObject:self.stop];
    NSInteger  nextStopIndex = 0;
    
 	NSLog(@"Segment clicked: %d, %d", 
@@ -373,6 +406,46 @@
    UIBarButtonItem* button = sender;   
    switch ((int)button.tag) 
    {
+      case 778:
+         if([ModalAlert ask:@"Deleting this stop will remove the photo from flickr..."])
+         { 
+            NSString* photoId = [[stop.photoID copy]autorelease];
+            Trip* currentTrip = self.stop.trip;
+            
+            //WERE ABOUT TO DELETE THE CURRENT STOP
+            //SET STOP TO ANOTHER INDEX AND UPDATE VIEW
+            NSUInteger currentStopIndex = [currentTrip.stops indexOfObject:stop];
+            
+            
+            //REMOVE STOP FROM TRIP LIST OF STOPS
+            [self.stop.trip removeStop:self.stop];
+            
+            if(currentStopIndex == [stop.trip.stops count])
+               currentStopIndex -= 1;
+                              
+            self.stop = [stop.trip.stops objectAtIndex:currentStopIndex];
+
+            [self UpdateWithStop:self.stop];
+            ////////////////////////////////////////
+            
+            BOOL uploaded = stop.uploaded;
+               
+            if(uploaded)
+            {
+               ///////////////////////////////////////////////
+               //SEND DELETE REQUEST
+               TripJournalSession* session = [TripJournalSession sessionWithRequestType:DELETE];
+               app.flickrRequest.sessionInfo = session;
+                  
+               [app.flickrRequest 
+                  callAPIMethodWithPOST:@"flickr.photos.delete" 
+                   arguments:[NSDictionary dictionaryWithObjectsAndKeys:photoId,@"photo_id",nil]
+               ];
+            }
+            
+
+         }
+         break;
       case 77:
          //SHOW THE FLICKR PAGE
          [self OnShowInfo];
