@@ -77,6 +77,22 @@
    [locationManager setDistanceFilter:kCLDistanceFilterNone];
    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
    
+   if (![locationManager locationServicesEnabled]) 
+   {
+      UIAlertView *servicesDisabledAlert = 
+      
+      [[UIAlertView alloc] 
+       initWithTitle:@"Location Services Disabled" 
+       message:@"You currently have all location services for this device disabled. The next time add new stop you will be asked to confirm whether location services should be reenabled." 
+       delegate:nil 
+       cancelButtonTitle:@"OK" 
+       otherButtonTitles:nil
+       ];
+      
+      [servicesDisabledAlert show];
+      [servicesDisabledAlert release];
+   }
+
    return YES;
 }
 

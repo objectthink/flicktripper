@@ -56,12 +56,39 @@ NSInteger useLocation = 0;
       [app.locationManager stopUpdatingLocation];
    }
 }
+
+BOOL userInformedOfDisabledLocationServices = NO;
 ////////////////////////////////////////////////////////////////////////
 //locationManager:didFailWithError
 //there was an error getting the current location
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-   [ModalAlert say:[error localizedDescription]];
+   NSLog(@"%s %@", __PRETTY_FUNCTION__, error);   
+
+   //[ModalAlert say:[error localizedDescription]];
+   
+   if ([error domain] == kCLErrorDomain) 
+   {
+      // We handle CoreLocation-related errors here
+      switch ([error code]) 
+      {
+            // "Don't Allow" on two successive app launches is the same as saying "never allow". The user
+            // can reset this for all apps by going to Settings > General > Reset > Reset Location Warnings.
+         case kCLErrorDenied:
+            // USER HAS DISALLOWED LOCATION SERVICES FOR ISIMPLE TRIP JOURNAL
+            //STOP UPDATING LOCATION
+            [app.locationManager stopUpdatingLocation];
+            break;
+         case kCLErrorLocationUnknown:
+            break;
+         default:
+            break;
+      }
+   } 
+   else 
+   {
+      // We handle all non-CoreLocation errors here
+   }
 }
 
 -(UIImage*)resizeImage:(UIImage*)image
@@ -521,15 +548,23 @@ NSInteger useLocation = 0;
 -(void)addStop:(id)sender
 {
    TripJournalSession* session = [TripJournalSession sessionWithRequestType:PREUPLOAD];
-      
+
+   //////////////////////////////////////////////////////
+   //SET THE SESSION IN FLICKR REQUEST
+   app.flickrRequest.sessionInfo = session;
+
    ///////////////////////////////////////////////////////
    //START THE LOCATION MANAGER
    //MUST MAKE SURE THIS DELEGATE IS NIL BEFORE LEAVING
    //THIS VIEW - MAY NEED A CLEANUP METHOD
    app.locationManager.delegate = self;
    [app.locationManager startUpdatingLocation];
-
-   app.flickrRequest.sessionInfo = session;
+   
+   //////////////////////////////////////////////////////
+   //START WITH NO CURRENT LOCATION SO THAT A PREVIOUS
+   //LOCATION DOES NOT LEAK INTO A SUBSEQUENT STOP
+   currentLocation.latitude = 0;
+   currentLocation.longitude = 0;
    
    UIImagePickerController* picker = [[UIImagePickerController alloc] init];
    
