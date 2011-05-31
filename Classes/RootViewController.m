@@ -36,11 +36,19 @@ void MessageBox(NSString* title, NSString* message)
 	
    [av show];
 }
+
+NSTimeInterval startTime;
+NSTimeInterval endTime;
+NSTimeInterval elapsedTime;
 ///////////////////////////////////////////////////////////////////////////////
 void ShowActivity(UIViewController* controller, BOOL show)
 {
    if(show)
    {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+
+      startTime = [NSDate timeIntervalSinceReferenceDate];
+      
       UIActivityIndicatorView *activityIndicator = 
       [[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)] autorelease];
       
@@ -55,6 +63,12 @@ void ShowActivity(UIViewController* controller, BOOL show)
    }
    else
    {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
+      endTime = [NSDate timeIntervalSinceReferenceDate];
+      elapsedTime = endTime - startTime;
+      MessageBox(@"elapsed time", [NSString stringWithFormat:@"%f",elapsedTime]);
+      
       UIActivityIndicatorView *activityIndicator = 
       (UIActivityIndicatorView*)[[[controller navigationItem]leftBarButtonItem] customView];
 
@@ -183,6 +197,17 @@ void ShowActivity(UIViewController* controller, BOOL show)
    TripJournalSession* session = request.sessionInfo;
    
    NSInteger errorCode = [error code];
+   
+   ////////////////////////////////////////////////////
+   //CHECK THE ERROR DOMAIN
+   //OFFlickrAPIRequestErrorDomain - client side (probably network) problem
+   //OFFlickrAPIReturnedErrorDomain- flickr api error
+   //
+   if ([error domain] == OFFlickrAPIRequestErrorDomain) 
+   {
+      MessageBox(@"Cannot Open Trips", @"iSimple Trip Journal cannot open your trips because it is not connected to the Internet.");
+      return;
+   }
    
    switch (session.requestType) 
    {
@@ -317,7 +342,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
 {
    TripJournalSession* session = request.sessionInfo;
 
-   NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response); 
+   //NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response); 
    
    NSString* stat = [response valueForKey:@"stat"];
    if( [stat isEqualToString:@"ok"] )
@@ -461,7 +486,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
 {
    TripJournalSession* session = request.sessionInfo;
 
-   NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
+   //NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
    
    NSString* stat = [response valueForKey:@"stat"];
    if( [stat isEqualToString:@"ok"] )
@@ -500,7 +525,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
 {
    TripJournalSession* session = request.sessionInfo;
 
-   NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
+   //NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
    
    NSString* stop       = [NSString stringWithFormat:@"stop number %d"        , session.photoIndex];
    NSString* stopDetails= [NSString stringWithFormat:@"stop number %d details", session.photoIndex];
@@ -515,49 +540,49 @@ void ShowActivity(UIViewController* controller, BOOL show)
    NSArray* tags = [response valueForKeyPath:@"photo.tags.tag"];
    for(NSDictionary* d in tags)
    {
-      NSLog(@"%@",[d objectForKey:@"raw"]);   
+      //NSLog(@"%@",[d objectForKey:@"raw"]);   
       
       NSString* tag = [d objectForKey:@"raw"];
       
       if( [tag hasPrefix:@"iSimpleTripJournal:tripname="] )
       {
-         NSLog(@"***%@", [tag substringFromIndex:28]); 
+         //NSLog(@"***%@", [tag substringFromIndex:28]); 
          tripName = [tag substringFromIndex:28];
       }
       
       if( [tag hasPrefix:@"iSimpleTripJournal:tripdetails="] )
       {
-         NSLog(@"***%@", [tag substringFromIndex:31]); 
+         //NSLog(@"***%@", [tag substringFromIndex:31]); 
          tripDetails = [tag substringFromIndex:31];
       }
 
       if( [tag hasPrefix:@"iSimpleTripJournal:stop="] )
       {
-         NSLog(@"*****%@", [tag substringFromIndex:24]); 
+         //NSLog(@"*****%@", [tag substringFromIndex:24]); 
          stop = [tag substringFromIndex:24];
       }
       
       if( [tag hasPrefix:@"iSimpleTripJournal:stopdetails="] )
       {
-         NSLog(@"*****%@", [tag substringFromIndex:31]); 
+         //NSLog(@"*****%@", [tag substringFromIndex:31]); 
          stopDetails = [tag substringFromIndex:31];
       }
 
       if( [tag hasPrefix:@"iSimpleTripJournal:tripid="] )
       {
-         NSLog(@"***%@", [tag substringFromIndex:26]); 
+         //NSLog(@"***%@", [tag substringFromIndex:26]); 
          number = [[tag substringFromIndex:26]intValue ];
       }
 
       if( [tag hasPrefix:@"geo:lat="] )
       {
-         NSLog(@"***%@", [tag substringFromIndex:8]); 
+         //NSLog(@"***%@", [tag substringFromIndex:8]); 
          lat = [[tag substringFromIndex:8]floatValue ];
       }
 
       if( [tag hasPrefix:@"geo:lon="] )
       {
-         NSLog(@"***%@", [tag substringFromIndex:8]); 
+         //NSLog(@"***%@", [tag substringFromIndex:8]); 
          lon = [[tag substringFromIndex:8]floatValue ];
       }
    }      
