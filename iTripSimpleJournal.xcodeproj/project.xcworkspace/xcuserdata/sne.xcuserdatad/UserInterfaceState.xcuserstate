@@ -5809,8 +5809,8 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>330102828.92748302</real>
-		<string>{14612, 1436}</string>
+		<real>330103145.59620202</real>
+		<string>{14612, 2108}</string>
 		<string>{15617, 9}</string>
 		<dict>
 			<key>$class</key>
@@ -29676,7 +29676,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>20</integer>
+					<integer>289</integer>
 				</dict>
 			</array>
 		</dict>
@@ -30189,8 +30189,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>330102828.92984903</real>
-		<string>{14612, 1436}</string>
+		<real>330103145.59856999</real>
+		<string>{14612, 2108}</string>
 		<string>{15617, 9}</string>
 		<string>-getPhotoInfo:</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
@@ -30226,7 +30226,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1121, 686}}</string>
+		<string>{{0, 0}, {1121, 978}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -33057,7 +33057,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{253, 4}, {1667, 1054}}</string>
+		<string>{{252, 4}, {1667, 1054}}</string>
 	</array>
 	<key>$top</key>
 	<dict>
