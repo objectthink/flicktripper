@@ -523,9 +523,9 @@ void ShowActivity(UIViewController* controller, BOOL show)
 //OnDoRequestTypeImageInfo
 -(void)OnDoRequestTypeImageInfo:(OFFlickrAPIRequest *)request didCompleteWithResponse:(NSDictionary *)response
 {
-   TripJournalSession* session = request.sessionInfo;
+   NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
 
-   //NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
+   TripJournalSession* session = request.sessionInfo;
    
    NSString* stop       = [NSString stringWithFormat:@"stop number %d"        , session.photoIndex];
    NSString* stopDetails= [NSString stringWithFormat:@"stop number %d details", session.photoIndex];
