@@ -325,6 +325,15 @@ BOOL userInformedOfDisabledLocationServices = NO;
 
    [super viewWillAppear:animated];
    
+   
+   //make sure the stop and trip are still valid
+   if(self.trip == nil)
+   {
+      MessageBox(@"Memory problem!", @"There was a memory problem.  Reopening trips.");
+      [self.navigationController popToRootViewControllerAnimated:YES];
+      return;
+   }
+   
    [self.tableView reloadData];
 }
 
@@ -362,6 +371,14 @@ BOOL userInformedOfDisabledLocationServices = NO;
 
    [super viewDidLoad];
    
+   //make sure the stop and trip are still valid
+   if((self.trip == nil) || (self.trip.name == nil) )
+   {
+      MessageBox(@"Memory problem!", @"There was a memory problem.  Reopening trips.");
+      [self.navigationController popToRootViewControllerAnimated:YES];
+      return;
+   }
+
    self.title = @"Stops";
 
    /////////////////////////////////////////////////////////////////

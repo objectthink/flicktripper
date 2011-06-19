@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import<ObjectiveFlickr.h>
 #import <MapKit/MapKit.h>
+#import <CoreData/CoreData.h>
 
 #define OBJECTIVE_FLICKR_API_KEY             @"2a27ceabcdf4b005d9a1b7bcb4f0d488"
 #define OBJECTIVE_FLICKR_API_SHARED_SECRET   @"105871eb12e708a4"
@@ -34,7 +35,11 @@
    
    id flickrDelegate;
    id flickrSession;
+   
+   NSManagedObjectContext* context;
 }
+
+-(void)initializeDatabase;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
@@ -42,6 +47,7 @@
 
 @property (retain) OFFlickrAPIContext* flickrContext;
 @property (retain) OFFlickrAPIRequest* flickrRequest;
+@property (retain) NSManagedObjectContext* context;
 
 @end
 

@@ -221,14 +221,32 @@
          break;
    }
 }
-//////////////////////////////////////////////////////////////////////////////
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad 
+
+-(void)viewDidLoadX
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
-
+   
    [super viewDidLoad];
    
+   [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   
+   [super viewDidLoad];
+   
+   //make sure the stop and trip are still valid
+   if((self.stop == nil) || (self.stop.trip == nil) )
+   {
+      MessageBox(@"Memory problem!", @"There was a memory problem.  Reopening trips.");
+      [self.navigationController popToRootViewControllerAnimated:YES];
+      return;
+   }
+
    /////////////////////////////////////////////////////////////////////
    //SET THE APP PROPERTY
    app = (testAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -553,6 +571,23 @@
    // e.g. self.myOutlet = nil;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [super viewWillAppear:animated];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [super viewDidAppear:animated];
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [super viewWillDisappear:animated];
+}
 
 - (void)dealloc 
 {

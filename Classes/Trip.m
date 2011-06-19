@@ -133,6 +133,8 @@
    [photoSourceURL release];
    [image release];
    [mapPoint release];
+   
+   trip = nil;
       
    [super dealloc];
 }

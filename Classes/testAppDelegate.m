@@ -8,6 +8,7 @@
 
 #import "testAppDelegate.h"
 #import "RootViewController.h"
+#import "TripEntity.h"
 
 @interface AUIViewController : UIViewController
 @end
@@ -34,6 +35,7 @@
 @synthesize flickrContext;
 @synthesize flickrRequest;
 @synthesize locationManager;
+@synthesize context;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -93,9 +95,57 @@
       [servicesDisabledAlert release];
    }
 
+   //initialize the database
+   [self initializeDatabase];
+   
    return YES;
 }
 
+-(void)initializeDatabase
+{
+   NSError* error;
+   
+   //path to database file
+   NSString* path = [NSHomeDirectory() stringByAppendingString:@"/Documents/isimpletripjournal_database.sqlite"];
+   NSURL* url = [NSURL fileURLWithPath:path];
+   
+   //init the model
+   NSManagedObjectModel* managedObjectModel= [NSManagedObjectModel mergedModelFromBundles:nil];
+   
+   //establish persistent store
+   NSPersistentStoreCoordinator* persistenStoreCoodinator =
+   [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
+   
+   if(![persistenStoreCoodinator 
+        addPersistentStoreWithType:NSSQLiteStoreType 
+        configuration:nil 
+        URL:url options:nil 
+        error:&error])
+      NSLog(@"Error %@", [error localizedDescription]);
+   else
+   {
+      //create context and assign coordinator
+      self.context =
+      [[[NSManagedObjectContext alloc] init] autorelease];
+      
+      [self.context setPersistentStoreCoordinator:persistenStoreCoodinator];
+   }
+      
+   [persistenStoreCoodinator release];
+   
+   //TRY TO SAVE SOMETHING
+   TripEntity* aTrip  = 
+   (TripEntity*)[NSEntityDescription 
+                 insertNewObjectForEntityForName:@"TripEntity"
+                 inManagedObjectContext:self.context];
+   
+   aTrip.name = @"my trip name";
+   aTrip.details = @"some details";
+   aTrip.number = [NSNumber numberWithInt:77];
+
+   if(![self.context save:&error])
+      NSLog(@"Error saving trip:%@", [error localizedDescription]);
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application 
 {

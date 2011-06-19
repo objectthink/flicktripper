@@ -87,6 +87,20 @@
          landmarkName = "-OnDoRequestTypeTags:didCompleteWithResponse:"
          landmarkType = "5">
       </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Classes/testAppDelegate.m"
+         timestampString = "330124167.868071"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "105"
+         endingLineNumber = "105"
+         landmarkName = "-initializeDatabase"
+         landmarkType = "5">
+      </FileBreakpoint>
    </FileBreakpoints>
    <ExceptionBreakpoints>
       <ExceptionBreakpoint

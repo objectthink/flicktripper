@@ -523,7 +523,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
 //OnDoRequestTypeImageInfo
 -(void)OnDoRequestTypeImageInfo:(OFFlickrAPIRequest *)request didCompleteWithResponse:(NSDictionary *)response
 {
-   NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
+   //NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
 
    TripJournalSession* session = request.sessionInfo;
    
@@ -873,12 +873,15 @@ void ShowActivity(UIViewController* controller, BOOL show)
 //VIEW DID APPEAR
 - (void)viewWillDisappear:(BOOL)animated 
 {
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   
    [super viewWillDisappear:animated];
 }
 ///////////////////////////////////////////////////////////////////////////////
 //VIEW DID APPEAR
 - (void)viewDidDisappear:(BOOL)animated 
-{
+{   NSLog(@"%s", __PRETTY_FUNCTION__);
+   
    [super viewDidDisappear:animated];
 }
 
@@ -1106,6 +1109,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 #pragma mark -
 #pragma mark Table view delegate
 
+DetailViewController* test = nil;
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
    //TDBadgedCell* cell = (TDBadgedCell*)[self.tableView cellForRowAtIndexPath:indexPath];
@@ -1131,7 +1136,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    detailViewController.trip = [trips objectAtIndex:indexPath.row];
    
    [self.navigationController pushViewController:detailViewController animated:YES];
-   [detailViewController release];
+   //[detailViewController release];
+   
+   test = detailViewController;
 }
 
 
@@ -1163,6 +1170,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    [self.trips removeAllObjects];
    
    self.trips = nil;
+   
+   test.trip = nil;
 }
 
 - (void)dealloc 
