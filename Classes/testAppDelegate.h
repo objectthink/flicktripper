@@ -10,6 +10,9 @@
 #import<ObjectiveFlickr.h>
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
+#import "Trip.h"
+#import "TripEntity.h"
+#import "StopEntity.h"
 
 #define OBJECTIVE_FLICKR_API_KEY             @"2a27ceabcdf4b005d9a1b7bcb4f0d488"
 #define OBJECTIVE_FLICKR_API_SHARED_SECRET   @"105871eb12e708a4"
@@ -23,7 +26,10 @@
 #define UPLOAD_PUBLIC_KEY  @"uploadPublic"
 #define DELAY_UPLOAD_KEY @"delayUpload"
 
-@interface testAppDelegate : NSObject <UIApplicationDelegate> {
+@interface testAppDelegate : NSObject <
+UIApplicationDelegate,
+NSFetchedResultsControllerDelegate> 
+{
     
    UIWindow *window;
    UINavigationController *navigationController;
@@ -37,9 +43,14 @@
    id flickrSession;
    
    NSManagedObjectContext* context;
+   NSFetchedResultsController *results;
 }
 
 -(void)initializeDatabase;
+-(TripEntity*)addTripEntity:(Trip*)trip;
+-(StopEntity*)addStopEntity:(Stop*)stop forTripEntity:(TripEntity*)tripEntity;
+-(BOOL)persistEntities;
+-(BOOL)fetchTrips;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
@@ -48,6 +59,7 @@
 @property (retain) OFFlickrAPIContext* flickrContext;
 @property (retain) OFFlickrAPIRequest* flickrRequest;
 @property (retain) NSManagedObjectContext* context;
+@property (nonatomic, retain) NSFetchedResultsController *results;
 
 @end
 

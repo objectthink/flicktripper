@@ -8,7 +8,6 @@
 
 #import "testAppDelegate.h"
 #import "RootViewController.h"
-#import "TripEntity.h"
 
 @interface AUIViewController : UIViewController
 @end
@@ -36,6 +35,7 @@
 @synthesize flickrRequest;
 @synthesize locationManager;
 @synthesize context;
+@synthesize results;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -134,17 +134,118 @@
    [persistenStoreCoodinator release];
    
    //TRY TO SAVE SOMETHING
-   TripEntity* aTrip  = 
+//   TripEntity* aTrip  = 
+//   (TripEntity*)[NSEntityDescription 
+//                 insertNewObjectForEntityForName:@"TripEntity"
+//                 inManagedObjectContext:self.context];
+//   
+//   aTrip.name = @"my trip name";
+//   aTrip.details = @"some details";
+//   aTrip.number = [NSNumber numberWithInt:77];
+//
+//   StopEntity* aStop  = 
+//   (StopEntity*)[NSEntityDescription 
+//                 insertNewObjectForEntityForName:@"StopEntity"
+//                 inManagedObjectContext:self.context];
+//
+//   aStop.name = @"my stop";
+//   aStop.details = @"stop details";
+//   aStop.Trip = aTrip;
+//   
+//   if(![self.context save:&error])
+//      NSLog(@"Error saving trip:%@", [error localizedDescription]);
+}
+
+-(TripEntity*)addTripEntity:(Trip*)trip
+{
+   TripEntity* aTripEntity  = 
    (TripEntity*)[NSEntityDescription 
                  insertNewObjectForEntityForName:@"TripEntity"
                  inManagedObjectContext:self.context];
    
-   aTrip.name = @"my trip name";
-   aTrip.details = @"some details";
-   aTrip.number = [NSNumber numberWithInt:77];
+   aTripEntity.name = trip.name;
+   aTripEntity.details = trip.details;
+   aTripEntity.number = [NSNumber numberWithInt:trip.number];
 
-   if(![self.context save:&error])
-      NSLog(@"Error saving trip:%@", [error localizedDescription]);
+   [aTripEntity retain];
+   
+   return aTripEntity;
+}
+
+-(StopEntity*)addStopEntity:(Stop*)stop forTripEntity:(TripEntity*)tripEntity
+{
+   StopEntity* aStopEntity  = 
+   (StopEntity*)[NSEntityDescription 
+                 insertNewObjectForEntityForName:@"StopEntity"
+                 inManagedObjectContext:self.context];
+   
+   aStopEntity.name = @"my stop";
+   aStopEntity.details = @"stop details";
+   aStopEntity.number = [NSNumber numberWithInt:stop.number];
+   aStopEntity.latitude = [NSNumber numberWithDouble:stop.location.latitude];
+   aStopEntity.longitude = [NSNumber numberWithDouble:stop.location.longitude];
+   aStopEntity.photoIdString = stop.photoID;
+   aStopEntity.photoSourceURLString = [stop.photoSourceURL absoluteString];
+   aStopEntity.photoURLString = [stop.photoURL absoluteString];
+   
+   aStopEntity.Trip = tripEntity;
+
+   return aStopEntity;
+}
+
+-(BOOL)persistEntities
+{
+//   NSError* error;
+//   if(![self.context save:&error])
+//      NSLog(@"Error saving trip:%@", [error localizedDescription]);
+//   
+   return YES;
+}
+
+-(BOOL)fetchTrips
+{
+	// Create a basic fetch request
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	[fetchRequest setEntity:[NSEntityDescription entityForName:@"TripEntity" inManagedObjectContext:self.context]];
+	
+	// Add a sort descriptor
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES selector:nil];
+	NSArray *descriptors = [NSArray arrayWithObject:sortDescriptor];
+	[fetchRequest setSortDescriptors:descriptors];
+	[sortDescriptor release];
+	
+	// Init the fetched results controller
+	NSError *error;
+	self.results = 
+   [[NSFetchedResultsController alloc] 
+    initWithFetchRequest:fetchRequest 
+    managedObjectContext:self.context 
+    sectionNameKeyPath:nil cacheName:@"Root"];
+   
+	self.results.delegate = self;
+	
+   if (![[self results] performFetch:&error])	
+      NSLog(@"Error: %@", [error localizedDescription]);
+   
+	[self.results release];
+	[fetchRequest release];
+   
+   //test
+//   if (!self.results.fetchedObjects.count) 
+//	{
+//		NSLog(@"Database has no depts at this time");
+//		return YES;
+//	}
+//	
+//	NSLog(@"Department:");
+//	for (TripEntity* trip in self.results.fetchedObjects)
+//   {
+//		NSLog(@"%@ : %d", trip.name, [trip.stops count]);
+//      for(StopEntity* stop in trip.stops)
+//         NSLog(@"%@",stop.name);
+//   }
+   
+   return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application 
@@ -160,7 +261,6 @@
    flickrSession = flickrRequest.sessionInfo;
 }
 
-
 - (void)applicationDidEnterBackground:(UIApplication *)application 
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -169,7 +269,6 @@
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
    */
 }
-
 
 - (void)applicationWillEnterForeground:(UIApplication *)application 
 {
@@ -183,7 +282,6 @@
    flickrRequest.delegate = flickrDelegate;
 }
 
-
 - (void)applicationDidBecomeActive:(UIApplication *)application 
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -192,7 +290,6 @@
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
    */
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application 
 {
@@ -203,7 +300,6 @@
      See also applicationDidEnterBackground:.
      */
 }
-
 
 #pragma mark -
 #pragma mark Memory management

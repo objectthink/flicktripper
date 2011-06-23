@@ -186,6 +186,8 @@ longitude:(float)lon
    aStop.photoSourceURL = photoSourceURL;
    aStop.photoID = photoID;
    
+   //NSLog(@"photoURL:%@",[photoURL absoluteString]);
+   
    CLLocationCoordinate2D aLocation = {lat,lon};
    aStop.location = aLocation;
    

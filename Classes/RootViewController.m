@@ -452,6 +452,10 @@ void ShowActivity(UIViewController* controller, BOOL show)
       self.navigationItem.rightBarButtonItem.enabled = YES;
       
       self.tableView.allowsSelection = YES;
+      
+      /////////////////////////////////////////////////////////////////////////
+      //TRY TO ADD TRIPS TO DATABASE
+      [app persistEntities];
    }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -519,12 +523,16 @@ void ShowActivity(UIViewController* controller, BOOL show)
       //}
    }
 }
+
+//TRY TO ADD TRIPS TO DATABASE
+TripEntity* tripEntity;
+
 ///////////////////////////////////////////////////////////////////////////////
 //OnDoRequestTypeImageInfo
 -(void)OnDoRequestTypeImageInfo:(OFFlickrAPIRequest *)request didCompleteWithResponse:(NSDictionary *)response
 {
    //NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
-
+   
    TripJournalSession* session = request.sessionInfo;
    
    NSString* stop       = [NSString stringWithFormat:@"stop number %d"        , session.photoIndex];
@@ -597,6 +605,10 @@ void ShowActivity(UIViewController* controller, BOOL show)
       [Trip initWithName:tripName details:tripDetails stops:numberOfStops number:number];
       
       [trips addObject:session.trip];
+      
+      /////////////////////////////////////////////////////////
+      //TRY TO ADD TRIP TO DATABASE
+      tripEntity = [app addTripEntity:session.trip];
    }
    
    ///////////////////////////////////////////////////////////////////////////////
@@ -628,6 +640,10 @@ void ShowActivity(UIViewController* controller, BOOL show)
       Stop* aStop = [session.trip.stops lastObject];
       aStop.trip = session.trip;
       aStop.uploaded = YES;
+      
+      /////////////////////////////////////////////////////////////////////////
+      //TRY TO ADD STOPS TO TRIP
+      [app addStopEntity:aStop forTripEntity:tripEntity];
    }
    
    ////////////////////////////////////////////////////////////////////////////
