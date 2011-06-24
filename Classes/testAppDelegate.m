@@ -36,6 +36,7 @@
 @synthesize locationManager;
 @synthesize context;
 @synthesize results;
+@synthesize trips;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -98,6 +99,10 @@
    //initialize the database
    [self initializeDatabase];
    
+   [self fetchTrips];
+   
+   [self initializeTrips];
+   
    return YES;
 }
 
@@ -132,6 +137,9 @@
    }
       
    [persistenStoreCoodinator release];
+   
+   //TRY TO READ DATABASE
+//   [self fetchTrips];
    
    //TRY TO SAVE SOMETHING
 //   TripEntity* aTrip  = 
@@ -179,8 +187,8 @@
                  insertNewObjectForEntityForName:@"StopEntity"
                  inManagedObjectContext:self.context];
    
-   aStopEntity.name = @"my stop";
-   aStopEntity.details = @"stop details";
+   aStopEntity.name = stop.name;
+   aStopEntity.details = stop.details;
    aStopEntity.number = [NSNumber numberWithInt:stop.number];
    aStopEntity.latitude = [NSNumber numberWithDouble:stop.location.latitude];
    aStopEntity.longitude = [NSNumber numberWithDouble:stop.location.longitude];
@@ -231,19 +239,55 @@
 	[fetchRequest release];
    
    //test
-//   if (!self.results.fetchedObjects.count) 
-//	{
-//		NSLog(@"Database has no depts at this time");
-//		return YES;
-//	}
-//	
-//	NSLog(@"Department:");
-//	for (TripEntity* trip in self.results.fetchedObjects)
-//   {
-//		NSLog(@"%@ : %d", trip.name, [trip.stops count]);
-//      for(StopEntity* stop in trip.stops)
-//         NSLog(@"%@",stop.name);
-//   }
+   if (!self.results.fetchedObjects.count) 
+	{
+		NSLog(@"Database has no depts at this time");
+		return YES;
+	}
+	
+	NSLog(@"trips:");
+	for (TripEntity* trip in self.results.fetchedObjects)
+   {
+		NSLog(@"%@ : %d", trip.name, [trip.Stops count]);
+      for(StopEntity* stop in trip.Stops)
+         NSLog(@"%@",stop.name);
+   }
+   
+   return YES;
+}
+
+-(BOOL)initializeTrips
+{
+   self.trips = [NSMutableArray array]; 
+   
+   for (TripEntity* tripEntity in self.results.fetchedObjects)
+   {
+      Trip* trip = 
+      [Trip 
+       initWithName:tripEntity.name 
+       details:tripEntity.details 
+       stops:[tripEntity.Stops count] 
+       number:[tripEntity.number intValue]];
+
+      for(StopEntity* stopEntity in tripEntity.Stops)
+      {
+         Stop* stop =
+         [Stop 
+          initWithName:stopEntity.name 
+          details:stopEntity.details
+          photoURL:[NSURL URLWithString:stopEntity.photoURLString]
+          photoSourceURL:[NSURL URLWithString:stopEntity.photoSourceURLString]
+          photoID:stopEntity.photoIdString
+          latitude:[stopEntity.latitude floatValue]
+          longitude:[stopEntity.longitude floatValue]];
+         
+         stop.trip = trip;
+         
+         [trip.stops addObject:stop];
+      }
+      
+      [self.trips addObject:trip];
+   }
    
    return YES;
 }

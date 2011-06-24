@@ -44,6 +44,8 @@ NSFetchedResultsControllerDelegate>
    
    NSManagedObjectContext* context;
    NSFetchedResultsController *results;
+   
+   NSMutableArray* trips;
 }
 
 -(void)initializeDatabase;
@@ -51,10 +53,12 @@ NSFetchedResultsControllerDelegate>
 -(StopEntity*)addStopEntity:(Stop*)stop forTripEntity:(TripEntity*)tripEntity;
 -(BOOL)persistEntities;
 -(BOOL)fetchTrips;
+-(BOOL)initializeTrips;
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) CLLocationManager* locationManager;
+@property (retain) NSMutableArray* trips;
 
 @property (retain) OFFlickrAPIContext* flickrContext;
 @property (retain) OFFlickrAPIRequest* flickrRequest;

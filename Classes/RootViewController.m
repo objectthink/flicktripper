@@ -728,7 +728,10 @@ TripEntity* tripEntity;
    self.navigationItem.title = @"Trips";
    
    //GET TRIPS
-   [self getTrips];
+   //[self getTrips];
+   
+   self.trips = app.trips;
+   [self.tableView reloadData];
           
    [self setBarButtonItems];
 
