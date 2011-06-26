@@ -451,11 +451,10 @@ void ShowActivity(UIViewController* controller, BOOL show)
       
       self.navigationItem.rightBarButtonItem.enabled = YES;
       
-      self.tableView.allowsSelection = YES;
+      self.tableView.allowsSelection = YES;     
       
-      /////////////////////////////////////////////////////////////////////////
-      //TRY TO ADD TRIPS TO DATABASE
-      [app persistEntities];
+      //populate the database
+      [app initializeDatabaseWith:trips];
    }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -525,7 +524,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
 }
 
 //TRY TO ADD TRIPS TO DATABASE
-TripEntity* tripEntity;
+//TripEntity* tripEntity;
 
 ///////////////////////////////////////////////////////////////////////////////
 //OnDoRequestTypeImageInfo
@@ -608,7 +607,7 @@ TripEntity* tripEntity;
       
       /////////////////////////////////////////////////////////
       //TRY TO ADD TRIP TO DATABASE
-      tripEntity = [app addTripEntity:session.trip];
+      //tripEntity = [app addTripEntity:session.trip];
    }
    
    ///////////////////////////////////////////////////////////////////////////////
@@ -643,7 +642,7 @@ TripEntity* tripEntity;
       
       /////////////////////////////////////////////////////////////////////////
       //TRY TO ADD STOPS TO TRIP
-      [app addStopEntity:aStop forTripEntity:tripEntity];
+      //app addStopEntity:aStop forTripEntity:tripEntity];
    }
    
    ////////////////////////////////////////////////////////////////////////////
@@ -728,10 +727,15 @@ TripEntity* tripEntity;
    self.navigationItem.title = @"Trips";
    
    //GET TRIPS
-   //[self getTrips];
-   
-   self.trips = app.trips;
-   [self.tableView reloadData];
+   if (app.hasTrips) 
+   {
+      self.trips = app.trips;
+      [self.tableView reloadData];
+   }
+   else
+   {
+      [self getTrips];
+   }
           
    [self setBarButtonItems];
 
@@ -1186,9 +1190,10 @@ DetailViewController* test = nil;
    
    NSLog(@"%d",[self.trips retainCount]);
    
-   [self.trips removeAllObjects];
+   //TODO REVISIT THIS
+   //[self.trips removeAllObjects];
    
-   self.trips = nil;
+   //self.trips = nil;
    
    test.trip = nil;
 }
@@ -1199,9 +1204,10 @@ DetailViewController* test = nil;
 
    NSLog(@"%d",[self.trips retainCount]);
 
-   [self.trips removeAllObjects];
+   //TODO REVISIT THIS
+   //[self.trips removeAllObjects];
    
-   self.trips = nil;
+   //self.trips = nil;
 
    [super dealloc];
 }

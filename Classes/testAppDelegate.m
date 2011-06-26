@@ -37,6 +37,7 @@
 @synthesize context;
 @synthesize results;
 @synthesize trips;
+@synthesize hasTrips;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -96,16 +97,31 @@
       [servicesDisabledAlert release];
    }
 
-   //initialize the database
+   //determine if we have persisted trips
+   self.hasTrips = [[NSUserDefaults standardUserDefaults] boolForKey:HAS_PERSISTED_TRIPS];
+   
+   //initialize the database interface
    [self initializeDatabase];
-   
-   [self fetchTrips];
-   
-   [self initializeTrips];
-   
+
+   if(self.hasTrips == YES)
+   {
+      [self fetchTrips];
+      [self initializeTrips];
+   }
+   else
+   {
+      //initialize the database interface
+      //remove the file if it exists
+      //and initialize the database interface
+      //again
+      [self resetDatabase];
+      [self initializeDatabase];
+   }
+
    return YES;
 }
 
+/////////////////////////////////////////
 -(void)initializeDatabase
 {
    NSError* error;
@@ -164,6 +180,25 @@
 //      NSLog(@"Error saving trip:%@", [error localizedDescription]);
 }
 
+-(void)resetDatabase
+{
+   NSPersistentStoreCoordinator* 
+   persistentStoreCoordinator = [self.context persistentStoreCoordinator];
+   
+   
+   NSArray *stores = [persistentStoreCoordinator persistentStores];
+   
+   for(NSPersistentStore *store in stores) 
+   {
+      [persistentStoreCoordinator removePersistentStore:store error:nil];
+      [[NSFileManager defaultManager] removeItemAtPath:store.URL.path error:nil];
+   }
+   
+   //[persistentStoreCoordinator release];
+   
+   //self.context = nil;
+}
+
 -(TripEntity*)addTripEntity:(Trip*)trip
 {
    TripEntity* aTripEntity  = 
@@ -203,11 +238,29 @@
 
 -(BOOL)persistEntities
 {
-//   NSError* error;
-//   if(![self.context save:&error])
-//      NSLog(@"Error saving trip:%@", [error localizedDescription]);
-//   
-   return YES;
+   BOOL r = NO;
+   
+   NSError* error;
+   if(![self.context save:&error])
+   {
+      NSLog(@"Error saving trip:%@", [error localizedDescription]);
+   }
+   else
+   {
+      [self fetchTrips];
+      [self initializeTrips];
+
+      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:HAS_PERSISTED_TRIPS];
+      
+      [[NSUserDefaults standardUserDefaults] synchronize];
+      [NSUserDefaults resetStandardUserDefaults];
+      
+      r = YES;
+   }
+   
+   self.hasTrips = r;
+   
+   return r;
 }
 
 -(BOOL)fetchTrips
@@ -238,10 +291,10 @@
 	[self.results release];
 	[fetchRequest release];
    
-   //test
+   ///////////test
    if (!self.results.fetchedObjects.count) 
 	{
-		NSLog(@"Database has no depts at this time");
+		NSLog(@"Database has no trips at this time");
 		return YES;
 	}
 	
@@ -252,6 +305,7 @@
       for(StopEntity* stop in trip.Stops)
          NSLog(@"%@",stop.name);
    }
+   /////////////
    
    return YES;
 }
@@ -290,6 +344,27 @@
    }
    
    return YES;
+}
+
+////////////////////////////////////////////////////////
+//initialize the database with the passed array of trips
+-(void)initializeDatabaseWith:(NSArray *)flickrTrips
+{
+   [self resetDatabase];
+   [self initializeDatabase];
+   
+   for(Trip* trip in flickrTrips)
+   {
+      TripEntity* tripEntity = [self addTripEntity:trip];
+      
+      for(Stop* stop in trip.stops)
+         [self addStopEntity:stop forTripEntity:tripEntity];
+   }
+   
+   [self persistEntities];
+   
+   //test
+   //[self fetchTrips];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application 

@@ -23,8 +23,9 @@
 #define FLICKR_FULLNAME_KEY   @"flickrAuthFullname"
 
 #define UPLOAD_FULLSIZE_KEY   @"uploadFullSizePhotos"
-#define UPLOAD_PUBLIC_KEY  @"uploadPublic"
-#define DELAY_UPLOAD_KEY @"delayUpload"
+#define UPLOAD_PUBLIC_KEY     @"uploadPublic"
+#define DELAY_UPLOAD_KEY      @"delayUpload"
+#define HAS_PERSISTED_TRIPS   @"hasPersistedTrips"
 
 @interface testAppDelegate : NSObject <
 UIApplicationDelegate,
@@ -46,9 +47,12 @@ NSFetchedResultsControllerDelegate>
    NSFetchedResultsController *results;
    
    NSMutableArray* trips;
+   BOOL hasTrips;
 }
 
 -(void)initializeDatabase;
+-(void)initializeDatabaseWith:(NSArray*)trips;
+-(void)resetDatabase;
 -(TripEntity*)addTripEntity:(Trip*)trip;
 -(StopEntity*)addStopEntity:(Stop*)stop forTripEntity:(TripEntity*)tripEntity;
 -(BOOL)persistEntities;
@@ -59,6 +63,7 @@ NSFetchedResultsControllerDelegate>
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) CLLocationManager* locationManager;
 @property (retain) NSMutableArray* trips;
+@property (assign) BOOL hasTrips;
 
 @property (retain) OFFlickrAPIContext* flickrContext;
 @property (retain) OFFlickrAPIRequest* flickrRequest;
