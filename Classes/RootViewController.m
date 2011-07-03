@@ -183,6 +183,10 @@ void ShowActivity(UIViewController* controller, BOOL show)
                [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
                MessageBox(nil, @"Trip successfully deleted from flickr!");
+               
+               if(app.hasTrips == YES)
+                  //update the database
+                  [app initializeDatabaseWith:trips];
             }
          }
          break;
@@ -726,19 +730,23 @@ void ShowActivity(UIViewController* controller, BOOL show)
    self.title = @"Trips";
    self.navigationItem.title = @"Trips";
    
-   //GET TRIPS
-   if (app.hasTrips) 
-   {
-      self.trips = app.trips;
-      [self.tableView reloadData];
-   }
-   else
-   {
-      [self getTrips];
-   }
-          
    [self setBarButtonItems];
 
+   //GET TRIPS
+//   if (app.hasTrips) 
+//   {
+//      self.trips = app.trips;
+//      [self.tableView reloadData];
+//      
+//      self.navigationItem.rightBarButtonItem.enabled = YES;
+//   }
+//   else
+//   {
+//      [self getTrips];
+//   }
+   
+   [self getTrips];
+          
    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -775,7 +783,19 @@ void ShowActivity(UIViewController* controller, BOOL show)
    else
    {
       app.flickrContext.authToken = token;
-      [self getTripsFromFlickr];
+      
+      if (app.hasTrips) 
+      {
+         self.trips = app.trips;
+         [self.tableView reloadData];
+         
+         self.navigationItem.rightBarButtonItem.enabled = YES;
+      }
+      else
+      {
+         [self getTripsFromFlickr];
+      }
+
    }
 }
 ///////////////////////////////////////////////////////////////////////////////
@@ -878,6 +898,9 @@ void ShowActivity(UIViewController* controller, BOOL show)
       default:
          break;
    }
+   
+   //update the database
+   [app initializeDatabaseWith:trips];
 }
 ///////////////////////////////////////////////////////////////////////////////
 //VIEW DID APPEAR

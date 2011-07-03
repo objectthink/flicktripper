@@ -78,7 +78,7 @@
          return 1;
          break;
       case 1:
-         return 5;
+         return 6;
          break;
       default:
          return 0;
@@ -170,10 +170,14 @@
                mySwitch.tag = 77777;
                break;
             case 4:
+               cell.textLabel.text = @"Refresh trips";
+               
+               mySwitch.tag = 777777;
+               break;
+            case 5:
                cell.textLabel.text = @"iGuess PPT tags";
                
-               mySwitch.tag = 777;
-               
+               mySwitch.tag = 777;               
                break;
          }
       }
@@ -235,6 +239,13 @@
          else 
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:DELAY_UPLOAD_KEY];
          break;
+      case 777777:
+         if ([aSwitch isOn])
+         {
+            [ModalAlert say:@"The next time you go to Your Trips they will be downloaded from flickr."];
+            
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:HAS_PERSISTED_TRIPS];
+         }
          break;
    }
 

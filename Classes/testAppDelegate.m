@@ -39,6 +39,11 @@
 @synthesize trips;
 @synthesize hasTrips;
 
+-(BOOL)getHasTrips
+{
+   return [[NSUserDefaults standardUserDefaults] boolForKey:HAS_PERSISTED_TRIPS];
+}
+
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -99,6 +104,7 @@
 
    //determine if we have persisted trips
    self.hasTrips = [[NSUserDefaults standardUserDefaults] boolForKey:HAS_PERSISTED_TRIPS];
+   //self.hasTrips = NO;
    
    //initialize the database interface
    [self initializeDatabase];
@@ -243,7 +249,7 @@
    NSError* error;
    if(![self.context save:&error])
    {
-      NSLog(@"Error saving trip:%@", [error localizedDescription]);
+      NSLog(@"Error saving context:%@", [error localizedDescription]);
    }
    else
    {
@@ -335,6 +341,7 @@
           latitude:[stopEntity.latitude floatValue]
           longitude:[stopEntity.longitude floatValue]];
          
+         stop.uploaded = YES;
          stop.trip = trip;
          
          [trip.stops addObject:stop];

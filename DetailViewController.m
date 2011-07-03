@@ -212,7 +212,9 @@ BOOL userInformedOfDisabledLocationServices = NO;
          NSArray* urls = [response valueForKeyPath:@"photo.urls.url"];
          
          aStop.photoSourceURL = [NSURL URLWithString:[[urls objectAtIndex:0]objectForKey:@"_text"]];
-         aStop.photoID               = [response valueForKeyPath:@"photo.id"];
+         aStop.photoID        = [response valueForKeyPath:@"photo.id"];
+         aStop.photoURL       = 
+         [app.flickrContext photoSourceURLFromDictionary:[response valueForKey:@"photo"] size:OFFlickrSmallSize];
                   
          ////////////////////////////////////////////////
          //SET LOCATION

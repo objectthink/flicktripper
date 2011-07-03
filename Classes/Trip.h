@@ -57,10 +57,14 @@
    NSString* details;
    int number;
    
-   UIImage* image;
+   UIImage* image;         //used for stop page
+   UIImage* thumb;         //thumbnail used on details view
    
-   NSURL* photoURL;
+   NSURL* photoURL;        //big image
+   NSURL* photoThumbURL;   //thumb url
+   
    NSURL* photoSourceURL;
+   
    NSString* photoID;
    
    CLLocationCoordinate2D location;
