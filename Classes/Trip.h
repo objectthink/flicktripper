@@ -90,14 +90,27 @@
    latitude:(float) lat
    longitude:(float) lon;
 
++(Stop*)initWithName:(NSString*)name 
+             details:(NSString *)details 
+            photoURL:(NSURL*) photoURL 
+       photoThumbURL:(NSURL*) photoURL 
+      photoSourceURL:(NSURL*)photoSourceURL
+             photoID:(NSString*) photoID
+            latitude:(float) lat
+           longitude:(float) lon
+                trip:(Trip*)trip
+            uploaded:(BOOL)uploaded;
+
 @property (assign) Trip* trip;
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* details;
 @property (retain) NSURL* photoURL;
+@property (retain) NSURL* photoThumbURL;
 @property (retain) NSURL* photoSourceURL;
 @property (nonatomic, copy) NSString* photoID;
 @property (assign) int number;
 @property (retain) UIImage* image;
+@property (retain) UIImage* thumb;
 @property (assign) CLLocationCoordinate2D location;
 @property (retain) MapPoint* mapPoint;
 @property (assign) BOOL uploaded;

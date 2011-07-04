@@ -20,9 +20,9 @@
 		733B68E51363A8CF003DD28D /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = 733B68E31363A8CF003DD28D /* upload.png */; };
 		733B68E71363A947003DD28D /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 733B68E61363A947003DD28D /* down.png */; };
 		7369081D122807BC00AAA201 /* UIImageInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7369081C122807BC00AAA201 /* UIImageInfoView.m */; };
+		73BD88D313C1FE1E00288AC4 /* StopEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BD88D213C1FE1E00288AC4 /* StopEntity.m */; };
 		A3011CEF12DA081000050CF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3011CEE12DA081000050CF4 /* MainViewController.m */; };
 		A3011CF112DA096400050CF4 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3011CF012DA096400050CF4 /* MainViewController.xib */; };
-		A307CC9C13B363330096EC25 /* StopEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A307CC9B13B363330096EC25 /* StopEntity.m */; };
 		A307CC9F13B363330096EC25 /* TripEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A307CC9E13B363330096EC25 /* TripEntity.m */; };
 		A3192FFF1323C83B00770B60 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = A3192FFE1323C83B00770B60 /* gear.png */; };
 		A31930271323D0E400770B60 /* gears.png in Resources */ = {isa = PBXBuildFile; fileRef = A31930261323D0E400770B60 /* gears.png */; };
@@ -86,12 +86,12 @@
 		733B68E61363A947003DD28D /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		7369081B122807BC00AAA201 /* UIImageInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageInfoView.h; path = ../UIImageInfoView.h; sourceTree = "<group>"; };
 		7369081C122807BC00AAA201 /* UIImageInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageInfoView.m; path = ../UIImageInfoView.m; sourceTree = "<group>"; };
+		73BD88D113C1FE1E00288AC4 /* StopEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopEntity.h; sourceTree = "<group>"; };
+		73BD88D213C1FE1E00288AC4 /* StopEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopEntity.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* iTripSimpleJournal-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iTripSimpleJournal-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		A3011CE912DA075100050CF4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = SOURCE_ROOT; };
 		A3011CEE12DA081000050CF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = SOURCE_ROOT; };
 		A3011CF012DA096400050CF4 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		A307CC9A13B363330096EC25 /* StopEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StopEntity.h; path = ../../../Dropbox/dev/iSimpleTripJournal_2/StopEntity.h; sourceTree = "<group>"; };
-		A307CC9B13B363330096EC25 /* StopEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StopEntity.m; path = ../../../Dropbox/dev/iSimpleTripJournal_2/StopEntity.m; sourceTree = "<group>"; };
 		A307CC9D13B363330096EC25 /* TripEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripEntity.h; path = ../../../Dropbox/dev/iSimpleTripJournal_2/TripEntity.h; sourceTree = "<group>"; };
 		A307CC9E13B363330096EC25 /* TripEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripEntity.m; path = ../../../Dropbox/dev/iSimpleTripJournal_2/TripEntity.m; sourceTree = "<group>"; };
 		A3192FFE1323C83B00770B60 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
@@ -264,10 +264,10 @@
 			isa = PBXGroup;
 			children = (
 				A395B5E813AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld */,
+				73BD88D113C1FE1E00288AC4 /* StopEntity.h */,
+				73BD88D213C1FE1E00288AC4 /* StopEntity.m */,
 				A307CC9D13B363330096EC25 /* TripEntity.h */,
 				A307CC9E13B363330096EC25 /* TripEntity.m */,
-				A307CC9A13B363330096EC25 /* StopEntity.h */,
-				A307CC9B13B363330096EC25 /* StopEntity.m */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -380,8 +380,8 @@
 				A3459C00125AAB68004B76FD /* TDBadgedCell.m in Sources */,
 				A3011CEF12DA081000050CF4 /* MainViewController.m in Sources */,
 				A395B5EA13AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld in Sources */,
-				A307CC9C13B363330096EC25 /* StopEntity.m in Sources */,
 				A307CC9F13B363330096EC25 /* TripEntity.m in Sources */,
+				73BD88D313C1FE1E00288AC4 /* StopEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

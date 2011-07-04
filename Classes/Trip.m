@@ -109,10 +109,12 @@
 @synthesize name;
 @synthesize details;
 @synthesize photoURL;
+@synthesize photoThumbURL;
 @synthesize photoSourceURL;
 @synthesize photoID;
 @synthesize number;
 @synthesize image;
+@synthesize thumb;
 @synthesize location;
 @synthesize mapPoint;
 @synthesize uploaded;
@@ -195,6 +197,39 @@ longitude:(float)lon
    
    aStop.uploaded = NO;
    
+   return [aStop autorelease];
+}
+
++(Stop*)
+initWithName:(NSString *)name 
+details:(NSString *)details
+photoURL:(NSURL*) photoURL
+photoThumbURL:(NSURL*) photoThumbURL
+photoSourceURL:(NSURL*)photoSourceURL
+photoID:(NSString*) photoID
+latitude:(float)lat
+longitude:(float)lon
+trip:(Trip*)trip
+uploaded:(BOOL)uploaded
+{
+   Stop* aStop = [[Stop alloc] init];
+   
+   aStop.name = name;
+   aStop.details = details;
+   aStop.photoURL = photoURL;
+   aStop.photoThumbURL = photoThumbURL;
+   aStop.photoSourceURL = photoSourceURL;
+   aStop.photoID = photoID;
+   aStop.trip = trip;
+   aStop.uploaded = uploaded;
+   
+   //NSLog(@"photoURL:%@",[photoURL absoluteString]);
+   
+   CLLocationCoordinate2D aLocation = {lat,lon};
+   aStop.location = aLocation;
+   
+   aStop.mapPoint = [[MapPoint alloc] initWithCoordinate:aStop.location title:aStop.name];
+      
    return [aStop autorelease];
 }
 

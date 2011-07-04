@@ -155,7 +155,8 @@ BOOL userInformedOfDisabledLocationServices = NO;
       
       Stop* stop = [Stop initWithName:stopName details:stopDetails];
       
-      //ADD THESE PROPERTIES BY HAND FOR NOW
+      //ADD THESE PROPERTIES BY HAND AS WE DON'T HAVE ALL OF THE
+      //STOP DATA YET
       stop.image = [self resizeImage:image];
       stop.location = currentLocation;
       stop.mapPoint = [[MapPoint alloc] initWithCoordinate:stop.location title:stop.name];
@@ -215,6 +216,8 @@ BOOL userInformedOfDisabledLocationServices = NO;
          aStop.photoID        = [response valueForKeyPath:@"photo.id"];
          aStop.photoURL       = 
          [app.flickrContext photoSourceURLFromDictionary:[response valueForKey:@"photo"] size:OFFlickrSmallSize];
+         aStop.photoThumbURL  = 
+         [app.flickrContext photoSourceURLFromDictionary:[response valueForKey:@"photo"] size:OFFlickrSmallSquareSize];
                   
          ////////////////////////////////////////////////
          //SET LOCATION
@@ -881,29 +884,55 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 //   cell.imageView.image = image;
    
    
-   if(stop.image == nil)
+//   if(stop.image == nil)
+//   {
+//      dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+//      dispatch_async(queue, 
+//                     ^{
+//                        UIImage* image;
+//                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+//                        image = [UIImage imageWithData:imageData];
+//                              
+//                        stop.image = image;
+//                        
+//                        dispatch_sync(dispatch_get_main_queue(), 
+//                                      ^{
+//                                         cell.imageView.image = image;
+//                                         [cell setNeedsLayout];
+//                                      });
+//                     });  
+//   }
+//   else
+//   {
+//      cell.imageView.image = stop.image;
+//   }
+   
+   if(stop.thumb == nil)
    {
       dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
       dispatch_async(queue, 
                      ^{
                         UIImage* image;
-                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoThumbURL];
                         image = [UIImage imageWithData:imageData];
-                              
-                        stop.image = image;
+                        
+                        if(imageData == nil)
+                           image = [UIImage imageNamed:@"icon.png"];
+                        
+                        stop.thumb = image;
                         
                         dispatch_sync(dispatch_get_main_queue(), 
                                       ^{
-                                         cell.imageView.image = image;
+                                         cell.imageView.image = stop.thumb;
                                          [cell setNeedsLayout];
                                       });
                      });  
    }
    else
    {
-      cell.imageView.image = stop.image;
+      cell.imageView.image = stop.thumb;
    }
-   
+
    return cell;
 }
 

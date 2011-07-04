@@ -623,7 +623,9 @@ void ShowActivity(UIViewController* controller, BOOL show)
       NSString* photoID = [photo objectForKey:@"id"];
       
       NSURL* photoURL = 
-      [app.flickrContext photoSourceURLFromDictionary:photo size:OFFlickrSmallSize];
+      [app.flickrContext photoSourceURLFromDictionary:photo size:OFFlickrLargeSize];
+      NSURL* photoThumbURL =
+      [app.flickrContext photoSourceURLFromDictionary:photo size:OFFlickrSmallSquareSize];
       NSURL* photoSourcePage = 
       [app.flickrContext photoWebPageURLFromDictionary:photo];
 
@@ -634,18 +636,17 @@ void ShowActivity(UIViewController* controller, BOOL show)
         initWithName:stop 
         details:stopDetails
         photoURL:photoURL
+        photoThumbURL:photoThumbURL
         photoSourceURL:photoSourcePage
         photoID:photoID
         latitude:lat
         longitude:lon
+        trip:session.trip
+        uploaded:YES
         ]];
       
-      Stop* aStop = [session.trip.stops lastObject];
-      aStop.trip = session.trip;
-      aStop.uploaded = YES;
-      
       /////////////////////////////////////////////////////////////////////////
-      //TRY TO ADD STOPS TO TRIP
+      //TRY TO ADD STOPS TO TRIP ENTITY
       //app addStopEntity:aStop forTripEntity:tripEntity];
    }
    

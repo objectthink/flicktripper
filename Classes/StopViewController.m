@@ -76,16 +76,38 @@
    //////////////////////////////////////////////////////////////////////////////
    //IS THE IMAGE AVAILABLE? EVENTUALLY THIS WILL HAPPEN IN ANOTHER THREAD
    //FETCH THE STOP IMAGE - MAY NEED TO STORE THIS FOR THE DETAILS VIEW
-   if(aStop.image == nil)
+   if(aStop.thumb == nil)
    {
       //CONSIDER DOING THIS IN ANOTHER THREAD
-      UIImage* image;
-      NSData *imageData = [NSData dataWithContentsOfURL:aStop.photoURL];
-      image = [UIImage imageWithData:imageData];
+      //UIImage* image;
       
-      aStop.image = image;
-   }
+      //NSData *imageData = [NSData dataWithContentsOfURL:aStop.photoURL];
+      //image = [UIImage imageWithData:imageData];
+      
+      dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+      dispatch_async(queue, 
+      ^{
+         UIImage* image;
+         NSData *imageData = [NSData dataWithContentsOfURL:stop.photoThumbURL];
+         image = [UIImage imageWithData:imageData];
+                        
+         if(imageData == nil)
+            image = [UIImage imageNamed:@"icon.png"];
+                        
+            aStop.thumb = image;
+                        
+            dispatch_sync(dispatch_get_main_queue(), 
+               ^{
+                  [self.imageButton setBackgroundImage:aStop.thumb forState:UIControlStateNormal];
+               });
+            });  
 
+      
+      //aStop.image = image;
+   }
+   else
+      [self.imageButton setBackgroundImage:aStop.thumb forState:UIControlStateNormal];
+   
    //////////////////////////////////////////////////////////////////////////////
    //SETUP PHOTO ON BUTTON
    self.title = aStop.name;
@@ -93,7 +115,8 @@
    self.stopName.text = aStop.name;
    
    self.imageButton.imageView.contentMode = UIViewContentModeScaleAspectFit;   
-   [self.imageButton setBackgroundImage:aStop.image forState:UIControlStateNormal];
+   
+   //[self.imageButton setBackgroundImage:aStop.image forState:UIControlStateNormal];
    
    //TELL THE MAPVIEW TO SHOW THE CURRENT LOCATION
    //[mapView setShowsUserLocation:YES];
@@ -182,6 +205,46 @@
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
 
+   //MyUIViewController* c = [[[MyUIViewController alloc]init] autorelease];
+   
+   //do we have the image?
+   //////////////////////////////////////////////////////////////////////////////
+   //IS THE IMAGE AVAILABLE? EVENTUALLY THIS WILL HAPPEN IN ANOTHER THREAD
+   //FETCH THE STOP IMAGE - MAY NEED TO STORE THIS FOR THE DETAILS VIEW
+//   if(stop.image == nil)
+//   {
+//      dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+//      dispatch_async(queue, 
+//                     ^{
+//                        UIImage* image;
+//                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+//                        image = [UIImage imageWithData:imageData];
+//                        
+//                        if(imageData == nil)
+//                           image = [UIImage imageNamed:@"icon.png"];
+//                        
+//                        stop.image = image;
+//                        
+//                        dispatch_sync(dispatch_get_main_queue(), 
+//                                      ^{
+//                                         //c.view = [[[UIImageView alloc]initWithImage:stop.image]autorelease];                                         
+//                                      });
+//                     });  
+//   }
+   //else
+      //c.view = [[[UIImageView alloc]initWithImage:stop.image]autorelease];
+
+   if(stop.image == nil)
+   {
+      ShowActivity(self, YES);
+      UIImage* image;
+      NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+      image = [UIImage imageWithData:imageData];
+
+      stop.image = image;
+      ShowActivity(self, NO);
+   }
+   
    MyUIViewController* c = [[[MyUIViewController alloc]init] autorelease];
    
    c.view = [[[UIImageView alloc]initWithImage:stop.image]autorelease];

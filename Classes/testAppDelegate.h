@@ -63,7 +63,7 @@ NSFetchedResultsControllerDelegate>
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) CLLocationManager* locationManager;
 @property (retain) NSMutableArray* trips;
-@property (assign, getter=getHasTrips) BOOL hasTrips;
+@property (readonly, assign, getter=getHasTrips) BOOL hasTrips;
 
 @property (retain) OFFlickrAPIContext* flickrContext;
 @property (retain) OFFlickrAPIRequest* flickrRequest;

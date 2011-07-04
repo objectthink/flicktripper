@@ -37,7 +37,7 @@
 @synthesize context;
 @synthesize results;
 @synthesize trips;
-@synthesize hasTrips;
+//@synthesize hasTrips;
 
 -(BOOL)getHasTrips
 {
@@ -103,7 +103,7 @@
    }
 
    //determine if we have persisted trips
-   self.hasTrips = [[NSUserDefaults standardUserDefaults] boolForKey:HAS_PERSISTED_TRIPS];
+   //self.hasTrips = [[NSUserDefaults standardUserDefaults] boolForKey:HAS_PERSISTED_TRIPS];
    //self.hasTrips = NO;
    
    //initialize the database interface
@@ -236,6 +236,7 @@
    aStopEntity.photoIdString = stop.photoID;
    aStopEntity.photoSourceURLString = [stop.photoSourceURL absoluteString];
    aStopEntity.photoURLString = [stop.photoURL absoluteString];
+   aStopEntity.photoThumbURLString = [stop.photoThumbURL absoluteString];
    
    aStopEntity.Trip = tripEntity;
 
@@ -264,7 +265,7 @@
       r = YES;
    }
    
-   self.hasTrips = r;
+   //self.hasTrips = r;
    
    return r;
 }
@@ -336,13 +337,14 @@
           initWithName:stopEntity.name 
           details:stopEntity.details
           photoURL:[NSURL URLWithString:stopEntity.photoURLString]
+          photoThumbURL: [NSURL URLWithString:stopEntity.photoThumbURLString]
           photoSourceURL:[NSURL URLWithString:stopEntity.photoSourceURLString]
           photoID:stopEntity.photoIdString
           latitude:[stopEntity.latitude floatValue]
-          longitude:[stopEntity.longitude floatValue]];
-         
-         stop.uploaded = YES;
-         stop.trip = trip;
+          longitude:[stopEntity.longitude floatValue]
+          trip:trip
+          uploaded:YES
+          ];
          
          [trip.stops addObject:stop];
       }
