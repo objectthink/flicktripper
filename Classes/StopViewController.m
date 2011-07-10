@@ -11,6 +11,7 @@
 #import "RootViewController.h"
 #import "UIImageInfoViewController.h"
 #import "ModalAlert.h"
+#import "MBProgressHUD.h"
 
 #define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
 
@@ -234,20 +235,49 @@
    //else
       //c.view = [[[UIImageView alloc]initWithImage:stop.image]autorelease];
 
+   MyUIViewController* c = [[[MyUIViewController alloc]init] autorelease];
+
+   c.view = [[[UIImageView alloc]initWithImage:stop.image]autorelease];
+
    if(stop.image == nil)
    {
-      ShowActivity(self, YES);
-      UIImage* image;
-      NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
-      image = [UIImage imageWithData:imageData];
+      //ShowActivity(self, YES);
+//      UIImage* image;
+//      NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+//      image = [UIImage imageWithData:imageData];
+//
+//      stop.image = image;
+      //ShowActivity(self, NO);
+      
+      // No need to retain (just a local variable)
+      //MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+      MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:c.view animated:YES];
+      hud.labelText = @"Loading";
+      
+      dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), 
+                     ^{
+                        // Do a taks in the background
+                        UIImage* image;
+                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+                        image = [UIImage imageWithData:imageData];
+                        
+                        stop.image = image;
+                        // Hide the HUD in the main tread 
+                        dispatch_async(dispatch_get_main_queue(), 
+                                       ^{
+                                          UIImageView* iv = (UIImageView*)c.view;
+                                          
+                                          iv.image = image;
+                                          
+                                          [MBProgressHUD hideHUDForView:c.view animated:YES];
+                                       });
+                     });
 
-      stop.image = image;
-      ShowActivity(self, NO);
    }
    
-   MyUIViewController* c = [[[MyUIViewController alloc]init] autorelease];
+   //MyUIViewController* c = [[[MyUIViewController alloc]init] autorelease];
    
-   c.view = [[[UIImageView alloc]initWithImage:stop.image]autorelease];
+   //c.view = [[[UIImageView alloc]initWithImage:stop.image]autorelease];
    c.view.userInteractionEnabled = YES;
    c.view.contentMode = UIViewContentModeScaleAspectFit;
    c.view.backgroundColor = [UIColor blackColor];

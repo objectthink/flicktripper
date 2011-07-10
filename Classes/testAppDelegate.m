@@ -216,8 +216,6 @@
    aTripEntity.details = trip.details;
    aTripEntity.number = [NSNumber numberWithInt:trip.number];
 
-   [aTripEntity retain];
-   
    return aTripEntity;
 }
 

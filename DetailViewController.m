@@ -189,10 +189,11 @@ BOOL userInformedOfDisabledLocationServices = NO;
    switch (session.requestType) 
    {
       case UPLOAD:
-         [self.tableView reloadData];
+         //[self.tableView reloadData];
          
          //STOP THE LOCATION MANAGER
          app.locationManager.delegate = nil;
+         
          [app.locationManager stopUpdatingLocation];
          
          [response retain];
@@ -204,7 +205,7 @@ BOOL userInformedOfDisabledLocationServices = NO;
          [response retain];
          
          [uploadProgressActionSheet dismissWithClickedButtonIndex:0 animated:YES];
-         ShowActivity(self, NO);
+         //ShowActivity(self, NO);
 
          TripJournalSession* session = app.flickrRequest.sessionInfo;
 
@@ -232,6 +233,10 @@ BOOL userInformedOfDisabledLocationServices = NO;
                      latS,@"lat",
                      lonS,@"lon",
                      aStop.photoID, @"photo_id",nil]];         
+         
+         //wait til we have the photo urls to repaint the list
+         [self.tableView reloadData];
+
          break;
       }
       case LOCATION:
@@ -286,7 +291,7 @@ BOOL userInformedOfDisabledLocationServices = NO;
 
          [uploadProgressActionSheet dismissWithClickedButtonIndex:0 animated:YES];
          
-         ShowActivity(self, NO);
+         //ShowActivity(self, NO);
          break;
       case DELETE:
          break;
@@ -611,7 +616,7 @@ BOOL userInformedOfDisabledLocationServices = NO;
    //the stop we are working with
    session.tag = stop;
    
-   ShowActivity(self, YES);
+   //ShowActivity(self, YES);
   
    UIImage* newImage;
    

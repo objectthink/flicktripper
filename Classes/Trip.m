@@ -50,7 +50,7 @@
    
    aTrip.name = name;
    aTrip.details = details;
-   aTrip.stops = [[NSMutableArray alloc] initWithCapacity:stopsCount];
+   aTrip.stops = [[[NSMutableArray alloc] initWithCapacity:stopsCount] autorelease];
    
    return [aTrip autorelease];
 }
@@ -61,7 +61,7 @@
    
    aTrip.name = name;
    aTrip.details = details;
-   aTrip.stops = [[NSMutableArray alloc] initWithCapacity:stopsCount];
+   aTrip.stops = [[[NSMutableArray alloc] initWithCapacity:stopsCount] autorelease];
    aTrip.number = number;
    
    return [aTrip autorelease];
@@ -133,7 +133,9 @@
    [photoURL release];
    [photoID release];
    [photoSourceURL release];
+   [photoThumbURL release];
    [image release];
+   [thumb release];
    [mapPoint release];
    
    trip = nil;

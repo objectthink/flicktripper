@@ -35,13 +35,24 @@
 	return self;
 }
 
+-(void)finishPrompt:(id)o
+{
+	CFRunLoopStop(currentLoop);   
+}
+
 // User pressed button. Retrieve results
 -(void)alertView:(UIAlertView*)aView clickedButtonAtIndex:(NSInteger)anIndex 
 {
 	UITextField *tf = (UITextField *)[aView viewWithTag:TEXT_FIELD_TAG];
 	if (tf) self.text = tf.text;
 	self.index = anIndex;
-	CFRunLoopStop(currentLoop);
+   
+   [aView resignFirstResponder];
+   
+   // give the keyboard a chance to go away...
+	[self performSelector:@selector(finishPrompt:) withObject:nil afterDelay: 0.9f];
+
+	//CFRunLoopStop(currentLoop);
 }
 
 - (BOOL) isLandscape
@@ -82,8 +93,14 @@
 	
 	// Create Alert
 	ModalAlertDelegate *madelegate = [[ModalAlertDelegate alloc] initWithRunLoop:currentLoop];
+   
 	UIAlertView *alertView = 
-   [[UIAlertView alloc] initWithTitle:question message:nil delegate:madelegate cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil];
+   [[UIAlertView alloc] 
+    initWithTitle:question 
+    message:nil 
+    delegate:madelegate 
+    cancelButtonTitle:cancelButtonTitle 
+    otherButtonTitles:nil];
 	
    for (NSString *buttonTitle in buttons) 
       [alertView addButtonWithTitle:buttonTitle];
@@ -95,6 +112,7 @@
 	
 	// Retrieve answer
 	NSUInteger answer = madelegate.index;
+   
 	[alertView release];
 	[madelegate release];
 	return answer;

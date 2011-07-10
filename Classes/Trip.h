@@ -41,8 +41,8 @@
 
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* details;
-@property (assign) NSMutableArray* stops;
-@property (assign) int number;
+@property (retain)          NSMutableArray* stops;
+@property (assign)          int number;
 @property (assign, getter=getNeedsUploading) BOOL needsUploading;
 
 @end

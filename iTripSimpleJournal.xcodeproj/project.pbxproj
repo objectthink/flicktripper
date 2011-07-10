@@ -24,6 +24,7 @@
 		A3011CEF12DA081000050CF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3011CEE12DA081000050CF4 /* MainViewController.m */; };
 		A3011CF112DA096400050CF4 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3011CF012DA096400050CF4 /* MainViewController.xib */; };
 		A307CC9F13B363330096EC25 /* TripEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A307CC9E13B363330096EC25 /* TripEntity.m */; };
+		A30AA32313C5D760009045E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A30AA32213C5D760009045E7 /* MBProgressHUD.m */; };
 		A3192FFF1323C83B00770B60 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = A3192FFE1323C83B00770B60 /* gear.png */; };
 		A31930271323D0E400770B60 /* gears.png in Resources */ = {isa = PBXBuildFile; fileRef = A31930261323D0E400770B60 /* gears.png */; };
 		A339D01813AD418200792EF0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A339D01713AD418200792EF0 /* CoreData.framework */; };
@@ -94,6 +95,8 @@
 		A3011CF012DA096400050CF4 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		A307CC9D13B363330096EC25 /* TripEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripEntity.h; path = ../../../Dropbox/dev/iSimpleTripJournal_2/TripEntity.h; sourceTree = "<group>"; };
 		A307CC9E13B363330096EC25 /* TripEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripEntity.m; path = ../../../Dropbox/dev/iSimpleTripJournal_2/TripEntity.m; sourceTree = "<group>"; };
+		A30AA32113C5D760009045E7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A30AA32213C5D760009045E7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A3192FFE1323C83B00770B60 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
 		A31930261323D0E400770B60 /* gears.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gears.png; sourceTree = "<group>"; };
 		A339D01713AD418200792EF0 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -152,6 +155,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A30AA32113C5D760009045E7 /* MBProgressHUD.h */,
+				A30AA32213C5D760009045E7 /* MBProgressHUD.m */,
 				A3011CE912DA075100050CF4 /* MainViewController.h */,
 				A3011CEE12DA081000050CF4 /* MainViewController.m */,
 				A3459BFE125AAB68004B76FD /* TDBadgedCell.h */,
@@ -382,6 +387,7 @@
 				A395B5EA13AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld in Sources */,
 				A307CC9F13B363330096EC25 /* TripEntity.m in Sources */,
 				73BD88D313C1FE1E00288AC4 /* StopEntity.m in Sources */,
+				A30AA32313C5D760009045E7 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: stephen eshelman (ZXV77CSSEA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -413,7 +419,7 @@
 				INFOPLIST_FILE = "iTripSimpleJournal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = iTripSimpleJournal;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "628128FD-5645-4568-8D23-2656BB1382C3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;

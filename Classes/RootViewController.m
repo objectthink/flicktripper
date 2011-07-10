@@ -13,6 +13,7 @@
 #import "UserInfoController.h"
 #import "ModalAlert.h"
 #import "TDBadgedCell.h"
+#import "MBProgressHUD.h"
 
 #define BARBUTTON(TITLE, SELECTOR) 	[[[UIBarButtonItem alloc] initWithTitle:TITLE style:UIBarButtonItemStylePlain target:self action:SELECTOR] autorelease]
 #define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
@@ -45,43 +46,67 @@ void ShowActivity(UIViewController* controller, BOOL show)
 {
    if(show)
    {
-      [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
-      startTime = [NSDate timeIntervalSinceReferenceDate];
+      MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:controller.view animated:YES];
+      hud.labelText = @"Loading";   
+            
+      [controller.navigationController setNavigationBarHidden:YES animated:YES];
+      [controller.navigationController setToolbarHidden:YES];
       
-      UIActivityIndicatorView *activityIndicator = 
-      [[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)] autorelease];
+      UITableViewController* tvc = (UITableViewController*)controller;
       
-      UIBarButtonItem * barButton = 
-      [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
-      
-      // Set to Left or Right
-      [[controller navigationItem] setLeftBarButtonItem:barButton];
-      
-      [barButton release];
-      [activityIndicator startAnimating];
+      tvc.tableView.scrollEnabled = NO;
    }
    else
    {
-      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      [MBProgressHUD hideHUDForView:controller.view animated:YES];
 
-      endTime = [NSDate timeIntervalSinceReferenceDate];
-      elapsedTime = endTime - startTime;
-      MessageBox(@"elapsed time", [NSString stringWithFormat:@"%f",elapsedTime]);
+      [controller.navigationController setNavigationBarHidden:NO animated:YES];
+      [controller.navigationController setToolbarHidden:NO];
       
-      UIActivityIndicatorView *activityIndicator = 
-      (UIActivityIndicatorView*)[[[controller navigationItem]leftBarButtonItem] customView];
-
-      [[controller navigationItem] setLeftBarButtonItem:nil];
-      [activityIndicator stopAnimating];
-      //[activityIndicator release];
-
-      //UIBarButtonItem * barButton = 
-      //[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:controller action:@selector(doit)];
-
-      //[[controller navigationItem] setLeftBarButtonItem:barButton];
-      //[barButton release];
-   }
+      UITableViewController* tvc = (UITableViewController*)controller;
+      
+      tvc.tableView.scrollEnabled = YES;
+}
+   
+//   if(show)
+//   {
+//      [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//
+//      startTime = [NSDate timeIntervalSinceReferenceDate];
+//      
+//      UIActivityIndicatorView *activityIndicator = 
+//      [[[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)] autorelease];
+//      
+//      UIBarButtonItem * barButton = 
+//      [[UIBarButtonItem alloc] initWithCustomView:activityIndicator];
+//      
+//      // Set to Left or Right
+//      [[controller navigationItem] setLeftBarButtonItem:barButton];
+//      
+//      [barButton release];
+//      [activityIndicator startAnimating];
+//   }
+//   else
+//   {
+//      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//
+//      endTime = [NSDate timeIntervalSinceReferenceDate];
+//      elapsedTime = endTime - startTime;
+//      MessageBox(@"elapsed time", [NSString stringWithFormat:@"%f",elapsedTime]);
+//      
+//      UIActivityIndicatorView *activityIndicator = 
+//      (UIActivityIndicatorView*)[[[controller navigationItem]leftBarButtonItem] customView];
+//
+//      [[controller navigationItem] setLeftBarButtonItem:nil];
+//      [activityIndicator stopAnimating];
+//      //[activityIndicator release];
+//
+//      //UIBarButtonItem * barButton = 
+//      //[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:controller action:@selector(doit)];
+//
+//      //[[controller navigationItem] setLeftBarButtonItem:barButton];
+//      //[barButton release];
+//   }
 }
 
 @implementation RootViewController
@@ -902,6 +927,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
    
    //update the database
    [app initializeDatabaseWith:trips];
+   self.trips = app.trips;
 }
 ///////////////////////////////////////////////////////////////////////////////
 //VIEW DID APPEAR
@@ -1039,6 +1065,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
    static NSString *CellIdentifier = @"Cell";
       
    TDBadgedCell* cell = (TDBadgedCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   
    if (cell == nil) 
    {
       cell = 
@@ -1065,9 +1092,10 @@ void ShowActivity(UIViewController* controller, BOOL show)
    Trip* trip;
    trip = [trips objectAtIndex:indexPath.row];
    
-   NSString* badge = [[NSString alloc] initWithFormat:@"%d",[trip.stops count]];
+   //NSString* badge = [[NSString alloc] initWithFormat:@"%d",[trip.stops count]];
+   NSString* badge = [NSString stringWithFormat:@"%d",[trip.stops count]];
    cell.badgeNumber = badge; 
-   [badge release];
+   //[badge release];
 
    cell.textLabel.text = trip.name;
    cell.detailTextLabel.text = trip.details;
@@ -1076,14 +1104,43 @@ void ShowActivity(UIViewController* controller, BOOL show)
    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
    cell.editingAccessoryType = UITableViewCellAccessoryNone;
    
+   cell.imageView.image = nil;
+   
    //IMAGE USED TO IDENTIFY TRIP - COULD BE A STOP IMAGE SET AS DEFAULT
-   //if( [trip.stops count] > 0 )
-   //{
-   //   Stop* stop = [trip.stops objectAtIndex:0];
-   //   
-   //   if(stop.image != nil)
-   //      cell.imageView.image = stop.image;
-   //}
+   if( [trip.stops count] > 0 )
+   {
+      Stop* stop = [trip.stops objectAtIndex:0];
+      
+      //if(stop.thumb != nil)
+      //   cell.imageView.image = stop.thumb;
+      
+      if(stop.thumb == nil)
+      {
+         dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+         dispatch_async(queue, 
+                        ^{
+                           UIImage* image;
+                           NSData *imageData = [NSData dataWithContentsOfURL:stop.photoThumbURL];
+                           image = [UIImage imageWithData:imageData];
+                           
+                           if(imageData == nil)
+                              image = [UIImage imageNamed:@"icon.png"];
+                           
+                           stop.thumb = image;
+                           
+                           dispatch_sync(dispatch_get_main_queue(), 
+                                         ^{
+                                            cell.imageView.image = stop.thumb;
+                                            [cell setNeedsLayout];
+                                         });
+                        });  
+      }
+      else
+      {
+         cell.imageView.image = stop.thumb;
+      }
+
+   }
    
    //cell.imageView.image = 
    //[UIImage imageNamed:@"simpletripjournal512x512.png"];
