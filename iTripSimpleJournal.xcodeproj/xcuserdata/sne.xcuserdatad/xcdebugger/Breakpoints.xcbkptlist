@@ -65,7 +65,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/testAppDelegate.m"
-         timestampString = "331946786.582504"
+         timestampString = "332006832.065158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "353"
@@ -79,7 +79,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/testAppDelegate.m"
-         timestampString = "331946786.582504"
+         timestampString = "332006832.065158"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "320"
@@ -127,6 +127,34 @@
          startingLineNumber = "254"
          endingLineNumber = "254"
          landmarkName = "-imageTouched"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Classes/RootViewController.m"
+         timestampString = "332006393.580993"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1064"
+         endingLineNumber = "1064"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Classes/Trip.m"
+         timestampString = "332007364.233495"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "231"
+         endingLineNumber = "231"
+         landmarkName = "+initWithName:details:photoURL:photoThumbURL:photoSourceURL:photoID:latitude:longitude:trip:uploaded:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

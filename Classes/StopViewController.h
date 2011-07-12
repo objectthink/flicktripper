@@ -12,7 +12,11 @@
 #import "Trip.h"
 
 
-@interface StopViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate,OFFlickrAPIRequestDelegate>
+@interface StopViewController : UIViewController <
+CLLocationManagerDelegate, 
+MKMapViewDelegate,
+OFFlickrAPIRequestDelegate,
+UIActionSheetDelegate>
 {
    testAppDelegate* app;
 
@@ -48,6 +52,8 @@
 
 -(void)toolbarHandler:(id)sender;
 -(void)OnShowInfo;
+-(void)OnSaveToCamerRoll;
+-(void)OnPromptWhereTo;
 
 //CLLocationManagerDelegate
 -(void)locationManager:(CLLocationManager *)manager 

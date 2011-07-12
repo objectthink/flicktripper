@@ -417,7 +417,7 @@
     action:@selector(toolbarHandler:)] autorelease];
    
    gotoFlickrPageButton.enabled = stop.photoSourceURL != nil;
-   gotoFlickrPageButton.tag = 77;
+   gotoFlickrPageButton.tag = 78;
 
    NSArray* items = [NSArray arrayWithObjects:@"Map", @"Satellite", @"Hybrid",nil];
    UISegmentedControl* sc = [[[UISegmentedControl alloc] initWithItems:items] autorelease];
@@ -561,6 +561,10 @@
          //SHOW THE FLICKR PAGE
          [self OnShowInfo];
          break;
+      case 78:
+         //SHOW THE FLICKR PAGE
+         [self OnPromptWhereTo];
+         break;
       case 777:
       {
          if(showingAll)
@@ -634,6 +638,73 @@
    [self presentModalViewController:cc animated:YES]; 
 }
 
+- (void)image:(UIImage *)image 
+didFinishSavingWithError:(NSError *)error 
+contextInfo:(void *)contextInfo
+{
+   if (error != NULL)
+   {
+      MessageBox
+      (
+         @"Stop options", 
+         [NSString stringWithFormat:@"There was an error saving to the cameral roll:%@",[error localizedDescription]]
+       );
+   }
+   else 
+   {
+      MessageBox(@"Stop options", @"Stop photo saved to camera roll");
+   }
+}
+
+-(void)OnSaveToCameraRoll
+{   
+   if(stop.image == nil)
+   {
+      MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+      hud.labelText = @"Loading";
+      
+      dispatch_sync(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), 
+                     ^{
+                        // Do a taks in the background
+                        UIImage* image;
+                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
+                        image = [UIImage imageWithData:imageData];
+                        
+                        stop.image = image;
+
+                        // Hide the HUD in the main tread 
+                        dispatch_async(dispatch_get_main_queue(), 
+                                       ^{
+                                          [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                       });
+                     });
+      
+   }
+
+   // Request to save the image to camera roll
+   UIImageWriteToSavedPhotosAlbum
+   (
+    stop.image, 
+    self, 
+    @selector(image:didFinishSavingWithError:contextInfo:), nil
+    );
+}
+
+-(void)OnPromptWhereTo
+{
+   UIActionSheet *popupQuery = 
+   [[UIActionSheet alloc] 
+    initWithTitle:@"Stop options" 
+    delegate:self 
+    cancelButtonTitle:@"Cancel Button" 
+    destructiveButtonTitle:nil
+    otherButtonTitles:@"flickr photo page", @"Save to camera roll", nil];
+
+   popupQuery.actionSheetStyle = UIActionSheetStyleAutomatic;
+   [popupQuery showInView:self.view];
+   [popupQuery release];
+}
+
 /*
 // Override to allow orientations other than the default portrait orientation.
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -641,6 +712,19 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
+{
+   switch(buttonIndex)
+   {
+      case 0:
+         [self OnShowInfo];
+         break;
+      case 1:
+         [self OnSaveToCameraRoll];
+         break;
+   }
+}
 
 - (void)didReceiveMemoryWarning 
 {

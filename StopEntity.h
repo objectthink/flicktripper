@@ -17,12 +17,12 @@
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSString * details;
 @property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSString * photoSourceURLString;
-@property (nonatomic, retain) NSString * photoIdString;
+@property (nonatomic, copy) NSString * photoSourceURLString;
+@property (nonatomic, copy) NSString * photoIdString;
 @property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSString * photoThumbURLString;
+@property (nonatomic, copy) NSString * photoThumbURLString;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * photoURLString;
+@property (nonatomic, copy) NSString * photoURLString;
 @property (nonatomic, retain) TripEntity * Trip;
 
 @end

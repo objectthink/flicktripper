@@ -44,7 +44,7 @@
 
 -(void)showBusy:(BOOL)on;
 
-@property (nonatomic, retain) NSString *badgeNumber;
+@property (nonatomic, copy) NSString *badgeNumber;
 @property (readonly, retain) TDBadgeView *badge;
 @property (nonatomic, retain) UIColor *badgeColor;
 @property (nonatomic, retain) UIColor *badgeColorHighlighted;

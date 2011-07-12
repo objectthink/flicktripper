@@ -11,11 +11,24 @@
 @implementation MapPoint
 @synthesize coordinate, title;
 
++(MapPoint*)withCoordinate:(CLLocationCoordinate2D)c title:(NSString *)t
+{
+   MapPoint* mapPoint = [[[MapPoint alloc] init] autorelease];
+   
+   mapPoint.coordinate = c;
+   mapPoint.title = t;
+                        
+   return mapPoint;
+   //return [mapPoint autorelease];
+}
+
 - (id)initWithCoordinate:(CLLocationCoordinate2D)c title:(NSString *)t
 {
 	self = [super init];
+   
 	coordinate = c;
-	[self setTitle:t];
+	
+   [self setTitle:t];
 	
 	return [self autorelease];
 }
@@ -182,7 +195,7 @@ photoID:(NSString*) photoID
 latitude:(float)lat
 longitude:(float)lon
 {
-   Stop* aStop = [[Stop alloc] init];
+   Stop* aStop = [[[Stop alloc] init] autorelease];
    
    aStop.name = name;
    aStop.details = details;
@@ -195,11 +208,13 @@ longitude:(float)lon
    CLLocationCoordinate2D aLocation = {lat,lon};
    aStop.location = aLocation;
    
-   aStop.mapPoint = [[MapPoint alloc] initWithCoordinate:aStop.location title:aStop.name];
+   //aStop.mapPoint = [[MapPoint alloc] initWithCoordinate:aStop.location title:aStop.name];
+   aStop.mapPoint = [MapPoint withCoordinate:aStop.location title:aStop.name];
    
    aStop.uploaded = NO;
    
-   return [aStop autorelease];
+   return aStop;
+   //return [aStop autorelease];
 }
 
 +(Stop*)
@@ -214,7 +229,7 @@ longitude:(float)lon
 trip:(Trip*)trip
 uploaded:(BOOL)uploaded
 {
-   Stop* aStop = [[Stop alloc] init];
+   Stop* aStop = [[[Stop alloc] init] autorelease];
    
    aStop.name = name;
    aStop.details = details;
@@ -230,9 +245,11 @@ uploaded:(BOOL)uploaded
    CLLocationCoordinate2D aLocation = {lat,lon};
    aStop.location = aLocation;
    
-   aStop.mapPoint = [[MapPoint alloc] initWithCoordinate:aStop.location title:aStop.name];
+   //aStop.mapPoint = [[MapPoint alloc] initWithCoordinate:aStop.location title:aStop.name];
+   aStop.mapPoint = [MapPoint withCoordinate:aStop.location title:aStop.name];
       
-   return [aStop autorelease];
+   return aStop;
+   //return [aStop autorelease];
 }
 
 @end
