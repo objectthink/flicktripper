@@ -52,7 +52,7 @@ UIActionSheetDelegate>
 
 -(void)toolbarHandler:(id)sender;
 -(void)OnShowInfo;
--(void)OnSaveToCamerRoll;
+-(void)OnSaveToCameraRoll;
 -(void)OnPromptWhereTo;
 
 //CLLocationManagerDelegate

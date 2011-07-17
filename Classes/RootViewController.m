@@ -656,19 +656,37 @@ void ShowActivity(UIViewController* controller, BOOL show)
 
       ////////////////////////////////////////////////////////////////////////////
       //ADD STOPS INFO
-      [session.trip.stops addObject:
-       [Stop 
-        initWithName:stop 
-        details:stopDetails
-        photoURL:photoURL
-        photoThumbURL:photoThumbURL
-        photoSourceURL:photoSourcePage
-        photoID:photoID
-        latitude:lat
-        longitude:lon
-        trip:session.trip
-        uploaded:YES
-        ]];
+      Stop* newStop =
+      [Stop 
+       initWithName:stop 
+       details:stopDetails
+       photoURL:photoURL
+       photoThumbURL:photoThumbURL
+       photoSourceURL:photoSourcePage
+       photoID:photoID
+       latitude:lat
+       longitude:lon
+       trip:session.trip
+       uploaded:YES
+       ];
+      
+      newStop.number = session.photoIndex;
+      
+      [session.trip.stops addObject:newStop];
+      
+//      [session.trip.stops addObject:
+//       [Stop 
+//        initWithName:stop 
+//        details:stopDetails
+//        photoURL:photoURL
+//        photoThumbURL:photoThumbURL
+//        photoSourceURL:photoSourcePage
+//        photoID:photoID
+//        latitude:lat
+//        longitude:lon
+//        trip:session.trip
+//        uploaded:YES
+//        ]];
       
       /////////////////////////////////////////////////////////////////////////
       //TRY TO ADD STOPS TO TRIP ENTITY

@@ -327,8 +327,17 @@
        details:tripEntity.details 
        stops:[tripEntity.Stops count] 
        number:[tripEntity.number intValue]];
+      
+      NSSortDescriptor *sortNumberDescriptor = 
+      [[[NSSortDescriptor alloc] initWithKey:@"number" ascending:YES] autorelease];
+      
+      NSArray *sortDescriptors = [[[NSArray alloc] initWithObjects:sortNumberDescriptor, nil] autorelease];
+      
+      NSArray* sortedStopEntities =
+      [[tripEntity.Stops allObjects] sortedArrayUsingDescriptors:sortDescriptors];
 
-      for(StopEntity* stopEntity in tripEntity.Stops)
+      //for(StopEntity* stopEntity in tripEntity.Stops)
+      for(StopEntity* stopEntity in sortedStopEntities)
       {
          Stop* stop =
          [Stop 
@@ -343,6 +352,8 @@
           trip:trip
           uploaded:YES
           ];
+         
+         stop.number = [stopEntity.number intValue];
          
          [trip.stops addObject:stop];
       }

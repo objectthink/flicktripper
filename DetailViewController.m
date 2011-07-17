@@ -23,9 +23,21 @@
 @synthesize tag;
 @synthesize isUploadingWaiting;
 
+-(void)relinquishTripImages
+{
+   for(Stop* stop in trip.stops)
+   {
+      if(stop.image != nil)
+      {
+         //[stop.image release];
+         stop.image = nil;
+      }
+      
+   }
+}
+
 #pragma mark -
 #pragma mark CLLocationManage
-
 NSInteger useLocation = 0;
 ///////////////////////////////////////////////////////////////////////
 //locationManager:didUpdateToLocation:fromLocation
@@ -40,7 +52,7 @@ NSInteger useLocation = 0;
    NSTimeInterval t =
    [[newLocation timestamp]timeIntervalSinceNow];
    
-   if(t < -30) 
+   if(t < -120) 
    {
       NSLog(@"SKIPPING LOCATION READING");
       return;
@@ -48,7 +60,8 @@ NSInteger useLocation = 0;
    
    useLocation++;
    
-   if((useLocation%3)==1)
+   //if((useLocation%3)==1)
+   if(true)
    {
       currentLocation = [newLocation coordinate];
    
@@ -219,6 +232,9 @@ BOOL userInformedOfDisabledLocationServices = NO;
          [app.flickrContext photoSourceURLFromDictionary:[response valueForKey:@"photo"] size:OFFlickrSmallSize];
          aStop.photoThumbURL  = 
          [app.flickrContext photoSourceURLFromDictionary:[response valueForKey:@"photo"] size:OFFlickrSmallSquareSize];
+         
+         Stop* lastStop = [aStop.trip.stops lastObject];
+         aStop.number = lastStop.number + 1;
                   
          ////////////////////////////////////////////////
          //SET LOCATION
@@ -576,6 +592,9 @@ BOOL userInformedOfDisabledLocationServices = NO;
 {
    TripJournalSession* session = [TripJournalSession sessionWithRequestType:PREUPLOAD];
 
+   //clecn up images
+   [self relinquishTripImages];
+   
    //////////////////////////////////////////////////////
    //SET THE SESSION IN FLICKR REQUEST
    app.flickrRequest.sessionInfo = session;
@@ -850,7 +869,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
     
     static NSString *CellIdentifier = @"Cell";
     

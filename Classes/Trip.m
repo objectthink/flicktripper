@@ -147,7 +147,10 @@
    [photoID release];
    [photoSourceURL release];
    [photoThumbURL release];
-   [image release];
+   
+   if(image != nil)
+      [image release];
+   
    [thumb release];
    [mapPoint release];
    
