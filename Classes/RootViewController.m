@@ -243,6 +243,8 @@ void ShowActivity(UIViewController* controller, BOOL show)
       case FROB:
          break;
       case AUTH:
+         MessageBox(@"flickr error.", @"Authorization failed");
+         [self.navigationController popToRootViewControllerAnimated:YES];
          break;
       case TAGS:
          if(errorCode == 98)
@@ -355,6 +357,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
       [NSUserDefaults resetStandardUserDefaults];
       
       //self.title = [NSString stringWithFormat:@"%@ Trips", username]; 
+      [aLabel2 setText:username];
       
       //SEARCH FOR TRIPS AGAIN NOW THAT WE HAVE AUTH
       [self getTrips];
@@ -707,7 +710,6 @@ void ShowActivity(UIViewController* controller, BOOL show)
    [super viewDidLoad];
    
    [self.navigationController setToolbarHidden:NO animated:YES];   
-
    
    /////////////////////////////////////////////////////////////////
    //CREATE A MULTI-LINE LABEL FOR THE MAVIGATION ITEM TITLEVIEW
@@ -726,7 +728,8 @@ void ShowActivity(UIViewController* controller, BOOL show)
    aLabel1.textAlignment = UITextAlignmentCenter;
 
     
-   UILabel* aLabel2 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)] autorelease];
+   //UILabel* 
+   aLabel2 = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)] autorelease];
    
    [aLabel2 setFont:[UIFont fontWithName:@"Helvetica" size:14.0f]];
    [aLabel2 setText:username];
@@ -910,6 +913,12 @@ void ShowActivity(UIViewController* controller, BOOL show)
 {
    app.flickrRequest.sessionInfo = [TripJournalSession sessionWithRequestType:FROB];
    
+   //this request will fail if the auth token is filled in
+   //in the flickr context - this would happen if we had previously 
+   //been authorized and decided to reauth
+   app.flickrContext.authToken = nil;
+   app.flickrContext.authEndpoint = @"http://m.flickr.com/services/auth/fresh";
+   
    [app.flickrRequest 
     callAPIMethodWithGET:@"flickr.auth.getFrob" 
     arguments:nil];         
@@ -940,12 +949,11 @@ void ShowActivity(UIViewController* controller, BOOL show)
          }
          break;
       default:
-         break;
-   }
-   
-   //update the database
-   [app initializeDatabaseWith:trips];
-   self.trips = app.trips;
+         //update the database
+         [app initializeDatabaseWith:trips];
+         self.trips = app.trips;
+     break;
+   }   
 }
 ///////////////////////////////////////////////////////////////////////////////
 //VIEW DID APPEAR
