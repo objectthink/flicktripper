@@ -17,12 +17,12 @@
 -(void)webViewDidStartLoad:(UIWebView*)webView
 {
    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-   self.theBackButton.enabled = NO;
+   //self.theBackButton.enabled = NO;
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-   self.theBackButton.enabled = YES;
+   //self.theBackButton.enabled = YES;
    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
@@ -41,7 +41,10 @@
 
 -(IBAction)OnBack:(id)sender
 {
-   [[self parentViewController]dismissModalViewControllerAnimated:YES];
+   //[[self parentViewController]dismissModalViewControllerAnimated:YES];
+   [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+   [self dismissModalViewControllerAnimated:YES];
+   
 }
 
 -(void)dealloc
