@@ -12,6 +12,7 @@
 #import "UIImageInfoViewController.h"
 #import "ModalAlert.h"
 #import "MBProgressHUD.h"
+#import "SVWebViewController.h"
 
 #define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
 
@@ -626,16 +627,24 @@
 //Show the Flickr web page that the chosen image is on
 -(void)OnShowInfo
 {
-   UIImageInfoViewController* cc = 
-   [[[UIImageInfoViewController alloc]initWithNibName:@"ImageInfoController" bundle:nil] autorelease];
+//   UIImageInfoViewController* cc = 
+//   [[[UIImageInfoViewController alloc]initWithNibName:@"ImageInfoController" bundle:nil] autorelease];
+//   
+//   cc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//   
+//   NSURLRequest* ur = [NSURLRequest requestWithURL:stop.photoSourceURL];
+//   
+//   cc.theUrlRequest = ur;
+//   
+//   [self presentModalViewController:cc animated:YES]; 
    
-   cc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-   
-   NSURLRequest* ur = [NSURLRequest requestWithURL:stop.photoSourceURL];
-   
-   cc.theUrlRequest = ur;
-   
-   [self presentModalViewController:cc animated:YES]; 
+   SVWebViewController *webViewController = 
+   [[SVWebViewController alloc] initWithAddress:[stop.photoSourceURL absoluteString]];
+	
+   webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+   webViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:webViewController animated:YES];	
+	[webViewController release];
 }
 
 - (void)image:(UIImage *)image 
