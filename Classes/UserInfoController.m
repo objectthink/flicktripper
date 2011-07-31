@@ -200,6 +200,8 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:FLICKR_NSID_KEY];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:FLICKR_USERNAME_KEY];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:FLICKR_FULLNAME_KEY];
+            
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:HAS_PERSISTED_TRIPS];
                      
             [ModalAlert say:@"The next time you run iSimpleTripJournal you will be asked to reauthorize your flickr account."];
             aSwitch.enabled = NO;
