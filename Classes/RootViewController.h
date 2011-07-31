@@ -21,6 +21,8 @@ void ShowActivity(UIViewController* controller, BOOL show);
    testAppDelegate* app;
    
    UIAlertView* busyAlert;
+   
+   UILabel* aLabel2;
 }
 
 -(void)setBarButtonItems;
