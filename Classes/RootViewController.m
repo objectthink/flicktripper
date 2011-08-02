@@ -14,6 +14,8 @@
 #import "ModalAlert.h"
 #import "TDBadgedCell.h"
 #import "MBProgressHUD.h"
+#import "SVWebViewController.h"
+
 
 #define BARBUTTON(TITLE, SELECTOR) 	[[[UIBarButtonItem alloc] initWithTitle:TITLE style:UIBarButtonItemStylePlain target:self action:SELECTOR] autorelease]
 #define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
@@ -300,20 +302,31 @@ void ShowActivity(UIViewController* controller, BOOL show)
    TripJournalSession* session = app.flickrRequest.sessionInfo;
    session.tag = response;
    
-   UIImageInfoViewController* cc = 
-   [[UIImageInfoViewController alloc]initWithNibName:@"ImageInfoController" bundle:nil];
-   
-   cc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//   UIImageInfoViewController* cc = 
+//   [[UIImageInfoViewController alloc]initWithNibName:@"ImageInfoController" bundle:nil];
+//   
+//   cc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+//   
+//   NSURL *loginURL = 
+//   [app.flickrContext loginURLFromFrobDictionary:response requestedPermission:OFFlickrDeletePermission];
+//   
+//   NSURLRequest* ur = [NSURLRequest requestWithURL:loginURL];
+//   
+//   cc.theUrlRequest = ur;
+//   
+//   [self presentModalViewController:cc animated:YES]; 
+//   [cc release];
    
    NSURL *loginURL = 
    [app.flickrContext loginURLFromFrobDictionary:response requestedPermission:OFFlickrDeletePermission];
-   
-   NSURLRequest* ur = [NSURLRequest requestWithURL:loginURL];
-   
-   cc.theUrlRequest = ur;
-   
-   [self presentModalViewController:cc animated:YES]; 
-   [cc release];
+
+   SVWebViewController *webViewController = 
+   [[SVWebViewController alloc] initWithAddress:[loginURL absoluteString]];
+	
+   webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
+   webViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:webViewController animated:YES];	
+	[webViewController release];
 }
 ///////////////////////////////////////////////////////////////////////////////
 //OnDoRequestTypeAuth

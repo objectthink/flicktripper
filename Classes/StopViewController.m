@@ -644,6 +644,7 @@
    webViewController.modalPresentationStyle = UIModalPresentationPageSheet;
    webViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
 	[self presentModalViewController:webViewController animated:YES];	
+   //[self.navigationController pushViewController:webViewController animated:YES];
 	[webViewController release];
 }
 
