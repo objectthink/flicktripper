@@ -177,7 +177,7 @@
       
       ////////////////////////////////////////////////////
       //SIZE IMAGE FOR ANNOTATION
-      UIImage* stopImage = [stop.trip findStopWithMapPoint:mp].image;
+      UIImage* stopImage = [stop.trip findStopWithMapPoint:mp].thumb;
       
       UIGraphicsBeginImageContext(CGSizeMake(32, 32));
       [stopImage drawInRect:CGRectMake(0.0f, 0.0f, 32, 32)];
