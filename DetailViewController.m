@@ -287,6 +287,10 @@ BOOL userInformedOfDisabledLocationServices = NO;
 
          aStop.uploaded = YES;
          
+         //force new thumb to be fetch the next time the list is updated
+         [aStop.thumb release];
+         aStop.thumb = nil;
+         
          //CHECK FOR MORE DELAYED UPLOADS
          for (Stop* aStop in self.trip.stops) 
          {
@@ -300,6 +304,9 @@ BOOL userInformedOfDisabledLocationServices = NO;
 
          //UPDATE THE TOOLBAR
          uploadWaiting.enabled = self.trip.needsUploading;
+         
+         //UPDATE THE STOP LIST
+         [self.tableView reloadData];
 
          break;
       }
@@ -964,11 +971,19 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
       dispatch_async(queue, 
                      ^{
                         UIImage* image;
-                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoThumbURL];
-                        image = [UIImage imageWithData:imageData];
+
+                        if(stop.photoThumbURL == nil)
+                        {
+                           image = [UIImage imageNamed:@"needs_uploading.png"];
+                        }
+                        else
+                        {
+                           NSData *imageData = [NSData dataWithContentsOfURL:stop.photoThumbURL];
+                           image = [UIImage imageWithData:imageData];
                         
-                        if(imageData == nil)
-                           image = [UIImage imageNamed:@"icon.png"];
+                           if(imageData == nil)
+                              image = [UIImage imageNamed:@"icon.png"];
+                        }
                         
                         stop.thumb = image;
                         
