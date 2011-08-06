@@ -50,6 +50,7 @@
 		A3A2A8401227F61E00E7F297 /* TripJournalSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2A83F1227F61E00E7F297 /* TripJournalSession.m */; };
 		A3BA5E9E1208EE81004DD918 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BA5E9D1208EE81004DD918 /* Default.png */; };
 		A3D8FCDD120308BE004FE32C /* backsplash.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D8FCDC120308BE004FE32C /* backsplash.png */; };
+		A3DCD75E13ED7CA800C5F1BB /* needs_uploading.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DCD75D13ED7CA800C5F1BB /* needs_uploading.png */; };
 		A3F0F2DB12577D2F00A9B5A8 /* UserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F0F2D912577D2F00A9B5A8 /* UserInfoController.m */; };
 		A3F0F2DC12577D2F00A9B5A8 /* UserInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F0F2DA12577D2F00A9B5A8 /* UserInfoController.xib */; };
 /* End PBXBuildFile section */
@@ -135,6 +136,7 @@
 		A3A2A83F1227F61E00E7F297 /* TripJournalSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripJournalSession.m; sourceTree = "<group>"; };
 		A3BA5E9D1208EE81004DD918 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A3D8FCDC120308BE004FE32C /* backsplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backsplash.png; sourceTree = "<group>"; };
+		A3DCD75D13ED7CA800C5F1BB /* needs_uploading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = needs_uploading.png; sourceTree = "<group>"; };
 		A3F0F2D812577D2F00A9B5A8 /* UserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoController.h; sourceTree = "<group>"; };
 		A3F0F2D912577D2F00A9B5A8 /* UserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoController.m; sourceTree = "<group>"; };
 		A3F0F2DA12577D2F00A9B5A8 /* UserInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserInfoController.xib; path = Classes/UserInfoController.xib; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3DCD75D13ED7CA800C5F1BB /* needs_uploading.png */,
 				733B68E61363A947003DD28D /* down.png */,
 				733B68E21363A8CF003DD28D /* up.png */,
 				733B68E31363A8CF003DD28D /* upload.png */,
@@ -384,6 +387,7 @@
 				733B68E51363A8CF003DD28D /* upload.png in Resources */,
 				733B68E71363A947003DD28D /* down.png in Resources */,
 				73BE228713E610B200A6FB3E /* SVWebViewController.bundle in Resources */,
+				A3DCD75E13ED7CA800C5F1BB /* needs_uploading.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
