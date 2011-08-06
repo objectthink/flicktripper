@@ -444,7 +444,7 @@
      target:self 
      action:@selector(toolbarHandler:)] autorelease];
    
-   spaceItem.width = 30;
+   spaceItem.width = 25;
 
    [self setToolbarItems:[NSArray arrayWithObjects:gotoFlickrPageButton,spaceItem,mapToolbarItem,spaceItem, allToolbarItem, nil]];
    
