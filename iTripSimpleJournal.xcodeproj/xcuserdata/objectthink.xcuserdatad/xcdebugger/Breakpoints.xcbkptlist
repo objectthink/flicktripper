@@ -9,12 +9,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "DetailViewController.m"
-         timestampString = "332551254.591281"
+         timestampString = "334285959.788456"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "33"
-         endingLineNumber = "33"
-         landmarkName = "-relinquishTripImages"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
+         landmarkName = "-determineNextStopNumber"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

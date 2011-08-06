@@ -48,26 +48,39 @@ NSInteger useLocation = 0;
 {
    NSLog(@"%@ time:%f",newLocation,[[newLocation timestamp]timeIntervalSinceNow]);
    
-   //HOW OLD IS THIS READING?
-   NSTimeInterval t =
-   [[newLocation timestamp]timeIntervalSinceNow];
+//   currentLocation = [newLocation coordinate];
+//
+//   //HOW OLD IS THIS READING?
+//   NSTimeInterval t =
+//   [[newLocation timestamp]timeIntervalSinceNow];
+//   
+//   if(t < -120) 
+//   {
+//      NSLog(@"SKIPPING LOCATION READING");
+//      return;
+//   }
+//   
+//   //if((useLocation%3)==1)
+//   
+//   if(true)
+//   {
+//      currentLocation = [newLocation coordinate];
+//   
+//      //WEVE GOT A LOCATION SO STOP UPDATES
+//      [app.locationManager stopUpdatingLocation];
+//   }
    
-   if(t < -120) 
-   {
-      NSLog(@"SKIPPING LOCATION READING");
-      return;
-   }
-   
-   useLocation++;
-   
-   //if((useLocation%3)==1)
-   if(true)
-   {
-      currentLocation = [newLocation coordinate];
-   
-      //WEVE GOT A LOCATION SO STOP UPDATES
-      [app.locationManager stopUpdatingLocation];
-   }
+   currentLocation = [newLocation coordinate];
+
+   // test that the horizontal accuracy does not indicate an invalid measurement
+   if (newLocation.horizontalAccuracy < 0) return;
+   // test the age of the location measurement to determine if the measurement is cached
+   // in most cases you will not want to rely on cached measurements
+   NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
+   if (locationAge > 5.0) return;
+
+   //WEVE GOT A LOCATION SO STOP UPDATES
+   [app.locationManager stopUpdatingLocation];
 }
 
 BOOL userInformedOfDisabledLocationServices = NO;
@@ -193,6 +206,18 @@ BOOL userInformedOfDisabledLocationServices = NO;
    }
 }
 
+-(int)determineNextStopNumber
+{
+   int nextStopNumber = 1;
+   for(Stop* stop in trip.stops)
+   {
+      if(stop.number > nextStopNumber)
+         nextStopNumber = stop.number;
+   }
+   
+   return nextStopNumber+1;
+}
+
 -(void)flickrAPIRequest:(OFFlickrAPIRequest *)request didCompleteWithResponse:(NSDictionary *)response
 {
    NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);   
@@ -233,8 +258,9 @@ BOOL userInformedOfDisabledLocationServices = NO;
          aStop.photoThumbURL  = 
          [app.flickrContext photoSourceURLFromDictionary:[response valueForKey:@"photo"] size:OFFlickrSmallSquareSize];
          
-         Stop* lastStop = [aStop.trip.stops lastObject];
-         aStop.number = lastStop.number + 1;
+         //Stop* lastStop = [aStop.trip.stops lastObject];
+         
+         aStop.number = [self determineNextStopNumber];
                   
          ////////////////////////////////////////////////
          //SET LOCATION
