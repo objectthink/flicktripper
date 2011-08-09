@@ -52,6 +52,7 @@
    aLabel.textAlignment = UITextAlignmentCenter;
    
    self.navigationItem.titleView = aLabel;
+   [aLabel release];
    /////////////////////////////////////////////////////////////////
 
    self.title = @"Main";
