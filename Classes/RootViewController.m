@@ -757,6 +757,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
    [myTitleView addSubview:aLabel2];
    
    self.navigationItem.titleView = myTitleView;
+   [myTitleView release];
    /////////////////////////////////////////////////////////////////
    
    //UIBarButtonItem* test = 
