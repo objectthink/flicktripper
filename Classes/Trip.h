@@ -40,6 +40,7 @@
 
 -(Stop*)findStopWithMapPoint:(MapPoint*)mapPoint;
 -(void) removeStop:(Stop*)stop;
+-(void) relinquishImages;
 
 @property (nonatomic, copy) NSString* name;
 @property (nonatomic, copy) NSString* details;

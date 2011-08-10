@@ -13,13 +13,12 @@
 
 +(MapPoint*)withCoordinate:(CLLocationCoordinate2D)c title:(NSString *)t
 {
-   MapPoint* mapPoint = [[[MapPoint alloc] init] autorelease];
+   MapPoint* mapPoint = [[MapPoint alloc] init];
    
    mapPoint.coordinate = c;
    mapPoint.title = t;
                         
-   return mapPoint;
-   //return [mapPoint autorelease];
+   return [mapPoint autorelease];
 }
 
 - (id)initWithCoordinate:(CLLocationCoordinate2D)c title:(NSString *)t
@@ -101,7 +100,22 @@
    
    return nil;
 }
-
+////////////////////////////////////////////////////////////////////////////////
+//CLEAN UP STOP IMAGES THAT HAVE BEEN UPLOADED
+-(void)relinquishImages
+{
+   for(Stop* stop in self.stops)
+   {
+      if(stop.image != nil)
+      {
+         if(stop.uploaded)
+            //[stop.image release];
+            stop.image = nil;
+      }
+   }
+}
+////////////////////////////////////////////////////////////////////////////////
+//DEALLOC
 - (void)dealloc
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
