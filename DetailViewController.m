@@ -23,23 +23,17 @@
 @synthesize tag;
 @synthesize isUploadingWaiting;
 
+////////////////////////////////////////////////////////////////////////////////
+//Attempt the free up memory before capturing a new stop
 -(void)relinquishTripImages
-{
-   for(Stop* stop in trip.stops)
-   {
-      if(stop.image != nil)
-      {
-         //[stop.image release];
-         stop.image = nil;
-      }
-      
-   }
+{   
+   [trip relinquishImages];
 }
 
 #pragma mark -
 #pragma mark CLLocationManage
 NSInteger useLocation = 0;
-///////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 //locationManager:didUpdateToLocation:fromLocation
 //store the current location to be used in the new stop
 -(void)locationManager:(CLLocationManager *)manager 
@@ -288,7 +282,7 @@ BOOL userInformedOfDisabledLocationServices = NO;
          aStop.uploaded = YES;
          
          //force new thumb to be fetch the next time the list is updated
-         [aStop.thumb release];
+         //[aStop.thumb release];
          aStop.thumb = nil;
          
          //CHECK FOR MORE DELAYED UPLOADS
@@ -454,6 +448,7 @@ BOOL userInformedOfDisabledLocationServices = NO;
    aLabel.textAlignment = UITextAlignmentCenter;
    
    self.navigationItem.titleView = aLabel;
+   [aLabel release];
    /////////////////////////////////////////////////////////////////
 
    ////////////////////////////////////////////////////////////////////////////
@@ -592,18 +587,17 @@ BOOL userInformedOfDisabledLocationServices = NO;
                iv.image = stop.image;
                [view addSubview:iv];
                [iv release];
-               [stop.image release];
             }
             
             [view setContentSize:CGSizeMake([self.trip.stops count]*frame.size.width, frame.size.height)];
             [view setPagingEnabled:YES];
             
             controller.view = view;
+            [view release];
             
             // ...
             // Pass the selected object to the new view controller.
             [self.navigationController pushViewController:controller animated:YES];
-            
             [controller release];
          }
          break;
