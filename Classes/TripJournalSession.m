@@ -23,12 +23,17 @@
    [[TripJournalSession alloc] init];
    
    session.requestType = requestType;
-   session.tripids = [[NSMutableArray alloc] init];
+   session.tripids = [[[NSMutableArray alloc] init] autorelease];
    session.index = -1;
    session.photoIndex = -1;
    
-   //[session retain];
-   
    return [session autorelease];
+}
+
+-(void)dealloc
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   
+   [self.tripids release];
 }
 @end
