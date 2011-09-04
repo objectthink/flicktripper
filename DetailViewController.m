@@ -11,8 +11,9 @@
 #import "RootViewController.h"
 #import "ModalAlert.h"
 #import <dispatch/dispatch.h>
+#import <Foundation/NSLock.h>
 
-#define BARBUTTON(TITLE, SELECTOR) 	[[[UIBarButtonItem alloc] initWithTitle:TITLE style:UIBarButtonItemStylePlain target:self action:SELECTOR] autorelease]
+#define BARBUTTON(TITLE, SELECTOR) 	 [[[UIBarButtonItem alloc] initWithTitle:TITLE style:UIBarButtonItemStylePlain target:self action:SELECTOR] autorelease]
 #define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
 #define MAINLABEL	((UILabel *)self.navigationItem.titleView)
 
@@ -22,6 +23,7 @@
 @synthesize app;
 @synthesize tag;
 @synthesize isUploadingWaiting;
+@synthesize backRequested;
 
 ////////////////////////////////////////////////////////////////////////////////
 //Attempt the free up memory before capturing a new stop
@@ -293,14 +295,22 @@ BOOL userInformedOfDisabledLocationServices = NO;
                [self Upload:nil withStop:aStop];
                return;
             }
-         }         
+         }
+         
          MessageBox(nil, @"Photo uploaded to flickr successfully!");
-
+                  
          //UPDATE THE TOOLBAR
          uploadWaiting.enabled = self.trip.needsUploading;
          
          //UPDATE THE STOP LIST
          [self.tableView reloadData];
+
+         if(backRequested == YES)
+         {
+            [self performSelector:@selector(goBack) withObject:nil afterDelay:1.0];
+
+            //[self goBack];
+         }
 
          break;
       }
@@ -610,8 +620,42 @@ BOOL userInformedOfDisabledLocationServices = NO;
 {
    if(self.navigationItem.rightBarButtonItem == nil)
    {
-      self.navigationItem.rightBarButtonItem = SYSBARBUTTON(UIBarButtonSystemItemCamera, @selector(addStop:));         
+      self.navigationItem.rightBarButtonItem  = SYSBARBUTTON(UIBarButtonSystemItemCamera, @selector(addStop:));  
+      self.navigationItem.leftBarButtonItem   = BARBUTTON   (@"Trips", @selector(back:));
    }
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//go back to the root view controller
+-(void)goBack
+{
+   [self.navigationController popViewControllerAnimated:YES];   
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//check for un-uploaded stops
+-(void)back:(id)sender
+{
+   if(trip.needsUploading==YES)
+   {
+      if([ModalAlert ask:@"You have stops that have not been uploaded that will be lost.  Upload now?"])
+      {
+         Stop* stop=nil;
+         for (Stop* aStop in trip.stops) 
+         {
+            if(!aStop.uploaded)
+            {
+               stop = aStop;
+               break;
+            }
+         }
+         
+         self.backRequested = YES;
+         [self Upload:nil withStop:stop];
+      }
+      else
+         [self goBack];
+   }
+   else
+      [self goBack];
 }
 ///////////////////////////////////////////////////////////////////////////////
 //addStop:
@@ -655,6 +699,8 @@ BOOL userInformedOfDisabledLocationServices = NO;
 //Upload:withStop
 - (void)Upload:(UIImage *)image withStop:(Stop*)stop
 {
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+
    TripJournalSession* session = app.flickrRequest.sessionInfo;
    
    session.requestType = UPLOAD;
@@ -795,26 +841,6 @@ editingInfo:(NSDictionary *)editingInfo
    NSLog(@"%s", __PRETTY_FUNCTION__);
 
    [super viewWillDisappear:animated];
-
-//   TripJournalSession* session = app.flickrRequest.sessionInfo;
-//
-//   if(session != nil)
-//   {
-//      if(session.requestType != PREUPLOAD)
-//      {         
-//         if([ModalAlert confirm:@"You have stops that have not been uploaded that will be lost.  Upload now?"])
-//         {
-//            for (Stop* aStop in trip.stops) 
-//            {
-//               if(!aStop.uploaded)
-//               {
-//                  [self Upload:nil withStop:aStop];
-//                  return;
-//               }
-//            }      
-//         }
-//      }
-//   }
 }
    
 ////////////////////////////////////////////////////////////////

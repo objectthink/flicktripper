@@ -376,7 +376,11 @@
       TripEntity* tripEntity = [self addTripEntity:trip];
       
       for(Stop* stop in trip.stops)
-         [self addStopEntity:stop forTripEntity:tripEntity];
+      {
+         //forget stops that have not been uploaded
+         if(stop.uploaded == YES)
+            [self addStopEntity:stop forTripEntity:tripEntity];
+      }
    }
    
    [self persistEntities];

@@ -237,6 +237,10 @@ void ShowActivity(UIViewController* controller, BOOL show)
    if ([error domain] == OFFlickrAPIRequestErrorDomain) 
    {
       MessageBox(@"Cannot Open Trips", @"iSimple Trip Journal cannot open your trips because it is not connected to the Internet.");
+      MessageBox(@"didFailWithError", [error localizedDescription]);
+      
+      ShowActivity(self, NO);
+
       return;
    }
    
@@ -251,7 +255,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
       case TAGS:
          if(errorCode == 98)
          {
-            MessageBox(@"Authorization",@"You flickr authorization has expired, please authorize again...");
+            MessageBox(@"Authorization",@"Your flickr authorization has expired, please authorize again...");
             
             app.flickrContext.authToken = nil;
             

@@ -37,11 +37,13 @@ UITableViewDataSource>
    
    id tag;
 }
+@property (assign) BOOL backRequested;
 @property (assign) Trip* trip;
 @property (assign) testAppDelegate* app;
 @property (assign) id tag;
 @property (assign) BOOL isUploadingWaiting;
 
+-(void)goBack;
 -(void)doit:(id)sender;
 -(void)setBarButtonItems;
 -(void)getStopInfo:(UIImage*)image;

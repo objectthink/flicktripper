@@ -208,7 +208,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				73BE228913E6113E00A6FB3E /* MessageUI.framework */,
 				73BE228313E6106C00A6FB3E /* SVWebViewController */,
 				A395B5EB13AD3C2800EA3B1B /* Data Model */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -259,6 +258,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				73BE228913E6113E00A6FB3E /* MessageUI.framework */,
 				A339D01713AD418200792EF0 /* CoreData.framework */,
 				A33ED76512075E7A00DA7773 /* CFNetwork.framework */,
 				A3806AEB120060FD008E4C02 /* MapKit.framework */,
@@ -484,7 +484,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
@@ -499,7 +499,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphonesimulator4.3]" = "";
 				SDKROOT = iphoneos;
