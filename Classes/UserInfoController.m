@@ -75,10 +75,10 @@
    switch(section)
    {
       case 0:
-         return 1;
+         return 6;
          break;
       case 1:
-         return 6;
+         return 1;
          break;
       default:
          return 0;
@@ -91,11 +91,11 @@
    //return [NSString stringWithFormat:@"Section Title #%d", section];
    switch(section)
    {
-      case 0:
+      case 1:
          return [NSString stringWithFormat:@""];
          break;
-      case 1:
-         return [NSString stringWithString:@"User"];
+      case 0:
+         return [NSString stringWithString:@"User Settings"];
          break;
    }
    
@@ -118,17 +118,18 @@
    // Configure the cell...
    switch(indexPath.section)
    {
-      case 0: //LEGAL
+      case 1: //LEGAL
          switch(indexPath.row)
          {
             case 0:
                cell.textLabel.text = @"Legal";
                cell.textLabel.textAlignment = UITextAlignmentCenter;
+               cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             default:
                break;
          }
          break;
-      case 1: //USER
+      case 0: //USER
       {
          UISwitch *mySwitch = [[[UISwitch alloc] initWithFrame:CGRectZero] autorelease];
          [mySwitch addTarget:self action:@selector(doit:) forControlEvents:UIControlEventValueChanged];
@@ -303,22 +304,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
-   
-   if(indexPath.section == 0) //LEGAL
+
+   if(indexPath.section == 1) //LEGAL
    {
       UIViewController* controller = [[UIViewController alloc] init];
+      
+      controller.title = @"Legal";
       
       UITextView* statement = [[UITextView alloc] init];
       
       statement.text = 
-      @"ObjectiveFlickr Copyright (c) 2006-2009 Lukhnos D. Liu.\n"
+      @"This product uses the Flickr API but is not endorsed or certified by Flickr\n\n"
+      "ObjectiveFlickr Copyright (c) 2006-2009 Lukhnos D. Liu.\n"
       "LFWebAPIKit Copyright (c) 2007-2009 Lukhnos D. Liu and Lithoglyph Inc."
       "\n\n"
       "One test in LFWebAPIKit (Tests/StreamedBodySendingTest) makes use of Google Toolbox for Mac, Copyright (c) 2008"
