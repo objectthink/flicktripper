@@ -368,17 +368,6 @@ BOOL userInformedOfDisabledLocationServices = NO;
       uploadProgressActionSheet.title = @"Waiting for flickr...\n\n\n";
 }
 
-//- (void)navigationController:(UINavigationController *)navigationController 
-//   willShowViewController:(UIViewController *)viewController 
-//   animated:(BOOL)animated
-//{
-//}
-//- (void)navigationController:(UINavigationController *)navigationController 
-//   didShowViewController:(UIViewController *)viewController 
-//   animated:(BOOL)animated
-//{   
-//}
-
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -471,10 +460,6 @@ BOOL userInformedOfDisabledLocationServices = NO;
 
    [self setBarButtonItems];
 
-   //UIBarButtonItem* test = 
-   //[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(doit:)];
-   //test.tag = 7;
-   
    UIBarButtonItem* spaceItem =    
    [[[UIBarButtonItem alloc]
      initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace 
@@ -490,15 +475,6 @@ BOOL userInformedOfDisabledLocationServices = NO;
    [uploadWaitingButton setBackgroundImage:
     [UIImage imageNamed:@"upload.png"] forState:UIControlStateNormal];
    
-   //[uploadWaitingButton addTarget:self action:@selector(doit:) forControlEvents:UIControlEventTouchUpInside];
-   //uploadWaitingButton.tag = 7;
-
-   //uploadWaiting =    
-   //[[UIBarButtonItem alloc]
-   // initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
-   //   target:self 
-   //   action:@selector(doit:)];
-   
    [uploadWaitingButton addTarget:self 
                            action:@selector(doit:) 
                  forControlEvents:UIControlEventTouchUpInside];
@@ -511,21 +487,14 @@ BOOL userInformedOfDisabledLocationServices = NO;
    
    uploadWaiting.enabled = self.trip.needsUploading;
    
-   //uploadWaiting.tag = 77;
-   
-   
    UIBarButtonItem* playTrip =    
    [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(doit:)];
    playTrip.tag = 777;
 
    [self setToolbarItems:[NSArray arrayWithObjects:playTrip,spaceItem,uploadWaiting,nil]];
    
-   //[test release];
    [playTrip release];
    [uploadWaiting release];
-   
-   // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 -(void)doit:(id)sender
@@ -783,15 +752,6 @@ BOOL userInformedOfDisabledLocationServices = NO;
    [uploadProgressActionSheet showFromToolbar:self.navigationController.toolbar];
    
    progressView.center = CGPointMake(uploadProgressActionSheet.center.x, progressView.center.y);	
-   
-   ///////////////////////////////////////////////////////////////
-   //NEED TO FIND THE RIGHT PLACE TO CREATE THE NEW STOP AND
-   //ADD IT TO THE TRIP
-   //Stop* stop = [Stop initWithName:@"new stop" details:@"new stop details"];
-   //stop.image = image;
-   //[self.trip.stops addObject:stop];
-   
-   //[UIApplication sharedApplication].idleTimerDisabled = YES;
 }   
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -851,15 +811,6 @@ editingInfo:(NSDictionary *)editingInfo
 
    [super viewDidDisappear:animated];
 }
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
 
 #pragma mark -
 #pragma mark Table view data source
@@ -944,47 +895,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
    cell.editingAccessoryType = UITableViewCellAccessoryNone;
    
-   //FETCH THE STOP IMAGE - MAY NEED TO STORE THIS FOR THE DETAILS VIEW
-//   UIImage* image;
-//   if(stop.image == nil)
-//   {
-//      NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
-//      image = [UIImage imageWithData:imageData];
-//      
-//      stop.image = image;
-//   }
-//   else
-//   {
-//      image = stop.image;
-//   }
-//   
-//   //STOP IMAGE
-//   cell.imageView.image = image;
-   
-   
-//   if(stop.image == nil)
-//   {
-//      dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-//      dispatch_async(queue, 
-//                     ^{
-//                        UIImage* image;
-//                        NSData *imageData = [NSData dataWithContentsOfURL:stop.photoURL];
-//                        image = [UIImage imageWithData:imageData];
-//                              
-//                        stop.image = image;
-//                        
-//                        dispatch_sync(dispatch_get_main_queue(), 
-//                                      ^{
-//                                         cell.imageView.image = image;
-//                                         [cell setNeedsLayout];
-//                                      });
-//                     });  
-//   }
-//   else
-//   {
-//      cell.imageView.image = stop.image;
-//   }
-   
    if(stop.thumb == nil)
    {
       dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
@@ -1021,31 +931,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
    return cell;
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 
 #pragma mark -
