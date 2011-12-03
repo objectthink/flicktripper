@@ -435,7 +435,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: stephen eshelman (ZXV77CSSEA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: stephen eshelman (ZXV77CSSEA)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -448,7 +449,8 @@
 				INFOPLIST_FILE = "iTripSimpleJournal-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.1.3;
 				PRODUCT_NAME = iTripSimpleJournal;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "98C4B1E5-B930-49B4-AD62-DC2C167C7570";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98C4B1E5-B930-49B4-AD62-DC2C167C7570";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;

@@ -644,6 +644,11 @@ void ShowActivity(UIViewController* controller, BOOL show)
    }      
    
    ////////////////////////////////////////////////////////////////////////////
+   //GET DATES
+   NSDictionary* dates = [response valueForKeyPath:@"photo.dates"];
+   NSString* taken = [dates objectForKey:@"taken"];
+   
+   ////////////////////////////////////////////////////////////////////////////
    //COLLECT TRIP NAME AND STORE IN TRIP
    if(session.trip == nil)
    {
@@ -691,6 +696,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
        ];
       
       newStop.number = session.photoIndex;
+      newStop.taken = taken;
       
       [session.trip.stops addObject:newStop];
       
@@ -817,7 +823,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
 }
 ///////////////////////////////////////////////////////////////////////////////
 //TOOLBAR HANDLER
--(void)doit:(id)sender
+-(void)doit:(UIButton*)sender
 {
    switch([sender tag])
    {

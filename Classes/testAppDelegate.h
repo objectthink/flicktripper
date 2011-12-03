@@ -70,5 +70,6 @@ NSFetchedResultsControllerDelegate>
 @property (retain) NSManagedObjectContext* context;
 @property (nonatomic, retain) NSFetchedResultsController *results;
 
+@property (retain) NSCache* photoCache;
 @end
 

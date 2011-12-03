@@ -938,7 +938,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    cell.textLabel.text = stop.name;
    
    if(stop.details != nil)
-   cell.detailTextLabel.text = stop.details; 
+      cell.detailTextLabel.text = stop.details; 
    
    cell.detailTextLabel.textColor = [UIColor blackColor];
    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

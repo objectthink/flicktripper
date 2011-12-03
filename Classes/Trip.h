@@ -112,10 +112,11 @@
 @property (retain) NSURL* photoSourceURL;
 @property (nonatomic, copy) NSString* photoID;
 @property (assign) int number;
-@property (retain) UIImage* image;
-@property (retain) UIImage* thumb;
+@property (retain, getter = getimage, setter = setimage:) UIImage* image;
+@property (retain, getter = getthumb, setter = setthumb:) UIImage* thumb;
 @property (assign) CLLocationCoordinate2D location;
 @property (retain) MapPoint* mapPoint;
 @property (assign) BOOL uploaded;
+@property (nonatomic, copy) NSString* taken;
 @end
 

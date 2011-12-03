@@ -7,6 +7,7 @@
 //
 
 #import "Trip.h"
+#import "testAppDelegate.h"
 
 @implementation MapPoint
 @synthesize coordinate, title;
@@ -145,6 +146,62 @@
 @synthesize location;
 @synthesize mapPoint;
 @synthesize uploaded;
+@synthesize taken=_taken;
+
+int temp_photoid = -1;
+-(NSString*)getImageKey
+{
+   if(self.photoID == nil)
+      self.photoID = [NSString stringWithFormat: @"%d2X",temp_photoid--];
+   
+   return [NSString stringWithFormat:@"%@2X",self.photoID];
+}
+
+-(NSString*)getThumbKey
+{
+   if(self.photoID == nil)
+      self.photoID = [NSString stringWithFormat:@"%d",temp_photoid--];
+   
+   return [NSString stringWithFormat:@"%@",self.photoID];
+}
+
+-(void)setimage:(UIImage *)t
+{
+   testAppDelegate* app = 
+   (testAppDelegate*)[[UIApplication sharedApplication] delegate];
+   
+   if(t==nil)
+      [app.photoCache removeObjectForKey:[self getImageKey]];
+   else
+      [app.photoCache setObject:t forKey:[self getImageKey]];
+}
+
+-(UIImage*)getimage
+{
+   testAppDelegate* app = 
+   (testAppDelegate*)[[UIApplication sharedApplication] delegate];
+   
+   return (UIImage*)[app.photoCache objectForKey:[self getImageKey]];
+}
+
+-(void)setthumb:(UIImage *)t
+{
+   testAppDelegate* app = 
+   (testAppDelegate*)[[UIApplication sharedApplication] delegate];
+   
+   if(t==nil)
+      [app.photoCache removeObjectForKey:[self getThumbKey]];
+   else
+      [app.photoCache setObject:t forKey:[self getThumbKey]];
+}
+
+-(UIImage*)getthumb
+{
+   testAppDelegate* app = 
+   (testAppDelegate*)[[UIApplication sharedApplication] delegate];
+   
+   return (UIImage*)[app.photoCache objectForKey:[self getThumbKey]];
+}
 
 -(NSInteger)index
 {
@@ -161,6 +218,9 @@
    [photoID release];
    [photoSourceURL release];
    [photoThumbURL release];
+   
+   if(_taken != nil)
+      [_taken release];
    
    if(image != nil)
       [image release];

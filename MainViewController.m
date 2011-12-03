@@ -77,7 +77,7 @@
 }
 ///////////////////////////////////////////////////////////////////////////////
 //TOOLBAR HANDLER
--(void)doit:(id)sender
+-(void)doit:(UIButton*)sender
 {
    switch([sender tag])
    {

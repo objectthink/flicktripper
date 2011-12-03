@@ -42,7 +42,6 @@ void ShowActivity(UIViewController* controller, BOOL show);
 -(void)OnDoRequestTypeImageInfo:(OFFlickrAPIRequest *)request didCompleteWithResponse:(NSDictionary *)response;
 
 -(void)ShowBusy:(BOOL)showing;
--(void)doit:(id)sender;
 -(void)getTrips;
 -(void)getTripInfo:(TripJournalSession *)session;
 -(void)getPhotoInfo:(TripJournalSession*)session;

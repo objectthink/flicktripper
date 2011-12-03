@@ -37,6 +37,8 @@
 @synthesize context;
 @synthesize results;
 @synthesize trips;
+@synthesize photoCache=_photoCache;
+
 //@synthesize hasTrips;
 
 -(BOOL)getHasTrips
@@ -123,6 +125,9 @@
       [self resetDatabase];
       [self initializeDatabase];
    }
+
+   //initialze photo cache
+   self.photoCache = [[NSCache alloc] init];
 
    return YES;
 }
