@@ -151,7 +151,8 @@
    if(![persistenStoreCoodinator 
         addPersistentStoreWithType:NSSQLiteStoreType 
         configuration:nil 
-        URL:url options:nil 
+        URL:url 
+        options:nil 
         error:&error])
       NSLog(@"Error %@", [error localizedDescription]);
    else

@@ -86,6 +86,7 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		73259D5C1241AC8700B6D853 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		73381773148BEFD90026B412 /* iSimpleTripJournal_datamodel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iSimpleTripJournal_datamodel 2.xcdatamodel"; sourceTree = "<group>"; };
 		733B68E21363A8CF003DD28D /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		733B68E31363A8CF003DD28D /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
 		733B68E61363A947003DD28D /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
@@ -535,6 +536,7 @@
 		A395B5E813AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				73381773148BEFD90026B412 /* iSimpleTripJournal_datamodel 2.xcdatamodel */,
 				A395B5E913AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodel */,
 			);
 			currentVersion = A395B5E913AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodel */;
