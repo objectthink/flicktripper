@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="iSimpleTripJournal_datamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="StopEntity" representedClassName="StopEntity">
+        <attribute name="details" optional="YES" attributeType="String"/>
+        <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="number" attributeType="Integer 64" defaultValueString="0" indexed="YES"/>
+        <attribute name="photoIdString" optional="YES" attributeType="String"/>
+        <attribute name="photoSourceURLString" optional="YES" attributeType="String"/>
+        <attribute name="photoThumbURLString" optional="YES" attributeType="String"/>
+        <attribute name="photoURLString" optional="YES" attributeType="String"/>
+        <attribute name="taken" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="Trip" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="TripEntity" inverseName="Stops" inverseEntity="TripEntity" indexed="YES"/>
+    </entity>
+    <entity name="TripEntity" representedClassName="TripEntity">
+        <attribute name="details" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="number" attributeType="Integer 64" defaultValueString="0" indexed="YES"/>
+        <relationship name="Stops" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="StopEntity" inverseName="Trip" inverseEntity="StopEntity" indexed="YES"/>
+    </entity>
+    <elements>
+        <element name="StopEntity" positionX="-3008" positionY="-3789" width="191" height="210"/>
+        <element name="TripEntity" positionX="-3278" positionY="-3714" width="128" height="105"/>
+    </elements>
+</model>

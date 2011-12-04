@@ -16,11 +16,11 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		73259D5D1241AC8700B6D853 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73259D5C1241AC8700B6D853 /* CoreLocation.framework */; };
+		73381776148C04710026B412 /* StopEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 73381775148C04710026B412 /* StopEntity.m */; };
 		733B68E41363A8CF003DD28D /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 733B68E21363A8CF003DD28D /* up.png */; };
 		733B68E51363A8CF003DD28D /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = 733B68E31363A8CF003DD28D /* upload.png */; };
 		733B68E71363A947003DD28D /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 733B68E61363A947003DD28D /* down.png */; };
 		7369081D122807BC00AAA201 /* UIImageInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7369081C122807BC00AAA201 /* UIImageInfoView.m */; };
-		73BD88D313C1FE1E00288AC4 /* StopEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BD88D213C1FE1E00288AC4 /* StopEntity.m */; };
 		73BE228713E610B200A6FB3E /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 73BE228413E610B200A6FB3E /* SVWebViewController.bundle */; };
 		73BE228813E610B200A6FB3E /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BE228613E610B200A6FB3E /* SVWebViewController.m */; };
 		73BE228A13E6113E00A6FB3E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73BE228913E6113E00A6FB3E /* MessageUI.framework */; };
@@ -87,13 +87,13 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		73259D5C1241AC8700B6D853 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		73381773148BEFD90026B412 /* iSimpleTripJournal_datamodel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "iSimpleTripJournal_datamodel 2.xcdatamodel"; sourceTree = "<group>"; };
+		73381774148C04710026B412 /* StopEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopEntity.h; sourceTree = "<group>"; };
+		73381775148C04710026B412 /* StopEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopEntity.m; sourceTree = "<group>"; };
 		733B68E21363A8CF003DD28D /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		733B68E31363A8CF003DD28D /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
 		733B68E61363A947003DD28D /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
 		7369081B122807BC00AAA201 /* UIImageInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageInfoView.h; path = ../UIImageInfoView.h; sourceTree = "<group>"; };
 		7369081C122807BC00AAA201 /* UIImageInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageInfoView.m; path = ../UIImageInfoView.m; sourceTree = "<group>"; };
-		73BD88D113C1FE1E00288AC4 /* StopEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopEntity.h; sourceTree = "<group>"; };
-		73BD88D213C1FE1E00288AC4 /* StopEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopEntity.m; sourceTree = "<group>"; };
 		73BE228413E610B200A6FB3E /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVWebViewController.bundle; sourceTree = "<group>"; };
 		73BE228513E610B200A6FB3E /* SVWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWebViewController.h; sourceTree = "<group>"; };
 		73BE228613E610B200A6FB3E /* SVWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWebViewController.m; sourceTree = "<group>"; };
@@ -292,9 +292,9 @@
 		A395B5EB13AD3C2800EA3B1B /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				73381774148C04710026B412 /* StopEntity.h */,
+				73381775148C04710026B412 /* StopEntity.m */,
 				A395B5E813AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld */,
-				73BD88D113C1FE1E00288AC4 /* StopEntity.h */,
-				73BD88D213C1FE1E00288AC4 /* StopEntity.m */,
 				A307CC9D13B363330096EC25 /* TripEntity.h */,
 				A307CC9E13B363330096EC25 /* TripEntity.m */,
 			);
@@ -415,9 +415,9 @@
 				A3011CEF12DA081000050CF4 /* MainViewController.m in Sources */,
 				A395B5EA13AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld in Sources */,
 				A307CC9F13B363330096EC25 /* TripEntity.m in Sources */,
-				73BD88D313C1FE1E00288AC4 /* StopEntity.m in Sources */,
 				A30AA32313C5D760009045E7 /* MBProgressHUD.m in Sources */,
 				73BE228813E610B200A6FB3E /* SVWebViewController.m in Sources */,
+				73381776148C04710026B412 /* StopEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,7 +539,7 @@
 				73381773148BEFD90026B412 /* iSimpleTripJournal_datamodel 2.xcdatamodel */,
 				A395B5E913AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodel */,
 			);
-			currentVersion = A395B5E913AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodel */;
+			currentVersion = 73381773148BEFD90026B412 /* iSimpleTripJournal_datamodel 2.xcdatamodel */;
 			name = iSimpleTripJournal_datamodel.xcdatamodeld;
 			path = ../../../Dropbox/dev/iSimpleTripJournal_2/iTripSimpleJournal.xcodeproj/iSimpleTripJournal_datamodel.xcdatamodeld;
 			sourceTree = "<group>";

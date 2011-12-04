@@ -144,15 +144,20 @@
    //init the model
    NSManagedObjectModel* managedObjectModel= [NSManagedObjectModel mergedModelFromBundles:nil];
    
+   //OPTIONS FOR LIGHT MIGRATION
+   NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                            [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+
    //establish persistent store
    NSPersistentStoreCoordinator* persistenStoreCoodinator =
    [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:managedObjectModel];
-   
+
    if(![persistenStoreCoodinator 
         addPersistentStoreWithType:NSSQLiteStoreType 
         configuration:nil 
         URL:url 
-        options:nil 
+        options:options 
         error:&error])
       NSLog(@"Error %@", [error localizedDescription]);
    else

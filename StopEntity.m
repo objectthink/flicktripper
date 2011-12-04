@@ -2,7 +2,7 @@
 //  StopEntity.m
 //  iTripSimpleJournal
 //
-//  Created by stephen eshelman on 7/4/11.
+//  Created by stephen eshelman on 12/4/11.
 //  Copyright (c) 2011 blue sky computing. All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 
 
 @implementation StopEntity
+
 @dynamic number;
 @dynamic details;
 @dynamic longitude;
@@ -20,7 +21,7 @@
 @dynamic photoThumbURLString;
 @dynamic name;
 @dynamic photoURLString;
+@dynamic taken;
 @dynamic Trip;
-
 
 @end

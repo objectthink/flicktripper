@@ -2,7 +2,7 @@
 //  StopEntity.h
 //  iTripSimpleJournal
 //
-//  Created by stephen eshelman on 7/4/11.
+//  Created by stephen eshelman on 12/4/11.
 //  Copyright (c) 2011 blue sky computing. All rights reserved.
 //
 
@@ -11,18 +11,18 @@
 
 @class TripEntity;
 
-@interface StopEntity : NSManagedObject {
-@private
-}
+@interface StopEntity : NSManagedObject
+
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSString * details;
 @property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, copy) NSString * photoSourceURLString;
-@property (nonatomic, copy) NSString * photoIdString;
+@property (nonatomic, retain) NSString * photoSourceURLString;
+@property (nonatomic, retain) NSString * photoIdString;
 @property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, copy) NSString * photoThumbURLString;
+@property (nonatomic, retain) NSString * photoThumbURLString;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, copy) NSString * photoURLString;
-@property (nonatomic, retain) TripEntity * Trip;
+@property (nonatomic, retain) NSString * photoURLString;
+@property (nonatomic, retain) NSString * taken;
+@property (nonatomic, retain) TripEntity *Trip;
 
 @end
