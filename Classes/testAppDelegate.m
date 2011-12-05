@@ -246,6 +246,7 @@
    aStopEntity.photoSourceURLString = [stop.photoSourceURL absoluteString];
    aStopEntity.photoURLString = [stop.photoURL absoluteString];
    aStopEntity.photoThumbURLString = [stop.photoThumbURL absoluteString];
+   aStopEntity.taken = stop.taken;
    
    aStopEntity.Trip = tripEntity;
 
@@ -365,6 +366,7 @@
           ];
          
          stop.number = [stopEntity.number intValue];
+         stop.taken  = stopEntity.taken;
          
          [trip.stops addObject:stop];
       }
@@ -395,9 +397,6 @@
    }
    
    [self persistEntities];
-   
-   //test
-   //[self fetchTrips];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application 
