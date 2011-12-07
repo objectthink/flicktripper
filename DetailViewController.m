@@ -253,11 +253,17 @@ BOOL userInformedOfDisabledLocationServices = NO;
          [app.flickrContext photoSourceURLFromDictionary:[response valueForKey:@"photo"] size:OFFlickrSmallSize];
          aStop.photoThumbURL  = 
          [app.flickrContext photoSourceURLFromDictionary:[response valueForKey:@"photo"] size:OFFlickrSmallSquareSize];
-         
-         //Stop* lastStop = [aStop.trip.stops lastObject];
+                  
          
          aStop.number = [self determineNextStopNumber];
-                  
+         
+         ////////////////////////////////////////////////////////////////////////////
+         //GET DATES
+         NSDictionary* dates = [response valueForKeyPath:@"photo.dates"];
+         NSString* taken = [dates objectForKey:@"taken"];
+
+         aStop.taken = taken;         
+
          ////////////////////////////////////////////////
          //SET LOCATION
          session.requestType = LOCATION;
@@ -866,24 +872,47 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    }   
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+{
+   // Return the number of rows in the section.
    return [self.trip.stops count];
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   return 84;
+}
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     
-    static NSString *CellIdentifier = @"Cell";
+   static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Configure the cell...
+   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+   if (cell == nil) 
+   {
+      cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+      
+      //add date taken label
+      UILabel* takenLabel = 
+      [[[UILabel alloc] 
+        initWithFrame:CGRectMake(74.0, 64.0, 200.0, 18.0)] autorelease];
+      
+      takenLabel.tag = 7;
+      takenLabel.font = [UIFont systemFontOfSize:12.0];
+      takenLabel.textAlignment = UITextAlignmentRight;
+      takenLabel.textColor = [UIColor darkGrayColor];
+      takenLabel.backgroundColor = [UIColor clearColor];
+      //takenLabel.autoresizingMask = 
+      //UIViewAutoresizingFlexibleLeftMargin |
+      //UIViewAutoresizingFlexibleHeight;
+      
+      [cell.contentView addSubview:takenLabel];
+      ///////////////////////////////////////////////////////////////////////////////////////
+   }
+       
+   // Configure the cell...
    Stop* stop = [self.trip.stops objectAtIndex:indexPath.row];
 
    cell.textLabel.text = stop.name;
@@ -895,6 +924,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
    cell.editingAccessoryType = UITableViewCellAccessoryNone;
    
+   UILabel* takenLabel = (UILabel *)[cell.contentView viewWithTag:7];
+   takenLabel.text = stop.taken;
+      
    if(stop.thumb == nil)
    {
       dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
