@@ -880,8 +880,12 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   return 84;
+   return 74;
 }
+
+#define LABEL_TAKEN 7
+#define LABEL_TITLE 77
+#define LABEL_DETAILS 777
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -897,9 +901,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
       //add date taken label
       UILabel* takenLabel = 
       [[[UILabel alloc] 
-        initWithFrame:CGRectMake(74.0, 64.0, 200.0, 18.0)] autorelease];
+        initWithFrame:CGRectMake(84.0, 54.0, 200.0, 18.0)] autorelease];
       
-      takenLabel.tag = 7;
+      takenLabel.tag = LABEL_TAKEN;
       takenLabel.font = [UIFont systemFontOfSize:12.0];
       takenLabel.textAlignment = UITextAlignmentRight;
       takenLabel.textColor = [UIColor darkGrayColor];
@@ -909,22 +913,67 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
       //UIViewAutoresizingFlexibleHeight;
       
       [cell.contentView addSubview:takenLabel];
-      ///////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////////
+      
+      //add title label
+      UILabel* mainLabel = 
+      [[[UILabel alloc] 
+        initWithFrame:CGRectMake(84.0, 5.0, 220.0, 15.0)] autorelease];
+      
+      mainLabel.tag = LABEL_TITLE;
+      mainLabel.font = [UIFont systemFontOfSize:15.0];
+      mainLabel.textAlignment = UITextAlignmentLeft;
+      mainLabel.textColor = [UIColor blackColor];
+      mainLabel.backgroundColor = [UIColor clearColor];
+//    mainLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
+//    UIViewAutoresizingFlexibleHeight;
+      [cell.contentView addSubview:mainLabel];
+      //////////////////////////////////////////////////////////////////////////
+      
+      //add details label
+//      UILabel* secondLabel = 
+//      [[[UILabel alloc] 
+//        initWithFrame:CGRectMake(84.0, 25.0, 195.0, 30.0)] autorelease];
+      
+      UITextView* secondLabel =
+      [[[UITextView alloc] 
+        initWithFrame:CGRectMake(84.0, 15.0, 195.0, 36.0)]autorelease];
+      
+      secondLabel.editable = NO;
+      secondLabel.userInteractionEnabled = NO;
+      
+      secondLabel.tag = LABEL_DETAILS;
+      secondLabel.font = [UIFont systemFontOfSize:12.0];
+      secondLabel.textAlignment = UITextAlignmentLeft;
+      secondLabel.textColor = [UIColor darkGrayColor];
+      secondLabel.backgroundColor = [UIColor clearColor];
+      
+//      secondLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
+//      UIViewAutoresizingFlexibleHeight;
+      [cell.contentView addSubview:secondLabel];
+      //////////////////////////////////////////////////////////////////////////
    }
        
    // Configure the cell...
    Stop* stop = [self.trip.stops objectAtIndex:indexPath.row];
 
-   cell.textLabel.text = stop.name;
-   
-   if(stop.details != nil)
-      cell.detailTextLabel.text = stop.details; 
-   
-   cell.detailTextLabel.textColor = [UIColor blackColor];
+//   cell.textLabel.text = stop.name;
+//   
+//   if(stop.details != nil)
+//      cell.detailTextLabel.text = stop.details; 
+//   
+//   cell.detailTextLabel.textColor = [UIColor blackColor];
+
    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
    cell.editingAccessoryType = UITableViewCellAccessoryNone;
    
-   UILabel* takenLabel = (UILabel *)[cell.contentView viewWithTag:7];
+   UILabel* titleLabel = (UILabel*)   [cell.contentView viewWithTag:LABEL_TITLE];
+   titleLabel.text = stop.name;
+   
+   UILabel* detailsLabel = (UILabel*) [cell.contentView viewWithTag:LABEL_DETAILS];
+   detailsLabel.text = stop.details;
+   
+   UILabel* takenLabel = (UILabel *)  [cell.contentView viewWithTag:LABEL_TAKEN];
    takenLabel.text = stop.taken;
       
    if(stop.thumb == nil)
