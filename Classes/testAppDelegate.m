@@ -88,7 +88,7 @@
    [locationManager setDistanceFilter:kCLDistanceFilterNone];
    [locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
    
-   if (![locationManager locationServicesEnabled]) 
+   if (![CLLocationManager locationServicesEnabled]) 
    {
       UIAlertView *servicesDisabledAlert = 
       
@@ -127,7 +127,7 @@
    }
 
    //initialze photo cache
-   self.photoCache = [[NSCache alloc] init];
+   self.photoCache = [[[NSCache alloc] init] autorelease];
 
    return YES;
 }
@@ -295,17 +295,16 @@
 	// Init the fetched results controller
 	NSError *error;
 	self.results = 
-   [[NSFetchedResultsController alloc] 
+   [[[NSFetchedResultsController alloc] 
     initWithFetchRequest:fetchRequest 
     managedObjectContext:self.context 
-    sectionNameKeyPath:nil cacheName:@"Root"];
+     sectionNameKeyPath:nil cacheName:@"Root"] autorelease];
    
 	self.results.delegate = self;
 	
    if (![[self results] performFetch:&error])	
       NSLog(@"Error: %@", [error localizedDescription]);
    
-	[self.results release];
 	[fetchRequest release];
    
    ///////////test

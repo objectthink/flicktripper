@@ -22,16 +22,16 @@
    return [mapPoint autorelease];
 }
 
-- (id)initWithCoordinate:(CLLocationCoordinate2D)c title:(NSString *)t
-{
-	self = [super init];
-   
-	coordinate = c;
-	
-   [self setTitle:t];
-	
-	return [self autorelease];
-}
+//- (id)initWithCoordinate:(CLLocationCoordinate2D)c title:(NSString *)t
+//{
+//	self = [super init];
+//   
+//	coordinate = c;
+//	
+//   [self setTitle:t];
+//	
+//	return [self autorelease];
+//}
 
 - (void)dealloc
 {

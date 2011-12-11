@@ -181,7 +181,7 @@ BOOL userInformedOfDisabledLocationServices = NO;
       //STOP DATA YET
       stop.image = [self resizeImage:image];
       stop.location = currentLocation;
-      stop.mapPoint = [[MapPoint alloc] initWithCoordinate:stop.location title:stop.name];
+      stop.mapPoint = [MapPoint withCoordinate:stop.location title:stop.name];
       stop.trip = self.trip;
       
       [self.trip.stops addObject:stop];
