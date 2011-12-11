@@ -921,7 +921,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         initWithFrame:CGRectMake(84.0, 5.0, 220.0, 15.0)] autorelease];
       
       mainLabel.tag = LABEL_TITLE;
-      mainLabel.font = [UIFont systemFontOfSize:15.0];
+      mainLabel.font = [UIFont boldSystemFontOfSize:15];
+//      mainLabel.font = [UIFont systemFontOfSize:15.0];
       mainLabel.textAlignment = UITextAlignmentLeft;
       mainLabel.textColor = [UIColor blackColor];
       mainLabel.backgroundColor = [UIColor clearColor];
