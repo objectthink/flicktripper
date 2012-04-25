@@ -57,7 +57,7 @@
 
    ////////////////////////////////////////////////////////////////////////////
    //SHOW SPLASH FOR SOME TIME
-   [NSThread sleepForTimeInterval:1];
+   //[NSThread sleepForTimeInterval:1];
    
     // Load in the backsplash image into a view
    //UIImageView *iv = 

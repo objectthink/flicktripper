@@ -20,12 +20,15 @@
 		733B68E41363A8CF003DD28D /* up.png in Resources */ = {isa = PBXBuildFile; fileRef = 733B68E21363A8CF003DD28D /* up.png */; };
 		733B68E51363A8CF003DD28D /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = 733B68E31363A8CF003DD28D /* upload.png */; };
 		733B68E71363A947003DD28D /* down.png in Resources */ = {isa = PBXBuildFile; fileRef = 733B68E61363A947003DD28D /* down.png */; };
+		7345713615475F4C00645D71 /* needs_uploading.png in Resources */ = {isa = PBXBuildFile; fileRef = 7345713515475F4C00645D71 /* needs_uploading.png */; };
 		7369081D122807BC00AAA201 /* UIImageInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7369081C122807BC00AAA201 /* UIImageInfoView.m */; };
 		73BE228713E610B200A6FB3E /* SVWebViewController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 73BE228413E610B200A6FB3E /* SVWebViewController.bundle */; };
 		73BE228813E610B200A6FB3E /* SVWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 73BE228613E610B200A6FB3E /* SVWebViewController.m */; };
 		73BE228A13E6113E00A6FB3E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73BE228913E6113E00A6FB3E /* MessageUI.framework */; };
 		A3011CEF12DA081000050CF4 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3011CEE12DA081000050CF4 /* MainViewController.m */; };
 		A3011CF112DA096400050CF4 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3011CF012DA096400050CF4 /* MainViewController.xib */; };
+		A30433541548971F0007AA08 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A30433531548971F0007AA08 /* icon.png */; };
+		A3043356154898E60007AA08 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A3043355154898E60007AA08 /* Default.png */; };
 		A307CC9F13B363330096EC25 /* TripEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = A307CC9E13B363330096EC25 /* TripEntity.m */; };
 		A30AA32313C5D760009045E7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A30AA32213C5D760009045E7 /* MBProgressHUD.m */; };
 		A3192FFF1323C83B00770B60 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = A3192FFE1323C83B00770B60 /* gear.png */; };
@@ -36,9 +39,7 @@
 		A3459C00125AAB68004B76FD /* TDBadgedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3459BFF125AAB68004B76FD /* TDBadgedCell.m */; };
 		A35821BA1245107400EF63F8 /* StopInfoPrompt.m in Sources */ = {isa = PBXBuildFile; fileRef = A35821B91245107400EF63F8 /* StopInfoPrompt.m */; };
 		A35821DB1245190400EF63F8 /* ModalAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = A35821DA1245190400EF63F8 /* ModalAlert.m */; };
-		A3651BCA12728BBA008539BD /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A3651BC912728BBA008539BD /* icon.png */; };
 		A3806AEC120060FD008E4C02 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3806AEB120060FD008E4C02 /* MapKit.framework */; };
-		A3806AF41200616C008E4C02 /* simpletripjournal512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = A3806AF31200616C008E4C02 /* simpletripjournal512x512.png */; };
 		A3958863122178C200754402 /* ImageInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3958860122178C200754402 /* ImageInfoController.xib */; };
 		A3958864122178C200754402 /* UIImageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3958862122178C200754402 /* UIImageInfoViewController.m */; };
 		A395B5EA13AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A395B5E813AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld */; };
@@ -48,9 +49,7 @@
 		A39FB59111FC70490039A701 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39FB58F11FC70490039A701 /* DetailViewController.xib */; };
 		A39FB59B11FC717A0039A701 /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = A39FB59A11FC717A0039A701 /* Trip.m */; };
 		A3A2A8401227F61E00E7F297 /* TripJournalSession.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A2A83F1227F61E00E7F297 /* TripJournalSession.m */; };
-		A3BA5E9E1208EE81004DD918 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BA5E9D1208EE81004DD918 /* Default.png */; };
 		A3D8FCDD120308BE004FE32C /* backsplash.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D8FCDC120308BE004FE32C /* backsplash.png */; };
-		A3DCD75E13ED7CA800C5F1BB /* needs_uploading.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DCD75D13ED7CA800C5F1BB /* needs_uploading.png */; };
 		A3F0F2DB12577D2F00A9B5A8 /* UserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F0F2D912577D2F00A9B5A8 /* UserInfoController.m */; };
 		A3F0F2DC12577D2F00A9B5A8 /* UserInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F0F2DA12577D2F00A9B5A8 /* UserInfoController.xib */; };
 /* End PBXBuildFile section */
@@ -92,6 +91,7 @@
 		733B68E21363A8CF003DD28D /* up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = up.png; sourceTree = "<group>"; };
 		733B68E31363A8CF003DD28D /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
 		733B68E61363A947003DD28D /* down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = down.png; sourceTree = "<group>"; };
+		7345713515475F4C00645D71 /* needs_uploading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = needs_uploading.png; sourceTree = "<group>"; };
 		7369081B122807BC00AAA201 /* UIImageInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageInfoView.h; path = ../UIImageInfoView.h; sourceTree = "<group>"; };
 		7369081C122807BC00AAA201 /* UIImageInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageInfoView.m; path = ../UIImageInfoView.m; sourceTree = "<group>"; };
 		73BE228413E610B200A6FB3E /* SVWebViewController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVWebViewController.bundle; sourceTree = "<group>"; };
@@ -102,6 +102,8 @@
 		A3011CE912DA075100050CF4 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = SOURCE_ROOT; };
 		A3011CEE12DA081000050CF4 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = SOURCE_ROOT; };
 		A3011CF012DA096400050CF4 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		A30433531548971F0007AA08 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		A3043355154898E60007AA08 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A307CC9D13B363330096EC25 /* TripEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TripEntity.h; path = ../../../Dropbox/dev/iSimpleTripJournal_2/TripEntity.h; sourceTree = "<group>"; };
 		A307CC9E13B363330096EC25 /* TripEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TripEntity.m; path = ../../../Dropbox/dev/iSimpleTripJournal_2/TripEntity.m; sourceTree = "<group>"; };
 		A30AA32113C5D760009045E7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -118,9 +120,7 @@
 		A35821B91245107400EF63F8 /* StopInfoPrompt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StopInfoPrompt.m; path = ../StopInfoPrompt.m; sourceTree = "<group>"; };
 		A35821D91245190400EF63F8 /* ModalAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalAlert.h; sourceTree = "<group>"; };
 		A35821DA1245190400EF63F8 /* ModalAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalAlert.m; sourceTree = "<group>"; };
-		A3651BC912728BBA008539BD /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		A3806AEB120060FD008E4C02 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		A3806AF31200616C008E4C02 /* simpletripjournal512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = simpletripjournal512x512.png; sourceTree = "<group>"; };
 		A3958860122178C200754402 /* ImageInfoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ImageInfoController.xib; path = Classes/ImageInfoController.xib; sourceTree = "<group>"; };
 		A3958861122178C200754402 /* UIImageInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageInfoViewController.h; sourceTree = "<group>"; };
 		A3958862122178C200754402 /* UIImageInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageInfoViewController.m; sourceTree = "<group>"; };
@@ -135,9 +135,7 @@
 		A39FB59A11FC717A0039A701 /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
 		A3A2A83E1227F61E00E7F297 /* TripJournalSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripJournalSession.h; sourceTree = "<group>"; };
 		A3A2A83F1227F61E00E7F297 /* TripJournalSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripJournalSession.m; sourceTree = "<group>"; };
-		A3BA5E9D1208EE81004DD918 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		A3D8FCDC120308BE004FE32C /* backsplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backsplash.png; sourceTree = "<group>"; };
-		A3DCD75D13ED7CA800C5F1BB /* needs_uploading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = needs_uploading.png; sourceTree = "<group>"; };
 		A3F0F2D812577D2F00A9B5A8 /* UserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoController.h; sourceTree = "<group>"; };
 		A3F0F2D912577D2F00A9B5A8 /* UserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoController.m; sourceTree = "<group>"; };
 		A3F0F2DA12577D2F00A9B5A8 /* UserInfoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UserInfoController.xib; path = Classes/UserInfoController.xib; sourceTree = "<group>"; };
@@ -209,6 +207,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A3043355154898E60007AA08 /* Default.png */,
+				A30433531548971F0007AA08 /* icon.png */,
 				73BE228313E6106C00A6FB3E /* SVWebViewController */,
 				A395B5EB13AD3C2800EA3B1B /* Data Model */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -234,7 +234,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A3DCD75D13ED7CA800C5F1BB /* needs_uploading.png */,
+				7345713515475F4C00645D71 /* needs_uploading.png */,
 				733B68E61363A947003DD28D /* down.png */,
 				733B68E21363A8CF003DD28D /* up.png */,
 				733B68E31363A8CF003DD28D /* upload.png */,
@@ -245,10 +245,7 @@
 				A3958860122178C200754402 /* ImageInfoController.xib */,
 				A3F0F2DA12577D2F00A9B5A8 /* UserInfoController.xib */,
 				A39962CF11FDBD59009B4324 /* StopViewController.xib */,
-				A3651BC912728BBA008539BD /* icon.png */,
-				A3BA5E9D1208EE81004DD918 /* Default.png */,
 				A3D8FCDC120308BE004FE32C /* backsplash.png */,
-				A3806AF31200616C008E4C02 /* simpletripjournal512x512.png */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* iTripSimpleJournal-Info.plist */,
@@ -375,12 +372,9 @@
 				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
 				A39FB59111FC70490039A701 /* DetailViewController.xib in Resources */,
 				A39962D111FDBD59009B4324 /* StopViewController.xib in Resources */,
-				A3806AF41200616C008E4C02 /* simpletripjournal512x512.png in Resources */,
 				A3D8FCDD120308BE004FE32C /* backsplash.png in Resources */,
-				A3BA5E9E1208EE81004DD918 /* Default.png in Resources */,
 				A3958863122178C200754402 /* ImageInfoController.xib in Resources */,
 				A3F0F2DC12577D2F00A9B5A8 /* UserInfoController.xib in Resources */,
-				A3651BCA12728BBA008539BD /* icon.png in Resources */,
 				A3011CF112DA096400050CF4 /* MainViewController.xib in Resources */,
 				A3192FFF1323C83B00770B60 /* gear.png in Resources */,
 				A31930271323D0E400770B60 /* gears.png in Resources */,
@@ -388,7 +382,9 @@
 				733B68E51363A8CF003DD28D /* upload.png in Resources */,
 				733B68E71363A947003DD28D /* down.png in Resources */,
 				73BE228713E610B200A6FB3E /* SVWebViewController.bundle in Resources */,
-				A3DCD75E13ED7CA800C5F1BB /* needs_uploading.png in Resources */,
+				7345713615475F4C00645D71 /* needs_uploading.png in Resources */,
+				A30433541548971F0007AA08 /* icon.png in Resources */,
+				A3043356154898E60007AA08 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +466,7 @@
 				);
 				CODE_SIGN_ENTITLEMENTS = "~/Dropbox/dev/iSimpleTripJournal/Entitlements.plist";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphonesimulator4.3]" = "iPhone Developer: stephen eshelman (ZXV77CSSEA)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iTripSimpleJournal_Prefix.pch;
@@ -481,6 +478,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				PRODUCT_NAME = iSimpleTripJournal;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphonesimulator4.3]" = "98C4B1E5-B930-49B4-AD62-DC2C167C7570";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -511,7 +509,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
-				"CODE_SIGN_IDENTITY[sdk=iphonesimulator4.3]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphonesimulator4.3]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

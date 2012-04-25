@@ -42,8 +42,8 @@
    //CREATE A LABEL FOR THE MAVIGATION ITEM TITLEVIEW
    UILabel* aLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
    
-   [aLabel setFont:[UIFont fontWithName:@"Helvetica" size:18.0f]];
-   [aLabel setText:@"iSimple Trip Journal"];
+   [aLabel setFont:[UIFont fontWithName:@"Helvetica" size:24.0f]];
+   [aLabel setText:@"flicktripper"];
    [aLabel setTextColor:[UIColor whiteColor]];
    
    aLabel.backgroundColor = [UIColor clearColor];
