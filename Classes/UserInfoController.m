@@ -204,7 +204,7 @@
             
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:HAS_PERSISTED_TRIPS];
                      
-            [ModalAlert say:@"The next time you run iSimpleTripJournal you will be asked to reauthorize your flickr account."];
+            [ModalAlert say:@"The next time you run flicktripper you will be asked to reauthorize your flickr account."];
             aSwitch.enabled = NO;
          }
          break;
