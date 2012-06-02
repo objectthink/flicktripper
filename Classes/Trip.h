@@ -77,6 +77,7 @@
 
 -(void)dealloc;
 -(NSInteger)index;
+-(NSString*)tags;
 
 +(Stop*)initWithName:(NSString*)name details:(NSString*)details;
 
