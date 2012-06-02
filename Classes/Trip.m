@@ -208,6 +208,23 @@ int temp_photoid = -1;
    return [self.trip.stops indexOfObject:self];
 }
 
+-(NSString*)tags
+{
+   NSString* tags = 
+   [[NSString alloc]initWithFormat:
+    @"iSimpleTripJournal:tripid=%d iSimpleTripJournal:tripname=\"%@\" iSimpleTripJournal:tripdetails=\"%@\" iSimpleTripJournal:stop=\"%@\" iSimpleTripJournal:stopdetails=\"%@\" geo:lat=%f geo:lon=%f geotagged" , 
+    self.trip.number, 
+    self.trip.name, 
+    self.trip.details, 
+    self.name, 
+    self.details,
+    self.location.latitude,
+    self.location.longitude
+    ];
+   
+   return tags;
+}
+
 - (void)dealloc
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
