@@ -10,6 +10,7 @@
 #import "StopViewController.h"
 #import "RootViewController.h"
 #import "ModalAlert.h"
+#import "StopInfoPrompt.h"
 #import <dispatch/dispatch.h>
 #import <Foundation/NSLock.h>
 
@@ -154,7 +155,7 @@ BOOL userInformedOfDisabledLocationServices = NO;
    TripJournalSession* session = app.flickrRequest.sessionInfo;
       
    session.requestType = UPLOAD;
-      
+         
    NSString* stopName    = [ModalAlert ask:@"Enter stop name"    withTextPrompt:@"Stop Name"];
    
    if(stopName == nil)
@@ -400,8 +401,12 @@ BOOL userInformedOfDisabledLocationServices = NO;
    NSLog(@"%s", __PRETTY_FUNCTION__);
 
    [super viewDidAppear:animated];
+   
+   ////////////////////////////////////////////////////////////////////////////
+   //SET THE FLICKR REQUEST DELEGATE
+   app = (testAppDelegate*)[[UIApplication sharedApplication] delegate];
+   app.flickrRequest.delegate = self;   
 }
-
 ///////////////////////////////////////////////////////////////////////////////
 //getPhotoInfo of the last uploaded image
 //query flickr for phtoto info in order to get the flickr photo page 
@@ -706,17 +711,18 @@ BOOL userInformedOfDisabledLocationServices = NO;
    //////////////////////////////////////////////////////////////////////
    //SETTAGS - CREATE IGUESS TAG, VALUE HAS SURROUNDING DOUBLE QUOTES
       
-   NSString* tags = 
-   [[NSString alloc]initWithFormat:
-    @"iSimpleTripJournal:tripid=%d iSimpleTripJournal:tripname=\"%@\" iSimpleTripJournal:tripdetails=\"%@\" iSimpleTripJournal:stop=\"%@\" iSimpleTripJournal:stopdetails=\"%@\" geo:lat=%f geo:lon=%f geotagged" , 
-    self.trip.number, 
-    self.trip.name, 
-    self.trip.details, 
-    stop.name, 
-    stop.details,
-    stop.location.latitude,
-    stop.location.longitude
-    ];
+   NSString* tags = [stop tags];
+   
+//   [[NSString alloc]initWithFormat:
+//    @"iSimpleTripJournal:tripid=%d iSimpleTripJournal:tripname=\"%@\" iSimpleTripJournal:tripdetails=\"%@\" iSimpleTripJournal:stop=\"%@\" iSimpleTripJournal:stopdetails=\"%@\" geo:lat=%f geo:lon=%f geotagged" , 
+//    self.trip.number, 
+//    self.trip.name, 
+//    self.trip.details, 
+//    stop.name, 
+//    stop.details,
+//    stop.location.latitude,
+//    stop.location.longitude
+//    ];
 
    //CHECK FOR PUBLIC OR NOT
    NSString* isPublic;
