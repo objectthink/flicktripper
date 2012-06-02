@@ -46,6 +46,9 @@
    
    switch (session.requestType) 
    {
+      case SETTAGS:
+         MessageBox(nil, @"Stop details updated successfully!");
+         break;
       case UPLOAD:
          break;
       case IMAGEINFO:
@@ -69,7 +72,28 @@
 {
    
 }
-
+///////////////////////////////////////////////////////////////////////////////
+//getPhotoInfo of the last uploaded image
+//query flickr for phtoto info in order to get the flickr photo page 
+-(void)setPhotoTags
+{
+   TripJournalSession* session = 
+   [TripJournalSession sessionWithRequestType:SETTAGS];
+   
+   app.flickrRequest.sessionInfo = session;
+   
+   NSString* tags = [[stop tags] autorelease]; 
+   
+   [app.flickrRequest 
+    callAPIMethodWithPOST:@"flickr.photos.setTags" 
+    arguments:
+    [NSDictionary 
+     dictionaryWithObjectsAndKeys:
+     stop.photoID,@"photo_id",
+     tags,@"tags",
+     nil]
+    ];  
+}
 /////////////////////////////////////////////////////////////////////////////////
 //UPDATE WITH STOP
 //Update the stop view with the passed stop
@@ -341,10 +365,11 @@
       return;
    }
 
-   /////////////////////////////////////////////////////////////////////
-   //SET THE APP PROPERTY
+   ////////////////////////////////////////////////////////////////////////////
+   //SET THE FLICKR REQUEST DELEGATE
    app = (testAppDelegate*)[[UIApplication sharedApplication] delegate];
-   
+   app.flickrRequest.delegate = self;
+
    //if(self.navigationItem.rightBarButtonItem == nil)
    //{
    //   self.navigationItem.rightBarButtonItem = SYSBARBUTTON(UIBarButtonSystemItemAdd, @selector(toolbarHandler:));  
@@ -520,6 +545,12 @@
    switch ((int)button.tag) 
    {
       case 778:
+         //change something
+         stop.details = @"NEW STOP DETAILS";
+         //update flickr
+         [self setPhotoTags];
+         break;
+      case 77888888:
          if([ModalAlert ask:@"Deleting this stop will remove the photo from flickr..."])
          { 
             NSString* photoId = [[stop.photoID copy]autorelease];
@@ -555,8 +586,6 @@
                    arguments:[NSDictionary dictionaryWithObjectsAndKeys:photoId,@"photo_id",nil]
                ];
             }
-            
-
          }
          break;
       case 77:
@@ -769,6 +798,10 @@ contextInfo:(void *)contextInfo
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
    [super viewDidAppear:animated];
+   ////////////////////////////////////////////////////////////////////////////
+   //SET THE FLICKR REQUEST DELEGATE
+   app = (testAppDelegate*)[[UIApplication sharedApplication] delegate];
+   app.flickrRequest.delegate = self;   
 }
 
 -(void)viewWillDisappear:(BOOL)animated
