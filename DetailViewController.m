@@ -11,6 +11,7 @@
 #import "RootViewController.h"
 #import "ModalAlert.h"
 #import "StopInfoPrompt.h"
+#import "EditViewController.h"
 #import <dispatch/dispatch.h>
 #import <Foundation/NSLock.h>
 
@@ -499,7 +500,11 @@ BOOL userInformedOfDisabledLocationServices = NO;
    uploadWaiting.enabled = self.trip.needsUploading;
    
    UIBarButtonItem* playTrip =    
-   [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(doit:)];
+   [[UIBarButtonItem alloc]
+    initWithBarButtonSystemItem:UIBarButtonSystemItemPlay 
+    target:self 
+    action:@selector(doit:)];
+   
    playTrip.tag = 777;
 
    [self setToolbarItems:[NSArray arrayWithObjects:playTrip,spaceItem,uploadWaiting,nil]];
@@ -889,6 +894,23 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    return 74;
 }
 
+-(void)
+tableView:(UITableView *)tableView 
+accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+   NSLog(@"details requested for row %d",indexPath.row); 
+   
+   EditViewController* evc =
+   [[EditViewController alloc] initWithNibName:@"EditViewController" bundle:nil];
+   
+   // Configure the cell...
+   Stop* stop = [self.trip.stops objectAtIndex:indexPath.row];
+
+   evc.tripComposite = stop;
+   
+   [self.navigationController pushViewController:evc animated:YES];
+}
+   
 #define LABEL_TAKEN 7
 #define LABEL_TITLE 77
 #define LABEL_DETAILS 777
@@ -971,7 +993,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 //   
 //   cell.detailTextLabel.textColor = [UIColor blackColor];
 
-   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+   cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
    cell.editingAccessoryType = UITableViewCellAccessoryNone;
    
    UILabel* titleLabel = (UILabel*)   [cell.contentView viewWithTag:LABEL_TITLE];

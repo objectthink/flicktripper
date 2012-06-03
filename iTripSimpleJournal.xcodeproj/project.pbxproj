@@ -43,6 +43,8 @@
 		A3958863122178C200754402 /* ImageInfoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3958860122178C200754402 /* ImageInfoController.xib */; };
 		A3958864122178C200754402 /* UIImageInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3958862122178C200754402 /* UIImageInfoViewController.m */; };
 		A395B5EA13AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A395B5E813AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodeld */; };
+		A399445D157C0071004A5798 /* EditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A399445B157C0071004A5798 /* EditViewController.m */; };
+		A399445E157C0071004A5798 /* EditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A399445C157C0071004A5798 /* EditViewController.xib */; };
 		A39962D011FDBD59009B4324 /* StopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39962CE11FDBD59009B4324 /* StopViewController.m */; };
 		A39962D111FDBD59009B4324 /* StopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A39962CF11FDBD59009B4324 /* StopViewController.xib */; };
 		A39FB59011FC70490039A701 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39FB58E11FC70490039A701 /* DetailViewController.m */; };
@@ -125,6 +127,9 @@
 		A3958861122178C200754402 /* UIImageInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageInfoViewController.h; sourceTree = "<group>"; };
 		A3958862122178C200754402 /* UIImageInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageInfoViewController.m; sourceTree = "<group>"; };
 		A395B5E913AD3BD500EA3B1B /* iSimpleTripJournal_datamodel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iSimpleTripJournal_datamodel.xcdatamodel; sourceTree = "<group>"; };
+		A399445A157C0071004A5798 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
+		A399445B157C0071004A5798 /* EditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditViewController.m; sourceTree = "<group>"; };
+		A399445C157C0071004A5798 /* EditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditViewController.xib; sourceTree = "<group>"; };
 		A39962CD11FDBD59009B4324 /* StopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopViewController.h; sourceTree = "<group>"; };
 		A39962CE11FDBD59009B4324 /* StopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopViewController.m; sourceTree = "<group>"; };
 		A39962CF11FDBD59009B4324 /* StopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StopViewController.xib; path = Classes/StopViewController.xib; sourceTree = "<group>"; };
@@ -165,6 +170,9 @@
 			isa = PBXGroup;
 			children = (
 				A30AA32113C5D760009045E7 /* MBProgressHUD.h */,
+				A399445A157C0071004A5798 /* EditViewController.h */,
+				A399445B157C0071004A5798 /* EditViewController.m */,
+				A399445C157C0071004A5798 /* EditViewController.xib */,
 				A30AA32213C5D760009045E7 /* MBProgressHUD.m */,
 				A3011CE912DA075100050CF4 /* MainViewController.h */,
 				A3011CEE12DA081000050CF4 /* MainViewController.m */,
@@ -325,7 +333,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iTripSimpleJournal" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -385,6 +393,7 @@
 				7345713615475F4C00645D71 /* needs_uploading.png in Resources */,
 				A30433541548971F0007AA08 /* icon.png in Resources */,
 				A3043356154898E60007AA08 /* Default.png in Resources */,
+				A399445E157C0071004A5798 /* EditViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +423,7 @@
 				A30AA32313C5D760009045E7 /* MBProgressHUD.m in Sources */,
 				73BE228813E610B200A6FB3E /* SVWebViewController.m in Sources */,
 				73381776148C04710026B412 /* StopEntity.m in Sources */,
+				A399445D157C0071004A5798 /* EditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,12 +453,13 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iTripSimpleJournal_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					../objectiveflickr/source,
 					../objectiveflickr/LFWebAPIKit,
 				);
 				INFOPLIST_FILE = "iTripSimpleJournal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = iTripSimpleJournal;
 				PROVISIONING_PROFILE = "98C4B1E5-B930-49B4-AD62-DC2C167C7570";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "98C4B1E5-B930-49B4-AD62-DC2C167C7570";
@@ -470,12 +481,13 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iTripSimpleJournal_Prefix.pch;
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = (
 					../objectiveflickr/source,
 					../objectiveflickr/LFWebAPIKit,
 				);
 				INFOPLIST_FILE = "iTripSimpleJournal-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = iSimpleTripJournal;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				"PROVISIONING_PROFILE[sdk=iphonesimulator4.3]" = "98C4B1E5-B930-49B4-AD62-DC2C167C7570";
@@ -493,6 +505,7 @@
 				);
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -511,6 +524,7 @@
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphonesimulator4.3]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

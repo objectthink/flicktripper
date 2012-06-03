@@ -9,6 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
+@protocol TripComposite <NSObject>
+
+-(NSString*) name;
+-(NSString*) details;
+
+@end
+
 @interface MapPoint : NSObject <MKAnnotation>
 {
 	NSString *title;
@@ -50,7 +57,7 @@
 
 @end
 
-@interface Stop : NSObject
+@interface Stop : NSObject <TripComposite>
 {
    Trip* trip;
    

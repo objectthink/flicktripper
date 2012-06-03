@@ -1108,6 +1108,13 @@ void ShowActivity(UIViewController* controller, BOOL show)
 {
    return self.trips.count;
 }
+
+-(void)
+tableView:(UITableView *)tableView 
+accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+   NSLog(@"details requested for %d",indexPath.row);
+}
 ///////////////////////////////////////////////////////////////////////////////
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -1151,7 +1158,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
    cell.detailTextLabel.text = trip.details;
    
    cell.detailTextLabel.textColor = [UIColor blackColor];
-   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+   cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
    cell.editingAccessoryType = UITableViewCellAccessoryNone;
    
    cell.imageView.image = nil;
