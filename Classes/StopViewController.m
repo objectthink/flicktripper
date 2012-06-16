@@ -65,7 +65,7 @@
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)request didFailWithError:(NSError *)error
 {
-   MessageBox(@"didFailWithError", [error localizedDescription]);
+   MessageBox(@"flickr Error", [error localizedDescription]);
 }
 
 - (void)flickrAPIRequest:(OFFlickrAPIRequest *)request imageUploadSentBytes:(NSUInteger)sent totalBytes:(NSUInteger)total
@@ -547,13 +547,13 @@
    UIBarButtonItem* button = sender;   
    switch ((int)button.tag) 
    {
-      case 778:
+      case 999999999:
          //change something
          stop.details = @"NEW STOP DETAILS";
          //update flickr
          [self setPhotoTags];
          break;
-      case 77888888:
+      case 778:
          if([ModalAlert ask:@"Deleting this stop will remove the photo from flickr..."])
          { 
             NSString* photoId = [[stop.photoID copy]autorelease];

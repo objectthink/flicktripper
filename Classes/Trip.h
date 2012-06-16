@@ -13,6 +13,8 @@
 
 -(NSString*) name;
 -(NSString*) details;
+-(void)setDetails:(NSString*)s;
+-(void)setName:(NSString*)s;
 
 @end
 

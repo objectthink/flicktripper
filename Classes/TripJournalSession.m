@@ -33,6 +33,8 @@
 -(void)dealloc
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
+ 
+   [super dealloc];
    
    [self.tripids release];
 }

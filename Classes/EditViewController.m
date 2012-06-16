@@ -5,8 +5,11 @@
 //  Created by stephen eshelman on 6/3/12.
 //  Copyright (c) 2012 blue sky computing. All rights reserved.
 //
-
+#import <QuartzCore/QuartzCore.h>
 #import "EditViewController.h"
+#import "TripJournalSession.h"
+#import "RootViewController.h"
+#import "MBProgressHUD.h"
 
 #define SYSBARBUTTON(ITEM, SELECTOR) [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:ITEM target:self action:SELECTOR] autorelease]
 
@@ -18,6 +21,85 @@
 
 @synthesize tripComposite;
 @synthesize name;
+@synthesize theName;
+@synthesize theDetails;
+@synthesize segmentedControl;
+
+#pragma mark OFFlickrAPIRequestDelegate
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request 
+ didCompleteWithResponse:(NSDictionary *)response
+{      
+   if([self.tripComposite isKindOfClass:[Trip class]])
+   {
+      [self setPhotoTagsWithTrip:(Trip*)tripComposite];
+   }
+   else
+   {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
+   }
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request didFailWithError:(NSError *)error
+{
+   [MBProgressHUD hideHUDForView:self.view animated:YES];
+
+   MessageBox(@"flickr Error", [error localizedDescription]);
+}
+
+- (void)flickrAPIRequest:(OFFlickrAPIRequest *)request imageUploadSentBytes:(NSUInteger)sent totalBytes:(NSUInteger)total
+{
+}
+
+int tripUpdateIndex = -1;
+-(void)setPhotoTagsWithTrip:(Trip*)trip
+{
+   tripUpdateIndex++;
+   if(tripUpdateIndex < [trip.stops count])
+   {
+      Stop* stop = [trip.stops objectAtIndex:tripUpdateIndex];
+      [self setPhotoTagsWithStop:stop];
+   }
+   else
+   {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
+   }
+}
+
+-(void)setPhotoTagsWithStop:(Stop*)stop
+{
+   ////////////////////////////////////////////////////////////////////////////
+   //SET THE FLICKR REQUEST DELEGATE
+   testAppDelegate* app = (testAppDelegate*)[[UIApplication sharedApplication] delegate];
+   app.flickrRequest.delegate = self;
+   
+   TripJournalSession* session = 
+   [TripJournalSession sessionWithRequestType:SETTAGS];
+   
+   app.flickrRequest.sessionInfo = session;
+   
+   NSString* tags = [[stop tags] autorelease]; 
+   
+   [app.flickrRequest 
+    callAPIMethodWithPOST:@"flickr.photos.setTags" 
+    arguments:
+    [NSDictionary 
+     dictionaryWithObjectsAndKeys:
+     stop.photoID,@"photo_id",
+     tags,@"tags",
+     nil]
+    ];  
+}
+///////////////////////////////////////////////////////////////////////////////
+//getPhotoInfo of the last uploaded image
+//query flickr for phtoto info in order to get the flickr photo page 
+-(void)setPhotoTags
+{   
+   tripUpdateIndex = -1;
+   if([self.tripComposite isKindOfClass:[Stop class]])
+      [self setPhotoTagsWithStop:(Stop*)tripComposite];
+   else
+      [self setPhotoTagsWithTrip:(Trip*)tripComposite];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,46 +117,56 @@
    
    name.text = [tripComposite name];
    
+   self.theDetails = [tripComposite details];
+   self.theName = [tripComposite name];
+   
+   //////////////////////////////////////////////////////////////////////
+   //text box radius
+   name.layer.cornerRadius = 10.0;
+   
    /////////CREATE THE SEGMENTED BAR
    
    //////////////////////////////////////////////////////////////////////
    //CREATE SEGMENTED NAME/DETAILS CONTROL
-	UISegmentedControl* segmentedControl = 
+	self.segmentedControl = 
    [[UISegmentedControl alloc] initWithItems:
     [NSArray arrayWithObjects:@"Name", @"Details", nil ]];
    
-	[segmentedControl 
+	[self.segmentedControl 
     addTarget:self 
     action:@selector(segmentAction:) 
     forControlEvents:UIControlEventValueChanged];
    
-	segmentedControl.frame = CGRectMake(0, 0, 90, 30);
-	segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-	segmentedControl.momentary = YES;
-	  
-	self.navigationItem.titleView = segmentedControl;
-   [segmentedControl release];
+	self.segmentedControl.frame = CGRectMake(0, 0, 90, 30);
+	self.segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+	self.segmentedControl.selectedSegmentIndex = 0;
+   
+	self.navigationItem.titleView = self.segmentedControl;
+   [self.segmentedControl release];
    /////////////////////////////////
    
    /////////////////////////////////
    //ADD THE SAVE BUTTON
    self.navigationItem.rightBarButtonItem  = 
    SYSBARBUTTON(UIBarButtonSystemItemSave, @selector(save:));  
+   
+   [name becomeFirstResponder];
 }
 /////////////////////////////////////////////////////////////////////////////
 //SEGMENT ACTION
 //Handle requests to show next/previous stop
 - (IBAction)segmentAction:(id)sender
 {
-	UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-   switch (segmentedControl.selectedSegmentIndex) 
+   switch (self.segmentedControl.selectedSegmentIndex) 
    {
       case 0: //Name
-         name.text = tripComposite.name;
+         self.theDetails = [NSString stringWithString:name.text];
+         name.text = self.theName;
          break;
          
       case 1: //Details
-         name.text = tripComposite.details;
+         self.theName = [NSString stringWithString:name.text];
+         name.text = self.theDetails;
          break;
          
       default:
@@ -85,6 +177,29 @@
 //save:
 -(void)save:(id)sender
 {
+   [self.name resignFirstResponder];
+   
+   MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+   hud.labelText = @"Updating flickr tags";   
+
+   //GET THE FIELD THAT IS ON THE SCREEN
+   switch (self.segmentedControl.selectedSegmentIndex) 
+   {
+      case 0: //Name
+         self.theName = [NSString stringWithString:name.text];
+         break;
+         
+      case 1: //Details
+         self.theDetails = [NSString stringWithString:name.text];
+         break;
+   }
+
+   [tripComposite setDetails:self.theDetails];
+   [tripComposite setName:self.theName];
+   
+   [self setPhotoTags];
+   
+   //[self.navigationController popViewControllerAnimated:YES];   
 }
 - (void)viewDidUnload
 {

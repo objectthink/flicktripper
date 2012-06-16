@@ -336,7 +336,7 @@ BOOL userInformedOfDisabledLocationServices = NO;
 {
    TripJournalSession* session = app.flickrRequest.sessionInfo;
 
-   MessageBox(@"didFailWithError", [error localizedDescription]);
+   MessageBox(@"flickr Error", [error localizedDescription]);
    
    switch(session.requestType)
    {

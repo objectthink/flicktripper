@@ -19,12 +19,13 @@ typedef enum {
    PREUPLOAD   = 5,
    UPLOAD      = 6,
    SETTAGS     = 7,
-   IMAGESEARCH = 8,
-   IMAGEINFO   = 9,
-   DELETE      = 10,
-   LOCATION    = 11,
-   TRIPS       = 12,
-   TEST        = 13
+   SETTRIPTAGS = 8,
+   IMAGESEARCH = 9,
+   IMAGEINFO   = 10,
+   DELETE      = 11,
+   LOCATION    = 12,
+   TRIPS       = 13,
+   TEST        = 14
 }REQUESTTYPE;
 
 @interface TripJournalSession : NSObject

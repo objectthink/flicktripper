@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "Trip.h"
-@interface EditViewController : UIViewController
+#import "testAppDelegate.h"
+
+@interface EditViewController : UIViewController<OFFlickrAPIRequestDelegate>
 
 @property (nonatomic, assign) id <TripComposite> tripComposite;
 
 @property (nonatomic, retain) IBOutlet UITextView* name;
+@property (nonatomic, retain) UISegmentedControl* segmentedControl;
+@property (copy) NSString* theName;
+@property (copy) NSString* theDetails;
 
 @end

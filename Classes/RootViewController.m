@@ -8,6 +8,7 @@
 
 #import "RootViewController.h"
 #import "DetailViewController.h"
+#import "EditViewController.h"
 #import "testAppDelegate.h"
 #import "UIImageInfoViewController.h"
 #import "UserInfoController.h"
@@ -237,7 +238,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
    if ([error domain] == OFFlickrAPIRequestErrorDomain) 
    {
       MessageBox(@"Cannot Open Trips", @"iSimple Trip Journal cannot open your trips because it is not connected to the Internet.");
-      MessageBox(@"didFailWithError", [error localizedDescription]);
+      MessageBox(@"flickr Error", [error localizedDescription]);
       
       ShowActivity(self, NO);
 
@@ -276,7 +277,7 @@ void ShowActivity(UIViewController* controller, BOOL show)
       case IMAGEINFO:
          break;
       default:
-         MessageBox(@"didFailWithError", [error localizedDescription]);
+         MessageBox(@"flickr Error", [error localizedDescription]);
          break;
    }
 }
@@ -1113,7 +1114,17 @@ void ShowActivity(UIViewController* controller, BOOL show)
 tableView:(UITableView *)tableView 
 accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-   NSLog(@"details requested for %d",indexPath.row);
+   NSLog(@"details requested for row %d",indexPath.row); 
+   
+   EditViewController* evc =
+   [[EditViewController alloc] initWithNibName:@"EditViewController" bundle:nil];
+   
+   Trip* trip;
+   trip = [trips objectAtIndex:indexPath.row];
+
+   evc.tripComposite = trip;
+   
+   [self.navigationController pushViewController:evc animated:YES];
 }
 ///////////////////////////////////////////////////////////////////////////////
 // Customize the appearance of table view cells.
