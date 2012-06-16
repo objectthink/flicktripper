@@ -47,6 +47,14 @@
 @synthesize number;
 @dynamic needsUploading;
 
+-(NSString*)description
+{
+   return [NSString stringWithFormat:@"<Trip: %@:%@>",
+           self.name,
+           self.details
+           ];
+}
+
 -(BOOL)getNeedsUploading
 {
     for (Stop* stop in stops) 
@@ -148,11 +156,21 @@
 @synthesize uploaded;
 @synthesize taken=_taken;
 
+-(NSString*)description
+{
+   return [NSString stringWithFormat:@"<Stop: %@:%@>",
+           self.name,
+           self.details
+           ];
+}
+
 int temp_photoid = -1;
 -(NSString*)getImageKey
 {
+   NSLog(@"%@",self.photoID);
+   
    if(self.photoID == nil)
-      self.photoID = [NSString stringWithFormat: @"%d2X",temp_photoid--];
+      self.photoID = [NSString stringWithFormat: @"%d",temp_photoid--];
    
    return [NSString stringWithFormat:@"%@2X",self.photoID];
 }

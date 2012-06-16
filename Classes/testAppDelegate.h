@@ -29,7 +29,8 @@
 
 @interface testAppDelegate : NSObject <
 UIApplicationDelegate,
-NSFetchedResultsControllerDelegate> 
+NSFetchedResultsControllerDelegate,
+NSCacheDelegate> 
 {
     
    UIWindow *window;

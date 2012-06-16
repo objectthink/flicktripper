@@ -578,7 +578,8 @@ void ShowActivity(UIViewController* controller, BOOL show)
 
 ///////////////////////////////////////////////////////////////////////////////
 //OnDoRequestTypeImageInfo
--(void)OnDoRequestTypeImageInfo:(OFFlickrAPIRequest *)request didCompleteWithResponse:(NSDictionary *)response
+-(void)OnDoRequestTypeImageInfo:(OFFlickrAPIRequest *)request 
+        didCompleteWithResponse:(NSDictionary *)response
 {
    //NSLog(@"%s %@ %@", __PRETTY_FUNCTION__, request.sessionInfo, response);
    
@@ -821,7 +822,82 @@ void ShowActivity(UIViewController* controller, BOOL show)
           
    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+   
+   //LISTEN FOR RESIGN ACTIVE AND CHECK FOR 
+   //PHOTOS THAT HAVENT BEEN UPLOADED
+   [[NSNotificationCenter defaultCenter] 
+    addObserver:self
+    selector:@selector(applicationWillResignActive:)
+    name:UIApplicationWillResignActiveNotification 
+    object:nil];
+
+   [[NSNotificationCenter defaultCenter] 
+    addObserver:self
+    selector:@selector(applicationWillEnterForeground:)
+    name:UIApplicationWillEnterForegroundNotification
+    object:nil];
 }
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   
+   NSArray *paths = 
+   NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+   NSString *documentsDirectory = [paths objectAtIndex:0];
+   
+   //make a file name to write the data to using the documents directory:
+   NSString *filename = 
+   [NSString 
+    stringWithFormat:@"%@/photos", documentsDirectory];
+
+   NSMutableDictionary* d = 
+   [[NSMutableDictionary alloc] initWithContentsOfFile:filename];
+   
+   [d enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) 
+   {
+      [app.photoCache setObject:[[UIImage alloc] initWithData:obj] forKey:key];
+   }];
+   
+   NSError* error;
+   [[NSFileManager defaultManager] removeItemAtPath:filename error:&error];
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   
+   NSMutableDictionary* d = 
+   [[NSMutableDictionary alloc] init ];
+   
+   for(Trip* trip in self.trips)
+   {
+      for(Stop* stop in trip.stops)
+      {
+         if(stop.uploaded == NO)
+         {
+            NSLog(@"%@",stop);
+            
+            //CREATE A DICTIONARY OF ID TO IMAGE
+            //THIS MUST BE THE ID THAT IS CURRENTLY IN THE NSCACHE
+            [d setObject:UIImagePNGRepresentation(stop.image) 
+                  forKey:[stop getImageKey]];
+         }
+      }
+   }
+   
+   NSArray *paths = 
+   NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+   NSString *documentsDirectory = [paths objectAtIndex:0];
+   
+   //make a file name to write the data to using the documents directory:
+   NSString *filename = 
+   [NSString 
+    stringWithFormat:@"%@/photos", documentsDirectory];
+   
+   [d writeToFile:filename atomically:YES];
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 //TOOLBAR HANDLER
 -(void)doit:(UIButton*)sender

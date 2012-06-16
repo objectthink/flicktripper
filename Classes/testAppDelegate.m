@@ -40,6 +40,10 @@
 @synthesize photoCache=_photoCache;
 
 //@synthesize hasTrips;
+- (void)cache:(NSCache *)cache willEvictObject:(id)obj
+{
+   NSLog(@"%@",obj);
+}
 
 -(BOOL)getHasTrips
 {
@@ -128,6 +132,7 @@
 
    //initialze photo cache
    self.photoCache = [[[NSCache alloc] init] autorelease];
+   self.photoCache.delegate = self;
 
    return YES;
 }
@@ -413,7 +418,6 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application 
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
    /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, called instead of applicationWillTerminate: when the user quits.

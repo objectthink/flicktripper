@@ -88,6 +88,10 @@
 -(NSInteger)index;
 -(NSString*)tags;
 
+-(NSString*)getImageKey;
+-(NSString*)getThumbKey;
+
+
 +(Stop*)initWithName:(NSString*)name details:(NSString*)details;
 
 +(Stop*)initWithName:(NSString*)name 
