@@ -33,7 +33,7 @@
 @end
 
 @class Stop;
-@interface Trip : NSObject 
+@interface Trip : NSObject <TripComposite>
 {
    NSString* name;
    NSString* details;
