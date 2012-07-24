@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import <ObjectiveFlickr.h>
+#import "ObjectiveFlickr.h"
 #import "Trip.h"
 #import "TripJournalSession.h"
 #import "testAppDelegate.h"

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import<ObjectiveFlickr.h>
+#import "ObjectiveFlickr.h"
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 #import "Trip.h"
