@@ -5,6 +5,7 @@
 //  Created by stephen eshelman on 7/25/10.
 //  Copyright __MyCompanyName__ 2010. All rights reserved.
 //
+//ABOUT TO UPDATE TO iOS 7
 
 #import "RootViewController.h"
 #import "DetailViewController.h"
